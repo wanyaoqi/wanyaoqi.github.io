@@ -43,18 +43,14 @@
 </script>
 
 <meta name="google-site-verification" content="YAHxtBFjjhWkrycLOhOBuMHETNYVTtS3h4cPY4Wgo2A" />
-  <title>
-  
-
-  
-    分类 // Yaoqi's Blog
-  
-</title>
+  <title> Yaoqi's Blog </title>
 </head>
 
 <body>
 <!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column ">
+  <div class="container one-column 
+   page-home 
+">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -123,21 +119,85 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-
   <div id="posts" class="posts-expand">
     
-    
-      <div class="category-all-page">
-        <div class="category-all-title">
-            目前共计 1 个分类
-        </div>
-        <div class="category-all">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">1</span></li></ul>
-        </div>
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2016/06/06/page/">
+                ������������������K����
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-06-06
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Algorithm/">Algorithm</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
       </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="��L"><a href="#��L" class="headerlink" title="��Ŀ"></a>��Ŀ</h1><p>��n��������������K����</p>
+<h1 id="˼·"><a href="#˼·" class="headerlink" title="˼·"></a>˼·</h1><p>����һ��K���ڵ���С���ѣ��ٱ���n����<br>��С���ѵĵ�һ��Ԫ�رȽ�</p>
+<h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void heap_adjust(int *arr, int start, int end)</span><br><span class="line">&#123;</span><br><span class="line">	int tmp = arr[start];</span><br><span class="line">	for (int i = 2 * start + 1; i &lt;= end; i = i * 2 + 1)</span><br><span class="line">	&#123;</span><br><span class="line">		if (i + 1 &lt;= end &amp;&amp; arr[i]&gt;arr[i + 1])</span><br><span class="line">		&#123;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		if (tmp &gt; arr[i])</span><br><span class="line">		&#123;</span><br><span class="line">			arr[start] = arr[i];</span><br><span class="line">			start = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	arr[start] = tmp;</span><br><span class="line">&#125;</span><br><span class="line">void heap_sort(int *arr, int length)</span><br><span class="line">&#123;</span><br><span class="line">	//������С����</span><br><span class="line">	for (int i = (length - 1 - 1) / 2; i &gt;= 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		heap_adjust(arr, i, length - 1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int * find_max_N(int *arr, int len,int n)</span><br><span class="line">&#123;</span><br><span class="line">	if (arr == NULL || len &lt; n||n&lt;1)return NULL;</span><br><span class="line">	int *brr = new int[n];//����brrΪarr��ǰn��</span><br><span class="line">	memcpy(brr, arr, sizeof(int)* n);</span><br><span class="line">	heap_sort(brr, n);//��ǰn������ΪС����</span><br><span class="line">	for (int i = n; i &lt; len; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		if (arr[i]&gt;brr[0])//������ֵ��brr[0]���������и�ֵ���ٴε���</span><br><span class="line">		&#123;</span><br><span class="line">			brr[0] = arr[i];</span><br><span class="line">			heap_adjust(brr, 0, n-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return brr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="�ܽ�"><a href="#�ܽ�" class="headerlink" title="�ܽ�"></a>�ܽ�</h1><p>���ö�������˼�룬ʱ�临�Ӷ�ΪO(n*logk),�ռ临�Ӷ�ΪO(K)</p>
+<h1 id="�����ⷨ"><a href="#�����ⷨ" class="headerlink" title="�����ⷨ"></a>�����ⷨ</h1><p>ʹ�ÿ������򻮷ֵ�����</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+      
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
     
   </div>
 
+  
 
         </div>
       </div>
@@ -273,6 +333,33 @@
   
 
   
+  
+  
+
+  
+
+    
+      
+    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'only0god';
+      var disqus_identifier = 'index.html';
+      var disqus_title = '';
+      var disqus_url = '';
+
+      (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    </script>
+  
+
+
+
 
   
   <script type="text/javascript" src="/js/analytics_google-analytics.js"></script>
