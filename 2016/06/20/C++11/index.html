@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="C++," />
+  <meta name="keywords" content="C++11,C++," />
 
 
 
@@ -43,7 +43,7 @@
 </script>
 
 <meta name="google-site-verification" content="YAHxtBFjjhWkrycLOhOBuMHETNYVTtS3h4cPY4Wgo2A" />
-  <title> 海量数据中求最大的K个数 // Yaoqi's Blog </title>
+  <title> C++11 // Yaoqi's Blog </title>
 </head>
 
 <body>
@@ -130,7 +130,7 @@
           
           
             
-              海量数据中求最大的K个数
+              C++11
             
           
         </h1>
@@ -138,14 +138,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-06-06
+          发表于 2016-06-20
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/Algorithm/">Algorithm</a>
+              <a href="/categories/Summary/">Summary</a>
 
               
               
@@ -158,8 +158,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/06/06/page/#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/06/page/"></span>
+            <a href="/2016/06/20/C++11/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/20/C++11/"></span>
             </a>
           </span>
           
@@ -173,11 +173,10 @@
       
 
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>在n个数中求最大的K个数</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>建立一个K个节点的小根堆，再遍历n个数<br>与小根堆的第一个元素比较</p>
-<h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void heap_adjust(int *arr, int start, int end)</span><br><span class="line">&#123;</span><br><span class="line">	int tmp = arr[start];</span><br><span class="line">	for (int i = 2 * start + 1; i &lt;= end; i = i * 2 + 1)</span><br><span class="line">	&#123;</span><br><span class="line">		if (i + 1 &lt;= end &amp;&amp; arr[i]&gt;arr[i + 1])</span><br><span class="line">		&#123;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		if (tmp &gt; arr[i])</span><br><span class="line">		&#123;</span><br><span class="line">			arr[start] = arr[i];</span><br><span class="line">			start = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	arr[start] = tmp;</span><br><span class="line">&#125;</span><br><span class="line">void heap_sort(int *arr, int length)</span><br><span class="line">&#123;</span><br><span class="line">	//调整成小根堆</span><br><span class="line">	for (int i = (length - 1 - 1) / 2; i &gt;= 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		heap_adjust(arr, i, length - 1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int * find_max_N(int *arr, int len,int n)</span><br><span class="line">&#123;</span><br><span class="line">	if (arr == NULL || len &lt; n||n&lt;1)return NULL;</span><br><span class="line">	int *brr = new int[n];//先让brr为arr的前n个</span><br><span class="line">	memcpy(brr, arr, sizeof(int)* n);</span><br><span class="line">	heap_sort(brr, n);//把前n个调整为小根堆</span><br><span class="line">	for (int i = n; i &lt; len; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		if (arr[i]&gt;brr[0])//如果有值比brr[0]大，则进行赋值后再次调整</span><br><span class="line">		&#123;</span><br><span class="line">			brr[0] = arr[i];</span><br><span class="line">			heap_adjust(brr, 0, n-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return brr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>利用堆排序的思想，时间复杂度为O(n*logk),空间复杂度为O(K)</p>
-<h1 id="其他解法"><a href="#其他解法" class="headerlink" title="其他解法"></a>其他解法</h1><p>使用快速排序划分的做法</p>
+        <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从反汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
+<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>它可以用于创建并定义匿名的函数对象形式如下：<br>[函数对象参数]（操作符重载函数参数） -&gt;返回值类型{函数体}(具体参数)<br><img src="/imgs/Summary/lambda.png" alt="lambda"></p>
+<h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype的功能与auto相反，从变量得到类型<br><img src="/imgs/Summary/decltype.png" alt="decltype"></p>
+<h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><p>右值引用（rvalue reference），是C++程序设计语言自C++11标准提出的一类数据类型。用于实现移动语义（move semantic）与完美转发（perfect forwarding）。–维基百科<br>在资源转移是不是调用拷贝等操作而是实现了资源的转移<a href="https://www.zhihu.com/question/22111546" target="_blank" rel="external">zhihu</a></p>
 
       
     </div>
@@ -188,16 +187,18 @@
           <hr class="eof">
         </div>
         <div class="copyright" style="clear:both;">
-           <p><span>本文标题:</span><a href="/2016/06/06/page/">海量数据中求最大的K个数</a></p>
+           <p><span>本文标题:</span><a href="/2016/06/20/C++11/">C++11</a></p>
            <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
-           <p><span>发布时间:</span>2016年6月6日 - 12时06分</p>
-           <p><span>最后更新:</span>2016年6月6日 - 12时06分</p>
-           <p><span>原始链接:</span><a href="/2016/06/06/page/" title="海量数据中求最大的K个数">http://yoursite.com/2016/06/06/page/</a></p>
+           <p><span>发布时间:</span>2016年6月20日 - 01时06分</p>
+           <p><span>最后更新:</span>2016年7月24日 - 01时07分</p>
+           <p><span>原始链接:</span><a href="/2016/06/20/C++11/" title="C++11">http://yoursite.com/2016/06/20/C++11/</a></p>
            <p><span>转载请保留以上信息。</span></p>
         </div>
       
       
         <div class="post-tags">
+          
+            <a href="/tags/C-11/"> #C++11 </a>
           
             <a href="/tags/C/"> #C++ </a>
           
@@ -207,11 +208,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/12/stl_alloc/">STL空间配置器</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/12/stl_alloc/">STL空间配置器</a>
             
           </div>
         </div>
@@ -317,7 +318,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他解法"><span class="nav-number">5.</span> <span class="nav-text">其他解法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#auto"><span class="nav-number">1.</span> <span class="nav-text">auto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda表达式"><span class="nav-number">2.</span> <span class="nav-text">lambda表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decltype"><span class="nav-number">3.</span> <span class="nav-text">decltype</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右值引用"><span class="nav-number">4.</span> <span class="nav-text">右值引用</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
