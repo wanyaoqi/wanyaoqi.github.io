@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,C++,Learn" />
+  <meta name="keywords" content="C++11,C++," />
 
 
 
@@ -43,7 +43,7 @@
 </script>
 
 <meta name="google-site-verification" content="YAHxtBFjjhWkrycLOhOBuMHETNYVTtS3h4cPY4Wgo2A" />
-  <title> 关于我以及博客 // Yaoqi's Blog </title>
+  <title> C++11 // Yaoqi's Blog </title>
 </head>
 
 <body>
@@ -130,7 +130,7 @@
           
           
             
-              关于我以及博客
+              C++11
             
           
         </h1>
@@ -138,17 +138,28 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-06-05
+          发表于 1970-01-01
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Summary/">Summary</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/about/index.html#comments" >
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="about/index.html"></span>
+            <a href="/1970/01/01/C++11/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="1970/01/01/C++11/"></span>
             </a>
           </span>
           
@@ -162,20 +173,9 @@
       
 
       
-        <h1 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h1><ul>
-<li>西安工业大学，大三学生</li>
-<li>计算机科学与技术专业</li>
-</ul>
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li>C/C++ 熟练</li>
-</ul>
-<h1 id="搭建博客参考"><a href="#搭建博客参考" class="headerlink" title="搭建博客参考"></a>搭建博客参考</h1><ul>
-<li><a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="external">史上最详细的Hexo博客搭建图文教程</a></li>
-<li><a href="http://pizn.github.io/2011/11/15/use-disqus-for-your-post.html" target="_blank" rel="external">为博客添加 DisQus 评论</a></li>
-</ul>
-<h1 id="博客更新日志"><a href="#博客更新日志" class="headerlink" title="博客更新日志"></a>博客更新日志</h1><ul>
-<li>2016-06-06 00:43:16  完成<code>现状</code>和<code>语言</code>的简单介绍。</li>
-</ul>
+        <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从反汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
+<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>它可以用于创建并定义匿名的函数对象形式如下：<br>[函数对象参数]（操作符重载函数参数） -&gt;返回值类型{函数体}(具体参数)<br><img src="/imgs/Summary/lambda.png" alt="lambda"></p>
+<h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype的功能与auto相反，从变量得到类型<br><img src="/imgs/Summary/decltype.png" alt="decltype"></p>
 
       
     </div>
@@ -186,15 +186,35 @@
           <hr class="eof">
         </div>
         <div class="copyright" style="clear:both;">
-           <p><span>本文标题:</span><a href="/about/index.html">关于我以及博客</a></p>
+           <p><span>本文标题:</span><a href="/1970/01/01/C++11/">C++11</a></p>
            <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
-           <p><span>发布时间:</span>2016年6月5日 - 19时06分</p>
-           <p><span>最后更新:</span>2016年6月6日 - 11时06分</p>
-           <p><span>原始链接:</span><a href="/about/index.html" title="关于我以及博客">http://yoursite.com/about/index.html</a></p>
+           <p><span>发布时间:</span>1970年1月1日 - 08时01分</p>
+           <p><span>最后更新:</span>2016年7月24日 - 01时07分</p>
+           <p><span>原始链接:</span><a href="/1970/01/01/C++11/" title="C++11">http://yoursite.com/1970/01/01/C++11/</a></p>
            <p><span>转载请保留以上信息。</span></p>
         </div>
       
       
+        <div class="post-tags">
+          
+            <a href="/tags/C-11/"> #C++11 </a>
+          
+            <a href="/tags/C/"> #C++ </a>
+          
+        </div>
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/06/page/">海量数据中求最大的K个数</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+        </div>
       
 
       
@@ -297,7 +317,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#现状"><span class="nav-number">1.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语言"><span class="nav-number">2.</span> <span class="nav-text">语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建博客参考"><span class="nav-number">3.</span> <span class="nav-text">搭建博客参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#博客更新日志"><span class="nav-number">4.</span> <span class="nav-text">博客更新日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#auto"><span class="nav-number">1.</span> <span class="nav-text">auto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda表达式"><span class="nav-number">2.</span> <span class="nav-text">lambda表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decltype"><span class="nav-number">3.</span> <span class="nav-text">decltype</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

@@ -285,6 +285,85 @@
 
 
     
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/1970/01/01/C++11/">
+                C++11
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 1970-01-01
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Summary/">Summary</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/1970/01/01/C++11/#comments" >
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="1970/01/01/C++11/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从反汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
+<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>它可以用于创建并定义匿名的函数对象形式如下：<br>[函数对象参数]（操作符重载函数参数） -&gt;返回值类型{函数体}(具体参数)<br><img src="/imgs/Summary/lambda.png" alt="lambda"></p>
+<h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype的功能与auto相反，从变量得到类型<br><img src="/imgs/Summary/decltype.png" alt="decltype"></p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+      
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
   </div>
 
   
@@ -317,7 +396,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -331,7 +410,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
