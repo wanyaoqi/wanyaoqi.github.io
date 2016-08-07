@@ -174,8 +174,9 @@
 
       
         <h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p><img src="/imgs/Summary/stdargs.png" alt="stdargs"></p>
-<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>va_list 是一个字符指针类型。<br>    typedef char *va_list; </p>
-<p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
+<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><h2 id="va-list"><a href="#va-list" class="headerlink" title="va_list"></a>va_list</h2><pre><code>va_list 是一个字符指针类型。
+typedef char *va_list; 
+</code></pre><h2 id="va-start"><a href="#va-start" class="headerlink" title="va_start"></a>va_start</h2><p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
 <pre><code>#ifndef __sparc__
 #define va_start(AP, LASTARG) \
 (AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG))) //AP即va_list
@@ -189,14 +190,17 @@ AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG)))
 __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存寄存器。
 它的说明可参见gcc 手册章节“Target Description Macros”中的
 “Implementing the Varargs Macros”小节。
-</code></pre><p>__va_rounded_size定义了取整后的TYPE 类型的字节长度值。是int 长度(4)的倍数。</p>
+</code></pre><h3 id="va-rounded-size"><a href="#va-rounded-size" class="headerlink" title="__va_rounded_size"></a>__va_rounded_size</h3><p>__va_rounded_size定义了取整后的TYPE 类型的字节长度值。是int 长度(4)的倍数。</p>
 <pre><code>#define __va_rounded_size(TYPE) \
 (((sizeof (TYPE) + sizeof (int) - 1) / sizeof (int)) * sizeof (int))
-</code></pre><p>va_arg先让AP偏移到指向下一个参数的位置，再返回要取的参数</p>
+</code></pre><h2 id="va-arg"><a href="#va-arg" class="headerlink" title="va_arg"></a>va_arg</h2><p>va_arg先让AP偏移到指向下一个参数的位置，再返回要取的参数</p>
 <pre><code>#define va_arg(AP, TYPE) \
 (AP += __va_rounded_size (TYPE), \
 *((TYPE *) (AP - __va_rounded_size (TYPE))))
-</code></pre>
+</code></pre><h2 id="va-end"><a href="#va-end" class="headerlink" title="va_end"></a>va_end</h2><p>va_end 必须在va_arg 读完所有的参数后再被调用。<br>va_end 可以修改AP 使其在重新调用va_start 之前不能被使用(把va_list指向NULL)。<br>    void va_end (va_list);    // 在gnulib 中定义</p>
+<pre><code>#define va_end(AP)
+</code></pre><h1 id="Linux内核代码Acenv-h中也定义了一组宏"><a href="#Linux内核代码Acenv-h中也定义了一组宏" class="headerlink" title="Linux内核代码Acenv.h中也定义了一组宏"></a>Linux内核代码Acenv.h中也定义了一组宏</h1><p><img src="/imgs/Summary/linux_args.png" alt="linuxstdargs"></p>
+
       
     </div>
 
@@ -337,7 +341,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用示例"><span class="nav-number">1.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现原理"><span class="nav-number">2.</span> <span class="nav-text">实现原理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用示例"><span class="nav-number">1.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现原理"><span class="nav-number">2.</span> <span class="nav-text">实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#va-list"><span class="nav-number">2.1.</span> <span class="nav-text">va_list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#va-start"><span class="nav-number">2.2.</span> <span class="nav-text">va_start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#va-rounded-size"><span class="nav-number">2.2.1.</span> <span class="nav-text">__va_rounded_size</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#va-arg"><span class="nav-number">2.3.</span> <span class="nav-text">va_arg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#va-end"><span class="nav-number">2.4.</span> <span class="nav-text">va_end</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux内核代码Acenv-h中也定义了一组宏"><span class="nav-number">3.</span> <span class="nav-text">Linux内核代码Acenv.h中也定义了一组宏</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
