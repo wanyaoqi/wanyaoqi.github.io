@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="C，stdargs," />
+  <meta name="keywords" content="C,stdargs," />
 
 
 
@@ -178,7 +178,8 @@
 <p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
 <pre><code>#ifndef __sparc__
 #define va_start(AP, LASTARG) \
-(AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG)))
+(AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG))) //AP即va_list
+
 #else
 #define va_start(AP, LASTARG) \
 (__builtin_saveregs (), \
@@ -208,7 +209,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
            <p><span>本文标题:</span><a href="/2016/08/06/stdarg/">可变参函数</a></p>
            <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
            <p><span>发布时间:</span>2016年8月6日 - 14时08分</p>
-           <p><span>最后更新:</span>2016年8月7日 - 19时08分</p>
+           <p><span>最后更新:</span>2016年8月7日 - 20时08分</p>
            <p><span>原始链接:</span><a href="/2016/08/06/stdarg/" title="可变参函数">http://yoursite.com/2016/08/06/stdarg/</a></p>
            <p><span>转载请保留以上信息。</span></p>
         </div>
@@ -216,7 +217,9 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
       
         <div class="post-tags">
           
-            <a href="/tags/C，stdargs/"> #C，stdargs </a>
+            <a href="/tags/C/"> #C </a>
+          
+            <a href="/tags/stdargs/"> #stdargs </a>
           
         </div>
       
@@ -304,7 +307,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

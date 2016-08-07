@@ -183,7 +183,8 @@
 <p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
 <pre><code>#ifndef __sparc__
 #define va_start(AP, LASTARG) \
-(AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG)))
+(AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG))) //AP即va_list
+
 #else
 #define va_start(AP, LASTARG) \
 (__builtin_saveregs (), \
@@ -595,7 +596,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
