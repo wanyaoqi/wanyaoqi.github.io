@@ -696,7 +696,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
         
         
           <div class="cc-license motion-element">
-            <a href="http://creativecommons.org/licenses/by-nc/4.0" class="cc-opacity" target="_blank">
+            <a  class="cc-opacity" target="_blank">
               <img src="/images/cc-by-nc.svg" alt="Creative Commons" />
             </a>
           </div>
@@ -716,24 +716,19 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
       <div class="footer-inner">
         <div class="copyright-page">
   
-  &copy; &nbsp;  2014 - 
+  &copy; &nbsp; 
   2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
   <span class="author">wanyaoqi</span>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        </br>访问量<span id="busuanzi_value_site_pv"></span>，访客数<span id="busuanzi_value_site_uv"></span>人，阅读量<span id="busuanzi_value_page_pv"></span>次
+
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
 
@@ -777,25 +772,38 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
   
 
   
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"qqtx1026"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
+  <% if (!index && post.comments && config.duoshuo_shortname){ %>
+  <section id="comments">
+    <!-- ��˵���ۿ� start -->
+    <div class="ds-thread" data-thread-key="<%= post.layout %>-<%= post.slug %>" data-title="<%= post.title %>" data-url="<%= page.permalink %>"></div>
+    <!-- ��˵���ۿ� end -->
+    <!-- ��˵����JS���� start (һ����ҳֻ������һ��) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'<%= config.duoshuo_shortname %>'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- ��˵����JS���� end -->
+  </section>
+  <% } %>
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'superqi'; // ע�⣬������ example Ҫ�滻Ϊ���Լ��Ķ�����
+/* * * ������Щ����Ҫ�Ķ� * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
   
