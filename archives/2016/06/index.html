@@ -43,14 +43,12 @@
 </script>
 
 <meta name="google-site-verification" content="YAHxtBFjjhWkrycLOhOBuMHETNYVTtS3h4cPY4Wgo2A" />
-  <title> Yaoqi's Blog </title>
+  <title> 归档 // Yaoqi's Blog </title>
 </head>
 
 <body>
 <!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column 
-  
-">
+  <div class="container one-column  page-archive ">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -119,341 +117,153 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-  <div id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+       
+      
+      嗯..! 目前共计 7 篇日志。 继续努力。
+    </span>
+
     
+
+      
+      
       
 
-  <div class="post post-type-normal ">
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        </div>
+      
+      
+
+      
+
+  <div class="post post-type-normal">
     <div class="post-header">
 
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/06/23/lcs/">
-                最长公共子序列
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-06-23
-        </span>
-
+      <div class="post-title">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Algorithm/">Algorithm</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/06/23/lcs/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/23/lcs/"></span>
+            <a class="post-title-link" href="/2016/06/23/lcs/">
+              最长公共子序列
             </a>
-          </span>
-          
         
       </div>
-    </div>
 
-    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-time"> 06-23 </span>
+      </div>
 
-      
-      
-
-      
-        
-          <h1 id="最长公共子序列（LongestCommonSubsequence）"><a href="#最长公共子序列（LongestCommonSubsequence）" class="headerlink" title="最长公共子序列（LongestCommonSubsequence）"></a>最长公共子序列（LongestCommonSubsequence）</h1><p>一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。<br>最长公共子序列问题可以由动态规划求解</p>
-<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>动态规划（英语：Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。<br>动态规划常常适用于有重叠子问题和最优子结构性质的问题，动态规划方法所耗时间往往远少于朴素解法。<br>动态规划背后的基本思想非常简单。大致上，若要解一个给定问题，我们需要解其不同部分（即子问题），再合并子问题的解以得出原问题的解。<br>通常许多子问题非常相似，为此动态规划法试图仅仅解决每个子问题一次，从而减少计算量：一旦某个给定子问题的解已经算出，则将其记忆化（en:memoization）存储，以便下次需要同一个子问题解之时直接查表。这种做法在重复子问题的数目关于输入的规模呈指数增长时特别有用。————<a href="https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92" target="_blank" rel="external">维基百科</a></p>
-<h1 id="动态规划求解LCS"><a href="#动态规划求解LCS" class="headerlink" title="动态规划求解LCS"></a>动态规划求解LCS</h1><h3 id="1-最优子结构性质"><a href="#1-最优子结构性质" class="headerlink" title="1.最优子结构性质"></a>1.最优子结构性质</h3><p>设输入序列是X [0 .. m-1] 和 Y [0 .. n-1]，长度分别为 m 和 n。和设序列 L(X [0 .. m-1]，Y[0 .. n-1]) 是这两个序列的 LCS 的长度，以下为 L(X [0 .. M-1]，Y [0 .. N-1]) 的递归定义：</p>
-<pre><code>1）如果两个序列的最后一个元素匹配（即X [M-1] == Y [N-1]）
-</code></pre><p>　　 则：L（X [0 .. M-1]，Y [0 .. N-1]）= 1 + L（X [0 .. M-2]，Y [0 .. N-1]）</p>
-<pre><code>2）如果两个序列的最后字符不匹配（即X [M-1] != Y [N-1]）
-</code></pre><p>　　 则：L(X [0 .. M-1]，Y [0 .. N-1]) = MAX(L(X [0 .. M-2]，Y [0 .. N-1])，L(X [0 .. M-1]，Y [0 .. N-2]))</p>
-<h3 id="2-重叠子问题"><a href="#2-重叠子问题" class="headerlink" title="2.重叠子问题"></a>2.重叠子问题</h3><pre><code>很明显，LCS 很多子问题也都共享子子问题，因此可以对其进行递归求解。具体的算法时间度为 O(m*n)，可以优化至 O(m+n)。
-</code></pre><h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><p>代码如下：</p>
-<h3 id="未优化"><a href="#未优化" class="headerlink" title="未优化"></a>未优化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int Longest_Common_Subsequence(char *sa, int n1, char *sb, int n2)</span><br><span class="line">&#123;</span><br><span class="line">	if (n1 &gt; 0 &amp;&amp; n2 &gt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		if (sa[n1 - 1] == sb[n2 - 1]) </span><br><span class="line">			return 1 + Longest_Common_Subsequence(sa, n1 - 1, sb, n2 - 1);</span><br><span class="line">		else </span><br><span class="line">			return max(Longest_Common_Subsequence(sa, n1 , sb, n2 - 1),</span><br><span class="line">			Longest_Common_Subsequence(sa, n1 - 1, sb, n2 ));</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="优化后"><a href="#优化后" class="headerlink" title="优化后"></a>优化后</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int lcs(char *sa, int n1, char *sb, int n2)</span><br><span class="line">&#123;</span><br><span class="line">	int **ls = new int*[n1];</span><br><span class="line">	for (int i = 0; i &lt; n1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		ls[i] = new int[n2];</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = 0; i &lt; n1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; n2; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			if (i == 0 || j == 0) ls[i][j] = 0;</span><br><span class="line">			else if (sa[i - 1] == sb[j - 1]) ls[i][j] = ls[i - 1][j - 1] + 1;</span><br><span class="line">			else ls[i][j] = max(ls[i - 1][j], ls[i][j - 1]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int tmp = ls[n1 - 1][n2 - 1];</span><br><span class="line">	for (int k = 0; k &lt; n1; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		delete []ls[k];</span><br><span class="line">	&#125;</span><br><span class="line">	delete []ls;</span><br><span class="line">	return tmp;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-      
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </div>
   </div>
 
 
+
     
+
+      
+      
       
 
-  <div class="post post-type-normal ">
+      
+      
+
+      
+
+  <div class="post post-type-normal">
     <div class="post-header">
 
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/06/20/C++11/">
-                C++11
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-06-20
-        </span>
-
+      <div class="post-title">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Summary/">Summary</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/06/20/C++11/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/20/C++11/"></span>
+            <a class="post-title-link" href="/2016/06/20/C++11/">
+              C++11
             </a>
-          </span>
-          
         
       </div>
-    </div>
 
-    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-time"> 06-20 </span>
+      </div>
 
-      
-      
-
-      
-        
-          <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
-<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>它可以用于创建并定义匿名的函数对象形式如下：<br>[函数对象参数]（操作符重载函数参数） -&gt;返回值类型{函数体}(具体参数)<br><img src="/imgs/Summary/lambda.png" alt="lambda"></p>
-<h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype的功能与auto相反，从变量得到类型<br><img src="/imgs/Summary/decltype.png" alt="decltype"></p>
-<h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><p>右值引用（rvalue reference），是C++程序设计语言自C++11标准提出的一类数据类型。用于实现移动语义（move semantic）与完美转发（perfect forwarding）。–维基百科<br>在资源转移不是调用拷贝等操作而是实现了资源的转移<br><a href="https://www.zhihu.com/question/22111546" target="_blank" rel="external">参考</a></p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-      
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </div>
   </div>
 
 
+
     
+
+      
+      
       
 
-  <div class="post post-type-normal ">
+      
+      
+
+      
+
+  <div class="post post-type-normal">
     <div class="post-header">
 
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/06/12/stl_alloc/">
-                STL空间配置器
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-06-12
-        </span>
-
+      <div class="post-title">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Summary/">Summary</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/06/12/stl_alloc/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/12/stl_alloc/"></span>
+            <a class="post-title-link" href="/2016/06/12/stl_alloc/">
+              STL空间配置器
             </a>
-          </span>
-          
         
       </div>
-    </div>
 
-    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-time"> 06-12 </span>
+      </div>
 
-      
-      
-
-      
-        
-          <h1 id="一级空间配置器"><a href="#一级空间配置器" class="headerlink" title="一级空间配置器"></a>一级空间配置器</h1><p>当所申请的空间大于128bytes时，stl直接使用一级空间配置器<br>一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况<br>当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">template&lt;int inst&gt;</span><br><span class="line">class __malloc_alloc_template</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">	static void *oom_malloc(size_t n)//</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)//不断的去尝试</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();//调用malloc_handler</span><br><span class="line">			&#125;</span><br><span class="line">			result = malloc(n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void *oom_realloc(void *p,size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();</span><br><span class="line">			&#125;</span><br><span class="line">			result = realloc(p,n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void (*__malloc_alloc_oom_handler)();</span><br><span class="line">public:</span><br><span class="line">	static void * allocate(size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void * result = malloc(n);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_malloc(n);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	static void deallocate(void *p,size_t/*n*/)</span><br><span class="line">	&#123;</span><br><span class="line">		free(p);</span><br><span class="line">	&#125;</span><br><span class="line">	static void *reallocate(void *p,size_t /*old_sz*/,size_t new_sz)</span><br><span class="line">	&#123;</span><br><span class="line">		void result = realloc(p,new_sz);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_realloc(p,new_sz);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	// set_new_handler ;</span><br><span class="line">	static void(*set_malloc_handler(void (*f)()))() //参数和返回值全是函数指针</span><br><span class="line">	&#123;</span><br><span class="line">		void (*old)() = __malloc_alloc_oom_handler;</span><br><span class="line">		__malloc_alloc_oom_handler = f;</span><br><span class="line">		return old;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;int inst&gt;</span><br><span class="line">void (*__malloc_alloc_template&lt;inst&gt;::__malloc_alloc_oom_handler)()= NULL;</span><br><span class="line"></span><br><span class="line">typedef __malloc_alloc_template&lt;0&gt; malloc_alloc;</span><br></pre></td></tr></table></figure></p>
-<h1 id="二级空间配置器"><a href="#二级空间配置器" class="headerlink" title="二级空间配置器"></a>二级空间配置器</h1><p>二级空间配置器其实是一个内存池，他维持这一个空闲链表数组，所需字节数全上调成8的倍数，然后在空闲链表里面找。<br>当空闲链表内存块不足时，优先从已申请好的空闲堆内存中填充空闲链表<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span>&#123;__ALIGN = <span class="number">8</span> &#125;;</span><br><span class="line"><span class="keyword">enum</span>&#123;__MAX_BYTES = <span class="number">128</span>&#125;;</span><br><span class="line"><span class="keyword">enum</span>&#123;__NFREELIST = __MAX_BYTES/__ALIGN&#125;;</span><br><span class="line"><span class="keyword">union</span> obj                                    <span class="comment">//链表的结构，空间的有效利用</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">union</span> obj *free_list_link;</span><br><span class="line">	<span class="keyword">char</span> client_data[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">static</span> obj * <span class="keyword">volatile</span> free_list[__NFREELIST];<span class="comment">//空闲链表数组</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> size_t <span class="title">FREELIST_INDEX</span><span class="params">(<span class="keyword">size_t</span> bytes)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes + __ALIGN <span class="number">-1</span>) / __ALIGN <span class="number">-1</span>;<span class="comment">//寻找在数组中的下标位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> size_t <span class="title">ROUND_UP</span><span class="params">(<span class="keyword">size_t</span> bytes)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes + __ALIGN <span class="number">-1</span>) &amp; ~(__ALIGN<span class="number">-1</span>);<span class="comment">//上调成8的倍数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * start_free; <span class="comment">//空闲内存起始地址</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * end_free;   <span class="comment">//空闲内存结束地址</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">size_t</span> heap_size;  <span class="comment">//空闲堆内存大小</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="allocate"><a href="#allocate" class="headerlink" title="allocate"></a>allocate</h2><p>如果找到了则把那块空间从free_list中非配给用户，没找到则调用refill()填充free_list<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> n)</span><span class="comment">// 15</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *result = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> malloc_alloc::allocate(n);</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	result = *my_free_list;</span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">NULL</span> == result)       <span class="comment">//如果free_list为空则调用refill填充或直接分配</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">void</span> *r = refill(ROUND_UP(n));</span><br><span class="line">		<span class="keyword">return</span> r;</span><br><span class="line">	&#125;</span><br><span class="line">	*my_free_list = result-&gt;free_list_link;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="refill"><a href="#refill" class="headerlink" title="refill"></a>refill</h2><p>STL规定refill为内存不足的那块填充20块相应大小的内存块，但是可能出现内存不足的情况所有申请到的不一定是20个内存快(可能只有1个)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">refill</span><span class="params">(<span class="keyword">size_t</span> n)</span> <span class="comment">//</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nobjs = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">char</span> *chunk = chunk_alloc(n,nobjs);<span class="comment">// 申请内存块</span></span><br><span class="line">	obj *<span class="keyword">volatile</span>* my_free_list;</span><br><span class="line">	obj *result;</span><br><span class="line">	obj *current_obj, *next_obj;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">1</span>==nobjs) <span class="keyword">return</span> chunk;</span><br><span class="line">	my_free_list=free_list + FREELIST_INDEX(n);</span><br><span class="line">	result=(obj *)chunk;</span><br><span class="line">	*my_free_list=next_obj=(obj *)(chunk+n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;;i++)                    <span class="comment">//将剩余的块连接到空闲链表</span></span><br><span class="line">	&#123;</span><br><span class="line">		current_obj = next_obj;</span><br><span class="line">		next_obj=(obj *)((<span class="keyword">char</span> *)next_obj + n);</span><br><span class="line">		<span class="keyword">if</span>(nobjs <span class="number">-1</span>==i)</span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=next_obj;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;                <span class="comment">//将第一个内存块返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="chunk-alloc"><a href="#chunk-alloc" class="headerlink" title="chunk_alloc"></a>chunk_alloc</h2><p>chunk_alloc函数分配内存块给free_list,他和refill是维持这个结构的核心。处理了多种内存不足的情况<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">char</span> * <span class="title">chunk_alloc</span><span class="params">(<span class="keyword">size_t</span> size,<span class="keyword">int</span> &amp;nobjs)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *result = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">size_t</span> total_bytes = size*nobjs;</span><br><span class="line">	<span class="keyword">size_t</span> bytes_left = end_free - start_free;</span><br><span class="line">	<span class="keyword">if</span>(bytes_left &gt;= total_bytes)<span class="comment">//当剩余内存完全足够</span></span><br><span class="line">	&#123;</span><br><span class="line">		result = start_free;</span><br><span class="line">		start_free += total_bytes;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(bytes_left &gt;= size)<span class="comment">//内存不够分配20块但能分配一块或一块以上</span></span><br><span class="line">	&#123;</span><br><span class="line">		nobjs = bytes_left/size;</span><br><span class="line">		total_bytes = size*nobjs;</span><br><span class="line">		result = start_free;</span><br><span class="line">		start_free += total_bytes;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="comment">//剩余内存一块都不能分配</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">size_t</span> bytes_to_get=<span class="number">2</span> *total_bytes+ROUND_UP(heap_size&gt;&gt;<span class="number">4</span>);</span><br><span class="line">		<span class="comment">//先给剩余的内存找到合适的free list(先处理start_free——end_free的那段内存)</span></span><br><span class="line">		<span class="keyword">if</span>(bytes_left&gt;<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			obj * <span class="keyword">volatile</span> *my_free_list=free_list +FREELIST_INDEX(bytes_left);</span><br><span class="line">			((obj *)start_free)-&gt;free_list_link= *my_free_list;</span><br><span class="line">			*my_free_list=(obj *)start_free;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//向堆空间申请内存</span></span><br><span class="line">		start_free=(<span class="keyword">char</span> *)<span class="built_in">malloc</span>(bytes_to_get);</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">0</span>==start_free)<span class="comment">//堆空间不足时</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			obj *<span class="keyword">volatile</span>* my_free_list,*p;</span><br><span class="line">			<span class="comment">//遍历比他大的free list查看是否还剩有未使用内存</span></span><br><span class="line">			<span class="keyword">for</span>(i=size;i&lt;__MAX_BYTES;i+=__ALIGN)</span><br><span class="line">			&#123;</span><br><span class="line">				my_free_list = free_list +FREELIST_INDEX(i);</span><br><span class="line">				p = *my_free_list;</span><br><span class="line">				<span class="keyword">if</span>(<span class="number">0</span>!=p)<span class="comment">//</span></span><br><span class="line">				&#123;</span><br><span class="line">					*my_free_list = p -&gt;free_list_link;</span><br><span class="line">					start _free = (<span class="keyword">char</span> *)p;</span><br><span class="line">					end_free = (<span class="keyword">char</span> *)p;</span><br><span class="line">					<span class="comment">//由于nobjs 传的是引用所以递归调用修正nobjs</span></span><br><span class="line">					<span class="keyword">return</span> (chunk_alloc(size,nobjs));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			end_free=<span class="number">0</span>;</span><br><span class="line">			<span class="comment">//调用一级空间配置器,看看malloc_handler能否挤出内存...</span></span><br><span class="line">			start_free =(<span class="keyword">char</span> *)malloc_alloc::allocate(bytes_to_get);</span><br><span class="line">		&#125;</span><br><span class="line">		heap_size +=bytes_to_get;</span><br><span class="line">		end_free =start_free +bytes_to_get;			</span><br><span class="line">		<span class="keyword">return</span> (chunk_alloc(size,nobjs));<span class="comment">//同上</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(<span class="keyword">void</span> *p,<span class="keyword">size_t</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *q = (obj*)p;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		malloc_alloc::deallocate(p,n);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	q-&gt;free_list_link = *my_free_list;</span><br><span class="line">	*my_free_list = q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h1><p>如图：<br><img src="/imgs/Summary/stl_alloc.png" alt="二级空间配置器内存结构"><br>参考资料——STL源码剖析</p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-      
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </div>
   </div>
 
 
+
     
+
+      
+      
       
 
-  <div class="post post-type-normal ">
+      
+      
+
+      
+
+  <div class="post post-type-normal">
     <div class="post-header">
 
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/06/06/heap_sort/">
-                海量数据中求最大的K个数
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-06-06
-        </span>
-
+      <div class="post-title">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Algorithm/">Algorithm</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/06/06/heap_sort/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/heap_sort/"></span>
+            <a class="post-title-link" href="/2016/06/06/heap_sort/">
+              海量数据中求最大的K个数
             </a>
-          </span>
-          
         
       </div>
-    </div>
 
-    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-time"> 06-06 </span>
+      </div>
 
-      
-      
-
-      
-        
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>在n个数中求最大的K个数</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>建立一个K个节点的小根堆，再遍历n个数<br>与小根堆的第一个元素比较</p>
-<h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void heap_adjust(int *arr, int start, int end)</span><br><span class="line">&#123;</span><br><span class="line">	int tmp = arr[start];</span><br><span class="line">	for (int i = 2 * start + 1; i &lt;= end; i = i * 2 + 1)</span><br><span class="line">	&#123;</span><br><span class="line">		if (i + 1 &lt;= end &amp;&amp; arr[i]&gt;arr[i + 1])</span><br><span class="line">		&#123;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		if (tmp &gt; arr[i])</span><br><span class="line">		&#123;</span><br><span class="line">			arr[start] = arr[i];</span><br><span class="line">			start = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	arr[start] = tmp;</span><br><span class="line">&#125;</span><br><span class="line">void heap_sort(int *arr, int length)</span><br><span class="line">&#123;</span><br><span class="line">	//调整成小根堆</span><br><span class="line">	for (int i = (length - 1 - 1) / 2; i &gt;= 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		heap_adjust(arr, i, length - 1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int * find_max_N(int *arr, int len,int n)</span><br><span class="line">&#123;</span><br><span class="line">	if (arr == NULL || len &lt; n||n&lt;1)return NULL;</span><br><span class="line">	int *brr = new int[n];//先让brr为arr的前n个</span><br><span class="line">	memcpy(brr, arr, sizeof(int)* n);</span><br><span class="line">	heap_sort(brr, n);//把前n个调整为小根堆</span><br><span class="line">	for (int i = n; i &lt; len; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		if (arr[i]&gt;brr[0])//如果有值比brr[0]大，则进行赋值后再次调整</span><br><span class="line">		&#123;</span><br><span class="line">			brr[0] = arr[i];</span><br><span class="line">			heap_adjust(brr, 0, n-1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return brr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>利用堆排序的思想，时间复杂度为O(n*logk),空间复杂度为O(K)</p>
-<h1 id="其他解法"><a href="#其他解法" class="headerlink" title="其他解法"></a>其他解法</h1><p>使用快速排序划分的做法</p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-      
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </div>
   </div>
 
 
+
     
+
   </div>
 
   
+
 
         </div>
       </div>
@@ -483,7 +293,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -497,7 +307,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -559,6 +369,12 @@
 
   
   
+  
+    <script type="text/javascript">
+      postMotionOptions = {stagger: 100, drag: true};
+    </script>
+  
+
 
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -577,6 +393,12 @@
 
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   <script type="text/javascript">
     $(document).ready(function () {

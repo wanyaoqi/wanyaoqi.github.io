@@ -43,14 +43,12 @@
 </script>
 
 <meta name="google-site-verification" content="YAHxtBFjjhWkrycLOhOBuMHETNYVTtS3h4cPY4Wgo2A" />
-  <title> Yaoqi's Blog </title>
+  <title> 归档 // Yaoqi's Blog </title>
 </head>
 
 <body>
 <!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column 
-  
-">
+  <div class="container one-column  page-archive ">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -119,194 +117,122 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-  <div id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+       
+      
+      嗯..! 目前共计 7 篇日志。 继续努力。
+    </span>
+
     
+
+      
+      
       
 
-  <div class="post post-type-normal ">
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        </div>
+      
+      
+
+      
+
+  <div class="post post-type-normal">
     <div class="post-header">
 
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/08/10/stl_traits/">
-                STL  traits
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-08-10
-        </span>
-
+      <div class="post-title">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Summary/">Summary</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/08/10/stl_traits/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/10/stl_traits/"></span>
+            <a class="post-title-link" href="/2016/08/14/stl_vector/">
+              STL vector
             </a>
-          </span>
-          
         
       </div>
-    </div>
 
-    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-time"> 08-14 </span>
+      </div>
 
-      
-      
-
-      
-        
-          <h1 id="STL-traits的实现"><a href="#STL-traits的实现" class="headerlink" title="STL traits的实现"></a>STL traits的实现</h1><p>traits 是一种能获取出你所需类型特性的方法</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> output_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> forward_iterator_tag :<span class="keyword">public</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> bidirectional_iterator_tag: <span class="keyword">public</span> forward_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> random_access_iterator_tag: <span class="keyword">public</span> bidirectional_iterator_tag&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> _Cat,<span class="keyword">class</span> _T,<span class="keyword">class</span> _Dis = <span class="keyword">int</span>,</span><br><span class="line">         <span class="keyword">class</span> _P = _T*, <span class="keyword">class</span> _Ref = _T&amp;&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> _Cat iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> _T   value_type;</span><br><span class="line">	<span class="keyword">typedef</span> _Dis difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> _P   pointer;</span><br><span class="line">	<span class="keyword">typedef</span> _Ref reference;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::iterator_category iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::value_type         value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::difference_type    difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::pointer            pointer;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::reference          reference;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits&lt;T*&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> random_access_iterator_tag iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> T         value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>       difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> T *       pointer;</span><br><span class="line">	<span class="keyword">typedef</span> T &amp;       reference;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits&lt;<span class="keyword">const</span> T*&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> random_access_iterator_tag iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> T               value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>             difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> T *       pointer;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> T &amp;       reference;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">iterator_category</span><br><span class="line"><span class="title">iterator_category</span><span class="params">(Iterator &amp;)</span>			      <span class="comment">//迭代器的'类型'</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::iterator_category iterator_category;</span><br><span class="line">	<span class="keyword">return</span> iterator_category();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">value_type*</span><br><span class="line"><span class="title">value_type</span><span class="params">(Iterator &amp;)</span>                       <span class="comment">//迭代器所指之物类型</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::value_type*&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">difference_type *</span><br><span class="line"><span class="title">difference_type</span><span class="params">(Iterator &amp;)</span>                 <span class="comment">//获取差值类型</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::difference_type*&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="迭代器分类"><a href="#迭代器分类" class="headerlink" title="迭代器分类"></a>迭代器分类</h1><p><img src="/imgs/Summary/stl_iterator.png" alt="stl_iterator"><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> output_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> forward_iterator_tag :<span class="keyword">public</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> bidirectional_iterator_tag: <span class="keyword">public</span> forward_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> random_access_iterator_tag: <span class="keyword">public</span> bidirectional_iterator_tag&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<h1 id="advance例子"><a href="#advance例子" class="headerlink" title="advance例子"></a>advance例子</h1><p><img src="/imgs/Summary/stl_traits.png" alt="stl_traits"></p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-      
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </div>
   </div>
 
 
+
     
+
+      
+      
       
 
-  <div class="post post-type-normal ">
+      
+      
+
+      
+
+  <div class="post post-type-normal">
     <div class="post-header">
 
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/08/06/stdarg/">
-                可变参函数
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-08-06
-        </span>
-
+      <div class="post-title">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/Summary/">Summary</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/08/06/stdarg/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/stdarg/"></span>
+            <a class="post-title-link" href="/2016/08/10/stl_traits/">
+              STL  traits
             </a>
-          </span>
-          
         
       </div>
-    </div>
 
-    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-time"> 08-10 </span>
+      </div>
 
-      
-      
-
-      
-        
-          <h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p><img src="/imgs/Summary/stdargs.png" alt="stdargs"></p>
-<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><h2 id="va-list"><a href="#va-list" class="headerlink" title="va_list"></a>va_list</h2><pre><code>va_list 是一个字符指针类型。
-typedef char *va_list; 
-</code></pre><h2 id="va-start"><a href="#va-start" class="headerlink" title="va_start"></a>va_start</h2><p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
-<pre><code>#ifndef __sparc__
-#define va_start(AP, LASTARG) \
-(AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG))) //AP即va_list
-
-#else
-#define va_start(AP, LASTARG) \
-(__builtin_saveregs (), \
-AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG)))
-#endif
-
-__builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存寄存器。
-它的说明可参见gcc 手册章节“Target Description Macros”中的
-“Implementing the Varargs Macros”小节。
-</code></pre><h3 id="va-rounded-size"><a href="#va-rounded-size" class="headerlink" title="__va_rounded_size"></a>__va_rounded_size</h3><p>__va_rounded_size定义了取整后的TYPE 类型的字节长度值。是int 长度(4)的倍数。</p>
-<pre><code>#define __va_rounded_size(TYPE) \
-(((sizeof (TYPE) + sizeof (int) - 1) / sizeof (int)) * sizeof (int))
-</code></pre><h2 id="va-arg"><a href="#va-arg" class="headerlink" title="va_arg"></a>va_arg</h2><p>va_arg先让AP偏移到指向下一个参数的位置，再返回要取的参数</p>
-<pre><code>#define va_arg(AP, TYPE) \
-(AP += __va_rounded_size (TYPE), \
-*((TYPE *) (AP - __va_rounded_size (TYPE))))
-</code></pre><h2 id="va-end"><a href="#va-end" class="headerlink" title="va_end"></a>va_end</h2><p>va_end 必须在va_arg 读完所有的参数后再被调用。<br>va_end 可以修改AP 使其在重新调用va_start 之前不能被使用(把va_list指向NULL)。<br>    void va_end (va_list);    // 在gnulib 中定义</p>
-<pre><code>#define va_end(AP)
-</code></pre><h1 id="Linux内核代码Acenv-h中也定义了一组宏"><a href="#Linux内核代码Acenv-h中也定义了一组宏" class="headerlink" title="Linux内核代码Acenv.h中也定义了一组宏"></a>Linux内核代码Acenv.h中也定义了一组宏</h1><p><img src="/imgs/Summary/linux_args.png" alt="linuxstdargs"></p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-      
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </div>
   </div>
 
 
+
     
+
+      
+      
+      
+
+      
+      
+
+      
+
+  <div class="post post-type-normal">
+    <div class="post-header">
+
+      <div class="post-title">
+        
+            <a class="post-title-link" href="/2016/08/06/stdarg/">
+              可变参函数
+            </a>
+        
+      </div>
+
+      <div class="post-meta">
+        <span class="post-time"> 08-06 </span>
+      </div>
+
+    </div>
+  </div>
+
+
+
+    
+
   </div>
 
   
+
 
         </div>
       </div>
@@ -336,7 +262,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -350,7 +276,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -412,6 +338,12 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
   
   
+  
+    <script type="text/javascript">
+      postMotionOptions = {stagger: 100, drag: true};
+    </script>
+  
+
 
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -430,6 +362,12 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   <script type="text/javascript">
     $(document).ready(function () {
