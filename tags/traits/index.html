@@ -1,130 +1,510 @@
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
 <head>
-  <meta charset="utf-8">
-  <title>标签 traits</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#00796b">
-  <meta name="msapplication-TileColor" content="#4E8071"/>
-  
-  
-  <link rel="alternative" href="/atom.xml" title="Yaoqi&#39;s Blog" type="application/atom+xml">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
-</head>
-
-
-<body>
-
-  <div id="container" class="container">
-    <div class="left-col">
-    <div class="intrude-less">
-  <header id="header" class="inner">
-    <a href="/" class="profilepic">
-      <img src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" class="block-select js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-	</a>
-	<p class="header-subtitle">coding</p>
-    <nav class="header-menu">
-      <ul>
-        <li><a href="/archives">文章</a></li><li><a href="/categories/note">随笔</a></li><li><a href="/tags">标签</a></li><li><a href="/feedback">留言</a></li>
-      </ul>
-    </nav>
-  </header>				
-</div>
-
-
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  <div class="intrude-less">
-    <header id="header" class="inner">
-      <a href="/" class="profilepic">
-        <img src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" class="block-select js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-	  </a>
-	  <p class="header-subtitle">coding</p>
-	  <nav class="header-menu">
-	    <ul>
-        <li><a href="/archives">文章</a></li><li><a href="/categories/note">随笔</a></li><li><a href="/tags">标签</a></li><li><a href="/feedback">留言</a></li><div class="clearfix"></div>
-		</ul>
-	  </nav>
-	</header>				
-  </div>
-</nav>
-
-      <div class="body-wrap">
-  
-    
-<article id="post-stl_traits" class="article article-type-post" itemscope itemprop="blogPost">
-
-   
-    
-  
-  <div class="article-inner block-select">
-  
-    
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/10/stl_traits/">STL  traits</a>
-    </h1>
   
 
-        
-      </header>
-      
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="STL-traits的实现"><a href="#STL-traits的实现" class="headerlink" title="STL traits的实现"></a>STL traits的实现</h1><pre><code>traits 是一种能获取出你所需类型特性的方法：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> output_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> forward_iterator_tag :<span class="keyword">public</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> bidirectional_iterator_tag: <span class="keyword">public</span> forward_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> random_access_iterator_tag: <span class="keyword">public</span> bidirectional_iterator_tag&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> _Cat,<span class="keyword">class</span> _T,<span class="keyword">class</span> _Dis = <span class="keyword">int</span>,</span><br><span class="line">         <span class="keyword">class</span> _P = _T*, <span class="keyword">class</span> _Ref = _T&amp;&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> _Cat iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> _T   value_type;</span><br><span class="line">	<span class="keyword">typedef</span> _Dis difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> _P   pointer;</span><br><span class="line">	<span class="keyword">typedef</span> _Ref reference;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::iterator_category iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::value_type         value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::difference_type    difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::pointer            pointer;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::reference          reference;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits&lt;T*&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> random_access_iterator_tag iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> T         value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>       difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> T *       pointer;</span><br><span class="line">	<span class="keyword">typedef</span> T &amp;       reference;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits&lt;<span class="keyword">const</span> T*&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> random_access_iterator_tag iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> T               value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>             difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> T *       pointer;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> T &amp;       reference;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">iterator_category</span><br><span class="line"><span class="title">iterator_category</span><span class="params">(Iterator &amp;)</span>			      <span class="comment">//迭代器的'类型'</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::iterator_category iterator_category;</span><br><span class="line">	<span class="keyword">return</span> iterator_category();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">value_type*</span><br><span class="line"><span class="title">value_type</span><span class="params">(Iterator &amp;)</span>                       <span class="comment">//迭代器所指之物类型</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::value_type*&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">difference_type *</span><br><span class="line"><span class="title">difference_type</span><span class="params">(Iterator &amp;)</span>                 <span class="comment">//获取差值类型</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::difference_type*&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="迭代器分类"><a href="#迭代器分类" class="headerlink" title="迭代器分类"></a>迭代器分类</h1><p><img src="/imgs/Summary/stl_iterator.png" alt="stl_iterator"><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> output_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> forward_iterator_tag :<span class="keyword">public</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> bidirectional_iterator_tag: <span class="keyword">public</span> forward_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> random_access_iterator_tag: <span class="keyword">public</span> bidirectional_iterator_tag&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<h1 id="advance例子"><a href="#advance例子" class="headerlink" title="advance例子"></a>advance例子</h1><p><img src="/imgs/Summary/stl_traits.png" alt="stl_traits"></p>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-      
-      
-      
-    </div>
-    
-  </div>
-  
-</article>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
 
 
-  
-  
 
-</div>
-      <footer id="footer" class="block-select">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">&copy; 2015-2016
-        <a href="/aboutme/" class ="aboutme-foot-tag"> wanyaoqi</a>
-      </div>
-    </div>
-  </div>
-</footer>
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
-    </div>
-    <script>
-	var ThemeXConfig = {fancybox: false,mathjax: false,animate: false,isHome: false,isPost: false,isArchive: false,isTag: true,isCategory: false,open_in_new: false, CDN_PATH: '' }
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="面对疾风吧！！！" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="面对疾风吧！！！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yaoqi's Blog">
+<meta property="og:url" content="http://yoursite.com/tags/traits/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="面对疾风吧！！！">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yaoqi's Blog">
+<meta name="twitter:description" content="面对疾风吧！！！">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
 </script>
 
+  <title> 标签: traits | Yaoqi's Blog </title>
+</head>
 
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/base.js"></script>
-    <script src="/js/jquery.lazyload.min.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-
-
-
-
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
   </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">coding</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+      
+
+      
+        <style type="text/css">
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        background: #555 no-repeat;
+        cursor: move;
+    }
+
+    .assist-btn {
+        position: fixed;
+        top: 50％;
+        left: 10px;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        outline: none;
+        border: none;
+        color: #87daff;
+    }
+
+</style>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+<script type="text/javascript">
+    // 浮动圆点展开与收缩
+    /*
+    $(function () {
+        var assist_box = $('.assist-box');
+        $('#assist_btn').hover(function () {
+            assist_box.stop().show(300);
+        }, function () {
+            assist_box.stop().hide(150);
+        })
+    });
+    */  
+    //浮动圆点拖动
+    $(function () {
+        var box = document.getElementById('assist_btn');
+        box.onmousedown = function (event) {
+            var e = event || window.event,
+                t = e.target || e.srcElement,
+                // 鼠标按下时的坐标x1,y1
+                x1 = e.clientX,
+                y1 = e.clientY,
+                //鼠标按下时的左右偏移量
+                dragLeft = this.offsetLeft,
+                dragTop = this.offsetTop;
+
+            document.onmousemove = function (event) {
+                var e = event || window.event,
+                    t = e.target || e.srcElement,
+                    // 鼠标移动时的动态坐标
+                    x2 = e.clientX,
+                    y2 = e.clientY,
+                    // 鼠标移动时的坐标的变化量
+                    x = x2 - x1,
+                    y = y2 - y1;
+                box.style.left = (dragLeft + x) + 'px';
+                box.style.top = (dragTop + y) + 'px';
+            }
+
+            document.onmouseup = function () {
+                this.onmousemove = null;
+            }
+        }
+    });
+
+/*
+    $whitesmoke   = #f5f5f5
+    $gainsboro    = #eee
+    $gray-lighter = #ddd
+    $grey-light   = #ccc
+    $grey         = #bbb
+    $grey-dark    = #999
+    $grey-dim     = #666
+    $black-light  = #555
+    $black-deep   = #222
+    $red          = #ff2a2a
+    $blue-bright  = #87daff
+    $blue         = #0684bd
+    $blue-deep    = #262a30
+*/
+    // white theme
+    var body = {color: "#555", background: "white"};
+    var a_tag = {color: "#222"};
+    var header = { background: "#f5f5f5"};
+    var logo_line_i = {background: "#222"};
+    // var post_code = {background: "#eee", color: "#222"};
+
+    function switch_theme() {
+        $("body").css(body);
+        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a, .show-commit-cls a, #donate_board a')").css(a_tag);
+        $(".header, .footer").css(header);
+        $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
+        //$(".post code").css(post_code);
+        $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
+        $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
+        
+        // $("code").css({color: '#c5c8c6', background: '#1d1f21'});
+        $("#assist_btn").hide(1500);
+    }
+
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
+</script>
+
+<div>
+
+    <button class="assist-btn circle" id="assist_btn" title="双击切换">
+        亮
+    </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+      
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        traits
+        <small>标签</small>
+      </h2>
+    </div>
+
+    
+      
+
+  <article class="post post-type-normal"itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/08/10/stl_traits/" itemprop="url">
+              <span itemprop="name">STL  traits</span>
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-08-10T04:56:46.000Z" itemprop="dateCreated" content="2016-08-10"> 08-10 </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+  </div>
+
+  
+ </div>
+
+        
+
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="wanyaoqi" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">wanyaoqi</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">面对疾风吧！！！</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wanyaoqi
+  </span>
+</div>
+
+
+<!-- busuanzi -->
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    <script type="text/javascript">
+      postMotionOptions = {stagger: 100, drag: true};
+    </script>
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wyq2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>

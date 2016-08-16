@@ -1,284 +1,576 @@
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
 <head>
-  <meta charset="utf-8">
-  <title>标签 STL</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#00796b">
-  <meta name="msapplication-TileColor" content="#4E8071"/>
-  
-  
-  <link rel="alternative" href="/atom.xml" title="Yaoqi&#39;s Blog" type="application/atom+xml">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
-</head>
-
-
-<body>
-
-  <div id="container" class="container">
-    <div class="left-col">
-    <div class="intrude-less">
-  <header id="header" class="inner">
-    <a href="/" class="profilepic">
-      <img src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" class="block-select js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-	</a>
-	<p class="header-subtitle">coding</p>
-    <nav class="header-menu">
-      <ul>
-        <li><a href="/archives">文章</a></li><li><a href="/categories/note">随笔</a></li><li><a href="/tags">标签</a></li><li><a href="/feedback">留言</a></li>
-      </ul>
-    </nav>
-  </header>				
-</div>
-
-
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  <div class="intrude-less">
-    <header id="header" class="inner">
-      <a href="/" class="profilepic">
-        <img src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" class="block-select js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-	  </a>
-	  <p class="header-subtitle">coding</p>
-	  <nav class="header-menu">
-	    <ul>
-        <li><a href="/archives">文章</a></li><li><a href="/categories/note">随笔</a></li><li><a href="/tags">标签</a></li><li><a href="/feedback">留言</a></li><div class="clearfix"></div>
-		</ul>
-	  </nav>
-	</header>				
-  </div>
-</nav>
-
-      <div class="body-wrap">
-  
-    
-<article id="post-stl_list_1" class="article article-type-post" itemscope itemprop="blogPost">
-
-   
-    
-  
-  <div class="article-inner block-select">
-  
-    
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/15/stl_list_1/">STL list ——part 1</a>
-    </h1>
   
 
-        
-      </header>
-      
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="list结构"><a href="#list结构" class="headerlink" title="list结构"></a>list结构</h1><p>STL list是一个环形双向链表 ，结点结构如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> __list_node</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>* void_pointer;</span><br><span class="line">void_pointer prev;<span class="comment">//其实可以设为__list_node&lt;T&gt;*</span></span><br><span class="line">void_pointer next;</span><br><span class="line">T data;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p>list是一个双向链表,其迭代器可以向前移、向后移,因此迭代器类型为bidirectional_iterator_tag<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有继承 std::iterator</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Ref, <span class="keyword">class</span> Ptr&gt;  </span><br><span class="line"><span class="keyword">struct</span> __list_iterator &#123;   </span><br><span class="line">  <span class="keyword">typedef</span> __list_iterator&lt;T, T&amp;, T*&gt;             iterator;  </span><br><span class="line">  <span class="keyword">typedef</span> __list_iterator&lt;T, <span class="keyword">const</span> T&amp;, <span class="keyword">const</span> T*&gt; const_iterator;  </span><br><span class="line">  <span class="keyword">typedef</span> __list_iterator&lt;T, Ref, Ptr&gt;           self;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//为了支持STL型别标准，自己定义5个类别  </span></span><br><span class="line">  <span class="keyword">typedef</span> bidirectional_iterator_tag iterator_category; </span><br><span class="line">  <span class="keyword">typedef</span> T value_type;           </span><br><span class="line">  <span class="keyword">typedef</span> Ptr pointer;          </span><br><span class="line">  <span class="keyword">typedef</span> Ref reference;             </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">ptrdiff_t</span> difference_type;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> __list_node&lt;T&gt;* link_type;  </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">size_t</span> size_type;   </span><br><span class="line">  </span><br><span class="line">  link_type node;  <span class="comment">// 指向list的结点指针 </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//构造函数  </span></span><br><span class="line">  __list_iterator(link_type x) : node(x) &#123;&#125;  </span><br><span class="line">  __list_iterator() &#123;&#125;  </span><br><span class="line">  __list_iterator(<span class="keyword">const</span> iterator&amp; x) : node(x.node) &#123;&#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//迭代器操作运算符重载</span></span><br><span class="line">  <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> self&amp; x) <span class="keyword">const</span> &#123; <span class="keyword">return</span> node == x.node; &#125; </span><br><span class="line">   </span><br><span class="line">  <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> self&amp; x) <span class="keyword">const</span> &#123; <span class="keyword">return</span> node != x.node; &#125; </span><br><span class="line">       </span><br><span class="line">  reference <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> (*node).data; &#125;      </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __SGI_STL_NO_ARROW_OPERATOR    </span></span><br><span class="line">  pointer <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123; <span class="keyword">return</span> &amp;(<span class="keyword">operator</span>*()); &#125;  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __SGI_STL_NO_ARROW_OPERATOR */</span>  </span></span><br><span class="line">      </span><br><span class="line">  self&amp; <span class="keyword">operator</span>++() &#123;   </span><br><span class="line">    node = (link_type)((*node).next);     </span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;  </span><br><span class="line">  &#125;    </span><br><span class="line">  self <span class="keyword">operator</span>++(<span class="keyword">int</span>) &#123;   </span><br><span class="line">    self tmp = *<span class="keyword">this</span>;  </span><br><span class="line">    ++*<span class="keyword">this</span>;  </span><br><span class="line">    <span class="keyword">return</span> tmp;  </span><br><span class="line">  &#125;      </span><br><span class="line">  self&amp; <span class="keyword">operator</span>--() &#123;   </span><br><span class="line">    node = (link_type)((*node).prev);   </span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;  </span><br><span class="line">  &#125;    </span><br><span class="line">  self <span class="keyword">operator</span>--(<span class="keyword">int</span>) &#123;   </span><br><span class="line">    self tmp = *<span class="keyword">this</span>;  </span><br><span class="line">    --*<span class="keyword">this</span>;  </span><br><span class="line">    <span class="keyword">return</span> tmp;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h1 id="list-定义"><a href="#list-定义" class="headerlink" title="list 定义"></a>list 定义</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc = alloc&gt; <span class="comment">// 默认为 alloc 为配置器  </span></span><br><span class="line"><span class="keyword">class</span> <span class="built_in">list</span> &#123;  </span><br><span class="line"><span class="keyword">protected</span>:  </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">void</span>* void_pointer;  </span><br><span class="line">  <span class="keyword">typedef</span> __list_node&lt;T&gt; list_node;    </span><br><span class="line">  <span class="keyword">typedef</span> simple_alloc&lt;list_node, Alloc&gt; list_node_allocator;  </span><br><span class="line"><span class="keyword">public</span>:        </span><br><span class="line">  <span class="keyword">typedef</span> T value_type;  </span><br><span class="line">  <span class="keyword">typedef</span> value_type* pointer;  </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">const</span> value_type* const_pointer;  </span><br><span class="line">  <span class="keyword">typedef</span> value_type&amp; reference;  </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">const</span> value_type&amp; const_reference;  </span><br><span class="line">  <span class="keyword">typedef</span> list_node* link_type;  </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">size_t</span> size_type;  </span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">ptrdiff_t</span> difference_type;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span>:   </span><br><span class="line">  <span class="keyword">typedef</span> __list_iterator&lt;T, T&amp;, T*&gt;             iterator;  </span><br><span class="line">  <span class="keyword">typedef</span> __list_iterator&lt;T, <span class="keyword">const</span> T&amp;, <span class="keyword">const</span> T*&gt; const_iterator;  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __STL_CLASS_PARTIAL_SPECIALIZATION  </span></span><br><span class="line">  <span class="keyword">typedef</span> reverse_iterator&lt;const_iterator&gt; const_reverse_iterator;  </span><br><span class="line">  <span class="keyword">typedef</span> reverse_iterator&lt;iterator&gt; reverse_iterator;  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> <span class="comment">/* __STL_CLASS_PARTIAL_SPECIALIZATION */</span>  </span></span><br><span class="line">  <span class="keyword">typedef</span> reverse_bidirectional_iterator&lt;const_iterator, value_type,  </span><br><span class="line">  const_reference, difference_type&gt;  </span><br><span class="line">  const_reverse_iterator;  </span><br><span class="line">  <span class="keyword">typedef</span> reverse_bidirectional_iterator&lt;iterator, value_type, reference,  </span><br><span class="line">  difference_type&gt;  </span><br><span class="line">  reverse_iterator;   </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __STL_CLASS_PARTIAL_SPECIALIZATION */</span>  </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">protected</span>:  </span><br><span class="line">  <span class="comment">//申请、释放结点 </span></span><br><span class="line">  <span class="function">link_type <span class="title">get_node</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> list_node_allocator::allocate(); &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">put_node</span><span class="params">(link_type p)</span> </span>&#123; list_node_allocator::deallocate(p); &#125;  </span><br><span class="line">   </span><br><span class="line">  <span class="function">link_type <span class="title">create_node</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span> </span>&#123;  </span><br><span class="line">    link_type p = get_node();  </span><br><span class="line">    __STL_TRY &#123;  </span><br><span class="line">      construct(&amp;p-&gt;data, x);    </span><br><span class="line">    &#125;  </span><br><span class="line">    __STL_UNWIND(put_node(p));  </span><br><span class="line">    <span class="keyword">return</span> p;  </span><br><span class="line">  &#125;   </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">destroy_node</span><span class="params">(link_type p)</span> </span>&#123;  </span><br><span class="line">    destroy(&amp;p-&gt;data);       </span><br><span class="line">    put_node(p);  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">protected</span>:  </span><br><span class="line">    <span class="comment">//初始化一个空链表，首尾相连  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">empty_initialize</span><span class="params">()</span> </span>&#123;   </span><br><span class="line">    node = get_node();    </span><br><span class="line">    node-&gt;next = node;     </span><br><span class="line">    node-&gt;prev = node;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="comment">//初始化长为n的链表，值都为value  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">fill_initialize</span><span class="params">(size_type n, <span class="keyword">const</span> T&amp; value)</span> </span>&#123;  </span><br><span class="line">    empty_initialize();  </span><br><span class="line">    __STL_TRY &#123;  </span><br><span class="line">      insert(begin(), n, value);      <span class="comment">//先初始化一个空链表在插入n个结点</span></span><br><span class="line">    &#125;  </span><br><span class="line">    __STL_UNWIND(clear(); put_node(node));  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __STL_MEMBER_TEMPLATES  </span></span><br><span class="line">  <span class="comment">//以迭代器区间初始化一个链表  </span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">class</span> InputIterator&gt;  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">range_initialize</span><span class="params">(InputIterator first, InputIterator last)</span> </span>&#123;  </span><br><span class="line">    empty_initialize();  </span><br><span class="line">    __STL_TRY &#123;  </span><br><span class="line">      insert(begin(), first, last);  <span class="comment">//</span></span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//commit or rollback  </span></span><br><span class="line">    __STL_UNWIND(clear(); put_node(node));  </span><br><span class="line">  &#125;  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>  <span class="comment">/* __STL_MEMBER_TEMPLATES */</span>  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">range_initialize</span><span class="params">(<span class="keyword">const</span> T* first, <span class="keyword">const</span> T* last)</span> </span>&#123;  </span><br><span class="line">    empty_initialize();  </span><br><span class="line">    __STL_TRY &#123;  </span><br><span class="line">      insert(begin(), first, last);  </span><br><span class="line">    &#125;  </span><br><span class="line">    __STL_UNWIND(clear(); put_node(node));  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">range_initialize</span><span class="params">(const_iterator first, const_iterator last)</span> </span>&#123;  </span><br><span class="line">    empty_initialize();  </span><br><span class="line">    __STL_TRY &#123;  </span><br><span class="line">      insert(begin(), first, last);  </span><br><span class="line">    &#125;  </span><br><span class="line">    __STL_UNWIND(clear(); put_node(node));  </span><br><span class="line">  &#125;  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __STL_MEMBER_TEMPLATES */</span>  </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">protected</span>:   </span><br><span class="line">  link_type node; <span class="comment">//头结点  </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="list元素操作"><a href="#list元素操作" class="headerlink" title="list元素操作"></a>list元素操作</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><pre><code>list() { empty_initialize(); // 默认构造函数，空链表。
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-//构造长为n的链表
-list(size_type n, const T&amp; value) { fill_initialize(n, value); } 
 
-list(int n, const T&amp; value) { fill_initialize(n, value); }  
-
-list(long n, const T&amp; value) { fill_initialize(n, value); } 
-
-explicit list(size_type n) { fill_initialize(n, T()); }
-
-//迭代器区间构造list   
-template &lt;class InputIterator&gt;  
-list(InputIterator first, InputIterator last){range_initialize(first, last);}
-
-//拷贝构造list
-list(const list&lt;T, Alloc&gt;&amp; x){range_initialize(x.begin(), x.end());}  
-</code></pre><h2 id="push、pop、erase、insert、clear、remove、unique"><a href="#push、pop、erase、insert、clear、remove、unique" class="headerlink" title="push、pop、erase、insert、clear、remove、unique"></a>push、pop、erase、insert、clear、remove、unique</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">push_front</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span> </span><br><span class="line">  </span>&#123; </span><br><span class="line">  	insert(begin(), x); </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">const</span> T&amp; x)</span></span><br><span class="line">  </span>&#123; </span><br><span class="line">   	insert(end(), x); </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">pop_front</span><span class="params">()</span></span><br><span class="line">  </span>&#123; </span><br><span class="line">  	erase(begin()); </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">pop_back</span><span class="params">()</span></span><br><span class="line">  </span>&#123;   </span><br><span class="line">    iterator tmp = end();  </span><br><span class="line">    erase(--tmp);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function">iterator <span class="title">insert</span><span class="params">(iterator position, <span class="keyword">const</span> T&amp; x)</span> <span class="comment">//在postition所指位置之前插入一个结点</span></span><br><span class="line">  </span>&#123;  </span><br><span class="line">    link_type tmp = create_node(x); <span class="comment">// 申请一个结点并用x初始化   </span></span><br><span class="line">    tmp-&gt;next = position.node;  </span><br><span class="line">    tmp-&gt;prev = position.node-&gt;prev;  </span><br><span class="line">    <span class="comment">//prev和next指针都是void*，所以需要指针类型转换  </span></span><br><span class="line">    (link_type(position.node-&gt;prev))-&gt;next = tmp;  </span><br><span class="line">    position.node-&gt;prev = tmp;  </span><br><span class="line">    <span class="keyword">return</span> tmp;  </span><br><span class="line">  &#125;   </span><br><span class="line">  <span class="function">iterator <span class="title">erase</span><span class="params">(iterator position)</span>  <span class="comment">//移除position所指结点 </span></span><br><span class="line">  </span>&#123;  </span><br><span class="line">    link_type next_node = link_type(position.node-&gt;next);  </span><br><span class="line">    link_type prev_node = link_type(position.node-&gt;prev);  </span><br><span class="line">    prev_node-&gt;next = next_node;  </span><br><span class="line">    next_node-&gt;prev = prev_node;  </span><br><span class="line">    destroy_node(position.node);  </span><br><span class="line">    <span class="keyword">return</span> iterator(next_node);  </span><br><span class="line">  &#125;   </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc&gt;   </span><br><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::clear()    <span class="comment">// 清除所有结点 </span></span><br><span class="line">&#123;  </span><br><span class="line">  link_type cur = (link_type) node-&gt;next; <span class="comment">// begin()  </span></span><br><span class="line">  <span class="keyword">while</span> (cur != node) &#123;   <span class="comment">//遍历结点</span></span><br><span class="line">    link_type tmp = cur;  </span><br><span class="line">    cur = (link_type) cur-&gt;next;  </span><br><span class="line">    destroy_node(tmp);    </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="comment">// 恢复头结点状态</span></span><br><span class="line">  node-&gt;next = node;  </span><br><span class="line">  node-&gt;prev = node;  </span><br><span class="line">&#125; 	  </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc&gt;  </span><br><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::remove(<span class="keyword">const</span> T&amp; value) <span class="comment">// 将数值为value的结点移除</span></span><br><span class="line">&#123;  </span><br><span class="line">  iterator first = begin();  </span><br><span class="line">  iterator last = end();  </span><br><span class="line">  <span class="keyword">while</span> (first != last) &#123;    </span><br><span class="line">    iterator next = first;  </span><br><span class="line">    ++next;  </span><br><span class="line">    <span class="keyword">if</span> (*first == value) erase(first);  <span class="comment">// 移除  </span></span><br><span class="line">    first = next;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc&gt;  </span><br><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::unique()<span class="comment">// 移除数值相同的连续元素 ，只有相同的连续元素才会被移除！！</span></span><br><span class="line">&#123;  </span><br><span class="line">  iterator first = begin();  </span><br><span class="line">  iterator last = end();  </span><br><span class="line">  <span class="keyword">if</span> (first == last) <span class="keyword">return</span>;  </span><br><span class="line">  iterator next = first;  </span><br><span class="line">  <span class="keyword">while</span> (++next != last) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (*first == *next)</span><br><span class="line">      erase(next);  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      first = next;  </span><br><span class="line">    next = first;    <span class="comment">//调整范围</span></span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-      
-      
-    </div>
-    
-  </div>
-  
-</article>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
 
 
-  
-    
-<article id="post-stl_vector" class="article article-type-post" itemscope itemprop="blogPost">
 
-   
-    
-  
-  <div class="article-inner block-select">
-  
-    
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/stl_vector/">STL vector</a>
-    </h1>
-  
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
-        
-      </header>
-      
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="vector概述"><a href="#vector概述" class="headerlink" title="vector概述"></a>vector概述</h1><p>   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素</p>
-<h1 id="vector-定义"><a href="#vector-定义" class="headerlink" title="vector 定义"></a>vector 定义</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> _Ty, <span class="keyword">class</span> _A = allocator&lt;_Ty&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> <span class="built_in">vector</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;_Ty, _A&gt;     _Myt;</span><br><span class="line">	<span class="keyword">typedef</span> _A                  allocator_type;</span><br><span class="line">	<span class="keyword">typedef</span> _A::size_type       size_type;</span><br><span class="line">	<span class="keyword">typedef</span> _A::difference_type difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> _A::pointer         _Tptr;</span><br><span class="line">	<span class="keyword">typedef</span> _A::const_pointer   _Ctptr;</span><br><span class="line">	<span class="keyword">typedef</span> _A::reference       reference;</span><br><span class="line">	<span class="keyword">typedef</span> _A::const_reference const_reference;</span><br><span class="line">	<span class="keyword">typedef</span> _A::value_type      value_type;</span><br><span class="line">	<span class="keyword">typedef</span> _Tptr               iterator;                <span class="comment">//vector迭代器就是本身的指针</span></span><br><span class="line">	<span class="keyword">typedef</span> _Ctptr              const_iterator;</span><br><span class="line">	</span><br><span class="line">protect:	</span><br><span class="line">	_A allocator;                <span class="comment">//空间配置器</span></span><br><span class="line">	iterator _First, _Last, _End;<span class="comment">//正在使用的头，正在使用的尾，空间的尾</span></span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">explicit vector(const _A&amp; _Al = _A())                 //简单的初始化成员变量</span><br><span class="line">	: allocator(_Al), _First(0), _Last(0), _End(0) &#123;&#125;</span><br><span class="line">	</span><br><span class="line">explicit vector(size_type _N, const _Ty&amp; _V = _Ty(),  //初始化_N个_TY变量</span><br><span class="line">	const _A&amp; _Al = _A())</span><br><span class="line">	: allocator(_Al)</span><br><span class="line">	&#123;_First = allocator.allocate(_N, (void *)0);</span><br><span class="line">	_Ufill(_First, _N, _V);                       //这个函数后面会有，就是从_F开始构造_N个_V                   </span><br><span class="line">	_Last = _First + _N;</span><br><span class="line">	_End = _Last; &#125;</span><br><span class="line">	</span><br><span class="line">vector(const _Myt&amp; _X)                           //拷贝构造函数</span><br><span class="line">	: allocator(_X.allocator)</span><br><span class="line">	&#123;_First = allocator.allocate(_X.size(), (void *)0);</span><br><span class="line">	_Last = _Ucopy(_X.begin(), _X.end(), _First);</span><br><span class="line">	_End = _Last; &#125;</span><br><span class="line">	</span><br><span class="line">typedef const_iterator _It;</span><br><span class="line">vector(_It _F, _It _L, const _A&amp; _Al = _A())     //构造vector并在开始位置插入_F到_L间的数据</span><br><span class="line">	: allocator(_Al), _First(0), _Last(0), _End(0)</span><br><span class="line">	&#123;insert(begin(), _F, _L); &#125;</span><br></pre></td></tr></table></figure>
-<h1 id="vector-元素操作"><a href="#vector-元素操作" class="headerlink" title="vector 元素操作"></a>vector 元素操作</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">void resize(size_type _N, const _Ty&amp; _X = _Ty())  //resize手动改变vector容量</span><br><span class="line">	&#123;if (size() &lt; _N)</span><br><span class="line">		insert(end(), _N - size(), _X);</span><br><span class="line">	else if (_N &lt; size())</span><br><span class="line">		erase(begin() + _N, end()); &#125;</span><br><span class="line">size_type size() const //已用大小</span><br><span class="line">	&#123;return (_First == 0 ? 0 : _Last - _First); &#125;</span><br><span class="line"></span><br><span class="line">bool empty() const</span><br><span class="line">	&#123;return (size() == 0); &#125;</span><br><span class="line"></span><br><span class="line">reference operator[](size_type _P)</span><br><span class="line">	&#123;return (*(begin() + _P)); &#125;</span><br><span class="line"></span><br><span class="line">void push_back(const _Ty&amp; _X)     //在容器的最后插入一个元素</span><br><span class="line">	&#123;insert(end(), _X); &#125;</span><br><span class="line">void pop_back()                   //删除最后一个元素</span><br><span class="line">	&#123;erase(end() - 1); &#125;</span><br><span class="line"></span><br><span class="line">iterator insert(iterator _P, const _Ty&amp; _X = _Ty()) //插入一个,返回的迭代器指向的是</span><br><span class="line">	&#123;size_type _O = _P - begin();</span><br><span class="line">	insert(_P, 1, _X);</span><br><span class="line">	return (begin() + _O); &#125;</span><br><span class="line">	</span><br><span class="line">void insert(iterator _P, size_type _M, const _Ty&amp; _X) //从_P开始插入_M个_X元素</span><br><span class="line">	&#123;if (_End - _Last &lt; _M)</span><br><span class="line">		&#123;size_type _N = size() + (_M &lt; size() ? size() : _M);</span><br><span class="line">		iterator _S = allocator.allocate(_N, (void *)0);</span><br><span class="line">		iterator _Q = _Ucopy(_First, _P, _S);</span><br><span class="line">		_Ufill(_Q, _M, _X);</span><br><span class="line">		_Ucopy(_P, _Last, _Q + _M);</span><br><span class="line">		_Destroy(_First, _Last);</span><br><span class="line">		allocator.deallocate(_First, _End - _First);</span><br><span class="line">		_End = _S + _N;</span><br><span class="line">		_Last = _S + size() + _M;</span><br><span class="line">		_First = _S; &#125;</span><br><span class="line">	else if (_Last - _P &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_P, _Last, _P + _M);</span><br><span class="line">		_Ufill(_Last, _M - (_Last - _P), _X);</span><br><span class="line">		fill(_P, _Last, _X);</span><br><span class="line">		_Last += _M; &#125;</span><br><span class="line">	else if (0 &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_Last - _M, _Last, _Last);</span><br><span class="line">		copy_backward(_P, _Last - _M, _Last);</span><br><span class="line">		fill(_P, _P + _M, _X);</span><br><span class="line">		_Last += _M; &#125;&#125;</span><br><span class="line">		</span><br><span class="line">void insert(iterator _P, _It _F, _It _L)</span><br><span class="line">	&#123;size_type _M = 0;</span><br><span class="line">	_Distance(_F, _L, _M);</span><br><span class="line">	if (_End - _Last &lt; _M)</span><br><span class="line">		&#123;size_type _N = size() + (_M &lt; size() ? size() : _M);</span><br><span class="line">		iterator _S = allocator.allocate(_N, (void *)0);</span><br><span class="line">		iterator _Q = _Ucopy(_First, _P, _S);</span><br><span class="line">		_Q = _Ucopy(_F, _L, _Q);</span><br><span class="line">		_Ucopy(_P, _Last, _Q);</span><br><span class="line">		_Destroy(_First, _Last);</span><br><span class="line">		allocator.deallocate(_First, _End - _First);</span><br><span class="line">		_End = _S + _N;</span><br><span class="line">		_Last = _S + size() + _M;</span><br><span class="line">		_First = _S; &#125;</span><br><span class="line">	else if (_Last - _P &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_P, _Last, _P + _M);</span><br><span class="line">		_Ucopy(_F + (_Last - _P), _L, _Last);</span><br><span class="line">		copy(_F, _F + (_Last - _P), _P);</span><br><span class="line">		_Last += _M; &#125;</span><br><span class="line">	else if (0 &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_Last - _M, _Last, _Last);</span><br><span class="line">		copy_backward(_P, _Last - _M, _Last);</span><br><span class="line">		copy(_F, _L, _P);</span><br><span class="line">		_Last += _M; &#125;&#125;</span><br><span class="line">iterator erase(iterator _P)</span><br><span class="line">	&#123;copy(_P + 1, end(), _P);    // 从—_p+1开始往前挪</span><br><span class="line">	_Destroy(_Last - 1, _Last);</span><br><span class="line">	--_Last;</span><br><span class="line">	return (_P); &#125;</span><br><span class="line">iterator erase(iterator _F, iterator _L)</span><br><span class="line">	&#123;iterator _S = copy(_L, end(), _F);</span><br><span class="line">	_Destroy(_S, end());</span><br><span class="line">	_Last = _S;</span><br><span class="line">	return (_F); &#125;</span><br><span class="line">void clear()</span><br><span class="line">	&#123;erase(begin(), end()); &#125;</span><br><span class="line"></span><br><span class="line">protected:</span><br><span class="line">void _Destroy(iterator _F, iterator _L)</span><br><span class="line">	&#123;for (; _F != _L; ++_F)</span><br><span class="line">		allocator.destroy(_F); &#125;</span><br><span class="line">iterator _Ucopy(const_iterator _F, const_iterator _L,</span><br><span class="line">	iterator _P)</span><br><span class="line">	&#123;for (; _F != _L; ++_P, ++_F)</span><br><span class="line">		allocator.construct(_P, *_F);</span><br><span class="line">	return (_P); &#125;</span><br><span class="line">void _Ufill(iterator _F, size_type _N, const _Ty &amp;_X)</span><br><span class="line">	&#123;for (; 0 &lt; _N; --_N, ++_F)</span><br><span class="line">		allocator.construct(_F, _X); &#125;</span><br><span class="line">void _Xran() const</span><br><span class="line">	&#123;_THROW(out_of_range, "invalid vector&lt;T&gt; subscript"); &#125;</span><br><span class="line"></span><br><span class="line">size_type capacity() const //容量</span><br><span class="line">&#123;return (_First == 0 ? 0 : _End - _First); &#125;</span><br></pre></td></tr></table></figure>
-      
-      
-      
-    </div>
-    
-  </div>
-  
-</article>
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="面对疾风吧！！！" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
 
 
 
 
 
-  
-    
-<article id="post-stl_traits" class="article article-type-post" itemscope itemprop="blogPost">
-
-   
-    
-  
-  <div class="article-inner block-select">
-  
-    
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/10/stl_traits/">STL  traits</a>
-    </h1>
-  
-
-        
-      </header>
-      
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="STL-traits的实现"><a href="#STL-traits的实现" class="headerlink" title="STL traits的实现"></a>STL traits的实现</h1><pre><code>traits 是一种能获取出你所需类型特性的方法：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> output_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> forward_iterator_tag :<span class="keyword">public</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> bidirectional_iterator_tag: <span class="keyword">public</span> forward_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> random_access_iterator_tag: <span class="keyword">public</span> bidirectional_iterator_tag&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> _Cat,<span class="keyword">class</span> _T,<span class="keyword">class</span> _Dis = <span class="keyword">int</span>,</span><br><span class="line">         <span class="keyword">class</span> _P = _T*, <span class="keyword">class</span> _Ref = _T&amp;&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> _Cat iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> _T   value_type;</span><br><span class="line">	<span class="keyword">typedef</span> _Dis difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> _P   pointer;</span><br><span class="line">	<span class="keyword">typedef</span> _Ref reference;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::iterator_category iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::value_type         value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::difference_type    difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::pointer            pointer;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> Iterator::reference          reference;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits&lt;T*&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> random_access_iterator_tag iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> T         value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>       difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> T *       pointer;</span><br><span class="line">	<span class="keyword">typedef</span> T &amp;       reference;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> iterator_traits&lt;<span class="keyword">const</span> T*&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> random_access_iterator_tag iterator_category;</span><br><span class="line">	<span class="keyword">typedef</span> T               value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>             difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> T *       pointer;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> T &amp;       reference;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">iterator_category</span><br><span class="line"><span class="title">iterator_category</span><span class="params">(Iterator &amp;)</span>			      <span class="comment">//迭代器的'类型'</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::iterator_category iterator_category;</span><br><span class="line">	<span class="keyword">return</span> iterator_category();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">value_type*</span><br><span class="line"><span class="title">value_type</span><span class="params">(Iterator &amp;)</span>                       <span class="comment">//迭代器所指之物类型</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::value_type*&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::<span class="function">difference_type *</span><br><span class="line"><span class="title">difference_type</span><span class="params">(Iterator &amp;)</span>                 <span class="comment">//获取差值类型</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::difference_type*&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="迭代器分类"><a href="#迭代器分类" class="headerlink" title="迭代器分类"></a>迭代器分类</h1><p><img src="/imgs/Summary/stl_iterator.png" alt="stl_iterator"><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> output_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> forward_iterator_tag :<span class="keyword">public</span> input_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> bidirectional_iterator_tag: <span class="keyword">public</span> forward_iterator_tag&#123;&#125;;</span><br><span class="line"><span class="keyword">struct</span> random_access_iterator_tag: <span class="keyword">public</span> bidirectional_iterator_tag&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<h1 id="advance例子"><a href="#advance例子" class="headerlink" title="advance例子"></a>advance例子</h1><p><img src="/imgs/Summary/stl_traits.png" alt="stl_traits"></p>
-
-      
-      
-      
-    </div>
-    
-  </div>
-  
-</article>
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
+<meta name="description" content="面对疾风吧！！！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yaoqi's Blog">
+<meta property="og:url" content="http://yoursite.com/tags/STL/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="面对疾风吧！！！">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yaoqi's Blog">
+<meta name="twitter:description" content="面对疾风吧！！！">
 
 
-
-  
-    
-<article id="post-stl_alloc" class="article article-type-post" itemscope itemprop="blogPost">
-
-   
-    
-  
-  <div class="article-inner block-select">
-  
-    
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/stl_alloc/">STL空间配置器</a>
-    </h1>
-  
-
-        
-      </header>
-      
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一级空间配置器"><a href="#一级空间配置器" class="headerlink" title="一级空间配置器"></a>一级空间配置器</h1><p>当所申请的空间大于128bytes时，stl直接使用一级空间配置器<br>一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况<br>当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">template&lt;int inst&gt;</span><br><span class="line">class __malloc_alloc_template</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">	static void *oom_malloc(size_t n)//</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)//不断的去尝试</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();//调用malloc_handler</span><br><span class="line">			&#125;</span><br><span class="line">			result = malloc(n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void *oom_realloc(void *p,size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();</span><br><span class="line">			&#125;</span><br><span class="line">			result = realloc(p,n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void (*__malloc_alloc_oom_handler)();</span><br><span class="line">public:</span><br><span class="line">	static void * allocate(size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void * result = malloc(n);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_malloc(n);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	static void deallocate(void *p,size_t/*n*/)</span><br><span class="line">	&#123;</span><br><span class="line">		free(p);</span><br><span class="line">	&#125;</span><br><span class="line">	static void *reallocate(void *p,size_t /*old_sz*/,size_t new_sz)</span><br><span class="line">	&#123;</span><br><span class="line">		void result = realloc(p,new_sz);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_realloc(p,new_sz);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	// set_new_handler ;</span><br><span class="line">	static void(*set_malloc_handler(void (*f)()))() //参数和返回值全是函数指针</span><br><span class="line">	&#123;</span><br><span class="line">		void (*old)() = __malloc_alloc_oom_handler;</span><br><span class="line">		__malloc_alloc_oom_handler = f;</span><br><span class="line">		return old;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;int inst&gt;</span><br><span class="line">void (*__malloc_alloc_template&lt;inst&gt;::__malloc_alloc_oom_handler)()= NULL;</span><br><span class="line"></span><br><span class="line">typedef __malloc_alloc_template&lt;0&gt; malloc_alloc;</span><br></pre></td></tr></table></figure></p>
-<h1 id="二级空间配置器"><a href="#二级空间配置器" class="headerlink" title="二级空间配置器"></a>二级空间配置器</h1><p>二级空间配置器其实是一个内存池，他维持这一个空闲链表数组，所需字节数全上调成8的倍数，然后在空闲链表里面找。<br>当空闲链表内存块不足时，优先从已申请好的空闲堆内存中填充空闲链表<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span>&#123;__ALIGN = <span class="number">8</span> &#125;;</span><br><span class="line"><span class="keyword">enum</span>&#123;__MAX_BYTES = <span class="number">128</span>&#125;;</span><br><span class="line"><span class="keyword">enum</span>&#123;__NFREELIST = __MAX_BYTES/__ALIGN&#125;;</span><br><span class="line"><span class="keyword">union</span> obj                                    <span class="comment">//链表的结构，空间的有效利用</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">union</span> obj *free_list_link;</span><br><span class="line">	<span class="keyword">char</span> client_data[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">static</span> obj * <span class="keyword">volatile</span> free_list[__NFREELIST];<span class="comment">//空闲链表数组</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> size_t <span class="title">FREELIST_INDEX</span><span class="params">(<span class="keyword">size_t</span> bytes)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes + __ALIGN <span class="number">-1</span>) / __ALIGN <span class="number">-1</span>;<span class="comment">//寻找在数组中的下标位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> size_t <span class="title">ROUND_UP</span><span class="params">(<span class="keyword">size_t</span> bytes)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes + __ALIGN <span class="number">-1</span>) &amp; ~(__ALIGN<span class="number">-1</span>);<span class="comment">//上调成8的倍数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * start_free; <span class="comment">//空闲内存起始地址</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * end_free;   <span class="comment">//空闲内存结束地址</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">size_t</span> heap_size;  <span class="comment">//空闲堆内存大小</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="allocate"><a href="#allocate" class="headerlink" title="allocate"></a>allocate</h2><p>如果找到了则把那块空间从free_list中非配给用户，没找到则调用refill()填充free_list<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> n)</span><span class="comment">// 15</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *result = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> malloc_alloc::allocate(n);</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	result = *my_free_list;</span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">NULL</span> == result)       <span class="comment">//如果free_list为空则调用refill填充或直接分配</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">void</span> *r = refill(ROUND_UP(n));</span><br><span class="line">		<span class="keyword">return</span> r;</span><br><span class="line">	&#125;</span><br><span class="line">	*my_free_list = result-&gt;free_list_link;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="refill"><a href="#refill" class="headerlink" title="refill"></a>refill</h2><p>STL规定refill为内存不足的那块填充20块相应大小的内存块，但是可能出现内存不足的情况所有申请到的不一定是20个内存快(可能只有1个)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">refill</span><span class="params">(<span class="keyword">size_t</span> n)</span> <span class="comment">//</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nobjs = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">char</span> *chunk = chunk_alloc(n,nobjs);<span class="comment">// 申请内存块</span></span><br><span class="line">	obj *<span class="keyword">volatile</span>* my_free_list;</span><br><span class="line">	obj *result;</span><br><span class="line">	obj *current_obj, *next_obj;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">1</span>==nobjs) <span class="keyword">return</span> chunk;</span><br><span class="line">	my_free_list=free_list + FREELIST_INDEX(n);</span><br><span class="line">	result=(obj *)chunk;</span><br><span class="line">	*my_free_list=next_obj=(obj *)(chunk+n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;;i++)                    <span class="comment">//将剩余的块连接到空闲链表</span></span><br><span class="line">	&#123;</span><br><span class="line">		current_obj = next_obj;</span><br><span class="line">		next_obj=(obj *)((<span class="keyword">char</span> *)next_obj + n);</span><br><span class="line">		<span class="keyword">if</span>(nobjs <span class="number">-1</span>==i)</span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=next_obj;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;                <span class="comment">//将第一个内存块返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="chunk-alloc"><a href="#chunk-alloc" class="headerlink" title="chunk_alloc"></a>chunk_alloc</h2><p>chunk_alloc函数分配内存块给free_list,他和refill是维持这个结构的核心。处理了多种内存不足的情况<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">char</span> * <span class="title">chunk_alloc</span><span class="params">(<span class="keyword">size_t</span> size,<span class="keyword">int</span> &amp;nobjs)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *result = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">size_t</span> total_bytes = size*nobjs;</span><br><span class="line">	<span class="keyword">size_t</span> bytes_left = end_free - start_free;</span><br><span class="line">	<span class="keyword">if</span>(bytes_left &gt;= total_bytes)<span class="comment">//当剩余内存完全足够</span></span><br><span class="line">	&#123;</span><br><span class="line">		result = start_free;</span><br><span class="line">		start_free += total_bytes;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(bytes_left &gt;= size)<span class="comment">//内存不够分配20块但能分配一块或一块以上</span></span><br><span class="line">	&#123;</span><br><span class="line">		nobjs = bytes_left/size;</span><br><span class="line">		total_bytes = size*nobjs;</span><br><span class="line">		result = start_free;</span><br><span class="line">		start_free += total_bytes;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="comment">//剩余内存一块都不能分配</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">size_t</span> bytes_to_get=<span class="number">2</span> *total_bytes+ROUND_UP(heap_size&gt;&gt;<span class="number">4</span>);</span><br><span class="line">		<span class="comment">//先给剩余的内存找到合适的free list(先处理start_free——end_free的那段内存)</span></span><br><span class="line">		<span class="keyword">if</span>(bytes_left&gt;<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			obj * <span class="keyword">volatile</span> *my_free_list=free_list +FREELIST_INDEX(bytes_left);</span><br><span class="line">			((obj *)start_free)-&gt;free_list_link= *my_free_list;</span><br><span class="line">			*my_free_list=(obj *)start_free;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//向堆空间申请内存</span></span><br><span class="line">		start_free=(<span class="keyword">char</span> *)<span class="built_in">malloc</span>(bytes_to_get);</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">0</span>==start_free)<span class="comment">//堆空间不足时</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			obj *<span class="keyword">volatile</span>* my_free_list,*p;</span><br><span class="line">			<span class="comment">//遍历比他大的free list查看是否还剩有未使用内存</span></span><br><span class="line">			<span class="keyword">for</span>(i=size;i&lt;__MAX_BYTES;i+=__ALIGN)</span><br><span class="line">			&#123;</span><br><span class="line">				my_free_list = free_list +FREELIST_INDEX(i);</span><br><span class="line">				p = *my_free_list;</span><br><span class="line">				<span class="keyword">if</span>(<span class="number">0</span>!=p)<span class="comment">//</span></span><br><span class="line">				&#123;</span><br><span class="line">					*my_free_list = p -&gt;free_list_link;</span><br><span class="line">					start _free = (<span class="keyword">char</span> *)p;</span><br><span class="line">					end_free = (<span class="keyword">char</span> *)p;</span><br><span class="line">					<span class="comment">//由于nobjs 传的是引用所以递归调用修正nobjs</span></span><br><span class="line">					<span class="keyword">return</span> (chunk_alloc(size,nobjs));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			end_free=<span class="number">0</span>;</span><br><span class="line">			<span class="comment">//调用一级空间配置器,看看malloc_handler能否挤出内存...</span></span><br><span class="line">			start_free =(<span class="keyword">char</span> *)malloc_alloc::allocate(bytes_to_get);</span><br><span class="line">		&#125;</span><br><span class="line">		heap_size +=bytes_to_get;</span><br><span class="line">		end_free =start_free +bytes_to_get;			</span><br><span class="line">		<span class="keyword">return</span> (chunk_alloc(size,nobjs));<span class="comment">//同上</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(<span class="keyword">void</span> *p,<span class="keyword">size_t</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *q = (obj*)p;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		malloc_alloc::deallocate(p,n);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	q-&gt;free_list_link = *my_free_list;</span><br><span class="line">	*my_free_list = q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h1><p>如图：<br><img src="/imgs/Summary/stl_alloc.png" alt="二级空间配置器内存结构"><br>参考资料——STL源码剖析</p>
-
-      
-      
-      
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-  
-  
-
-</div>
-      <footer id="footer" class="block-select">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">&copy; 2015-2016
-        <a href="/aboutme/" class ="aboutme-foot-tag"> wanyaoqi</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <script>
-	var ThemeXConfig = {fancybox: false,mathjax: false,animate: false,isHome: false,isPost: false,isArchive: false,isTag: true,isCategory: false,open_in_new: false, CDN_PATH: '' }
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
 </script>
 
+  <title> 标签: STL | Yaoqi's Blog </title>
+</head>
 
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/base.js"></script>
-    <script src="/js/jquery.lazyload.min.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-
-
-
-
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
   </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">coding</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+      
+
+      
+        <style type="text/css">
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        background: #555 no-repeat;
+        cursor: move;
+    }
+
+    .assist-btn {
+        position: fixed;
+        top: 50％;
+        left: 10px;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        outline: none;
+        border: none;
+        color: #87daff;
+    }
+
+</style>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+<script type="text/javascript">
+    // 浮动圆点展开与收缩
+    /*
+    $(function () {
+        var assist_box = $('.assist-box');
+        $('#assist_btn').hover(function () {
+            assist_box.stop().show(300);
+        }, function () {
+            assist_box.stop().hide(150);
+        })
+    });
+    */  
+    //浮动圆点拖动
+    $(function () {
+        var box = document.getElementById('assist_btn');
+        box.onmousedown = function (event) {
+            var e = event || window.event,
+                t = e.target || e.srcElement,
+                // 鼠标按下时的坐标x1,y1
+                x1 = e.clientX,
+                y1 = e.clientY,
+                //鼠标按下时的左右偏移量
+                dragLeft = this.offsetLeft,
+                dragTop = this.offsetTop;
+
+            document.onmousemove = function (event) {
+                var e = event || window.event,
+                    t = e.target || e.srcElement,
+                    // 鼠标移动时的动态坐标
+                    x2 = e.clientX,
+                    y2 = e.clientY,
+                    // 鼠标移动时的坐标的变化量
+                    x = x2 - x1,
+                    y = y2 - y1;
+                box.style.left = (dragLeft + x) + 'px';
+                box.style.top = (dragTop + y) + 'px';
+            }
+
+            document.onmouseup = function () {
+                this.onmousemove = null;
+            }
+        }
+    });
+
+/*
+    $whitesmoke   = #f5f5f5
+    $gainsboro    = #eee
+    $gray-lighter = #ddd
+    $grey-light   = #ccc
+    $grey         = #bbb
+    $grey-dark    = #999
+    $grey-dim     = #666
+    $black-light  = #555
+    $black-deep   = #222
+    $red          = #ff2a2a
+    $blue-bright  = #87daff
+    $blue         = #0684bd
+    $blue-deep    = #262a30
+*/
+    // white theme
+    var body = {color: "#555", background: "white"};
+    var a_tag = {color: "#222"};
+    var header = { background: "#f5f5f5"};
+    var logo_line_i = {background: "#222"};
+    // var post_code = {background: "#eee", color: "#222"};
+
+    function switch_theme() {
+        $("body").css(body);
+        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a, .show-commit-cls a, #donate_board a')").css(a_tag);
+        $(".header, .footer").css(header);
+        $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
+        //$(".post code").css(post_code);
+        $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
+        $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
+        
+        // $("code").css({color: '#c5c8c6', background: '#1d1f21'});
+        $("#assist_btn").hide(1500);
+    }
+
+    $(function () {
+        $("#assist_btn").dblclick(function() {
+            switch_theme();
+        });
+    });
+
+</script>
+
+<div>
+
+    <button class="assist-btn circle" id="assist_btn" title="双击切换">
+        亮
+    </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+      
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        STL
+        <small>标签</small>
+      </h2>
+    </div>
+
+    
+      
+
+  <article class="post post-type-normal"itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/08/15/stl_list_1/" itemprop="url">
+              <span itemprop="name">STL list ——part 1</span>
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-08-15T15:19:53.000Z" itemprop="dateCreated" content="2016-08-15"> 08-15 </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal"itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/08/14/stl_vector/" itemprop="url">
+              <span itemprop="name">STL vector</span>
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-08-13T17:53:03.000Z" itemprop="dateCreated" content="2016-08-13"> 08-14 </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal"itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/08/10/stl_traits/" itemprop="url">
+              <span itemprop="name">STL  traits</span>
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-08-10T04:56:46.000Z" itemprop="dateCreated" content="2016-08-10"> 08-10 </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal"itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/06/12/stl_alloc/" itemprop="url">
+              <span itemprop="name">STL空间配置器</span>
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" datetime="2016-06-11T17:26:33.000Z" itemprop="dateCreated" content="2016-06-11"> 06-12 </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+  </div>
+
+  
+ </div>
+
+        
+
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="wanyaoqi" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">wanyaoqi</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">面对疾风吧！！！</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wanyaoqi
+  </span>
+</div>
+
+
+<!-- busuanzi -->
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    <script type="text/javascript">
+      postMotionOptions = {stagger: 100, drag: true};
+    </script>
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wyq2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>
