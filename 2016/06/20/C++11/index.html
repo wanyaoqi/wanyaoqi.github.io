@@ -1,286 +1,630 @@
 <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-<meta name="description" content="Long way to go">
-<meta name="author" content="Xuanwo">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/dist/css/animate.min.css">
-<link rel="stylesheet" href="/dist/css/style.css">
-<link rel="stylesheet" href="/dist/css/font-awesome.min.css">
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-    <title> C++11 | Yaoqi's Blog </title>
-</head>
-<body id="home">
-<div id="menu" class="menu-right">
-    <ul>
-        <li>
-            <form class="menu-search">
-                <div class="form-group header">
-                    <span>
-                    <i class="fa fa-search searchico"></i>
-                    <input type="text" class="search-form-input ins-search-input" placeholder="Search" />
-                    <a href="#" class="close-menu"><i class="fa fa-close"></i></a>
-                        </span>
-                </div>
-            </form>
-        </li>
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-        <li><a href="/about"><i class="fa fa-user"></i>About</a></li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-book"></i>Categories<b class="caret"></b></a>
-            <ul class="submenu-list">
-                
-                    <li><a href="/categories/Summary/">Summary <span
-                                    class="badge">7</span></a></li>
-                
-                    <li><a href="/categories/Algorithm/">Algorithm <span
-                                    class="badge">2</span></a></li>
-                
-            </ul>
-        </li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-calendar"></i>Archives <b class="caret"></b></a>
-            <ul class="submenu-list"><li class="submenu-list-item"><a class="submenu-list-link" href="/archives/2016/">2016</a></li></ul>
-        </li>
-    </ul>
-</div>
 
-<div id="wrap">
-    <div id="main-nav" class="">
-    <div class="container">
-        <div class="nav-header">
-            <a class="nav-brand" href="/">Yqi's Blog</a>
-            <a class="menu-link nav-icon" href="#"><i class="fa fa-navicon"></i></a>
-        </div>
-    </div>
-</div>
-    <section id="hero" class="light-typo">
-    <div id="cover-image" class="image-bg animated fadeIn"></div>
-    <div class="container welcome-content">
-        <div class="middle-text">
-            <h1>Coding your future</h1>
-            <a class="btn smooth-scroll" href="#start">Get Stated</a>
-        </div>
-    </div>
-</section>
-    <div id="start" class="container content">
-        
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            
-    <article class="clearfix">
-        <div class="post-date">
-            发表于
-            <time datetime="2016-06-20T01:14:38+08:00"
-                  content="2016-06-20">
-                2016-06-20
-            </time>
-            &nbsp;|&nbsp;分类于
-            
-                
-                    <a href="/categories/Summary/" rel="index">
-                        Summary
-                        
-                        
-                    </a>
-                
-            
-            <span>
-            <a href="/2016/06/20/C++11/#disqus_thread" data-disqus-identifier="2016/06/20/C++11/">
-              <span class="disqus-comment-count" data-disqus-identifier="2016/06/20/C++11/"></span>
-            </a>
-          </span>
+
   
-        </div>
-        <h2><a href="/2016/06/20/C++11/">C++11</a></h2>
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++11,C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="autoauto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11">
+<meta property="og:url" content="http://yoursite.com/2016/06/20/C++11/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="autoauto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/int.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/auto_int.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/A.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/auto_A.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/auto_template.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/lambda.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/decltype.png">
+<meta property="og:updated_time" content="2016-07-23T17:29:03.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++11">
+<meta name="twitter:description" content="autoauto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧">
+<meta name="twitter:image" content="http://yoursite.com/imgs/Summary/int.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/20/C++11/"/>
+
+  <title> C++11 | Yaoqi's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yaoqi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">coding</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
         
-            <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++11
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-20T01:14:38+08:00" content="2016-06-20">
+              2016-06-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Summary/" itemprop="url" rel="index">
+                    <span itemprop="name">Summary</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/20/C++11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/20/C++11/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
 <h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>它可以用于创建并定义匿名的函数对象形式如下：<br>[函数对象参数]（操作符重载函数参数） -&gt;返回值类型{函数体}(具体参数)<br><img src="/imgs/Summary/lambda.png" alt="lambda"></p>
 <h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype的功能与auto相反，从变量得到类型<br><img src="/imgs/Summary/decltype.png" alt="decltype"></p>
 <h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><p>右值引用（rvalue reference），是C++程序设计语言自C++11标准提出的一类数据类型。用于实现移动语义（move semantic）与完美转发（perfect forwarding）。–维基百科<br>在资源转移不是调用拷贝等操作而是实现了资源的转移<br><a href="https://www.zhihu.com/question/22111546" target="_blank" rel="external">参考</a></p>
 
+      
+    </div>
+
+    <div>
+      
         
-        <div class="post-footer">
-            
-                <div id="eof" class="print-invisible">
-                    <hr class="eof">
-                </div>
-                
-                <div class="copyright" style="clear:both;">
-                    <p><span>本文标题:</span><a href="/2016/06/20/C++11/">C++11</a></p>
-                    <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
-                    <p><span>发布时间:</span>2016年6月20日 - 01时06分</p>
-                    <p><span>最后更新:</span>2016年7月24日 - 01时07分</p>
-                    <p><span>原始链接:</span><a href="/2016/06/20/C++11/"
-                                            title="C++11">http://yoursite.com/2016/06/20/C++11/</a></p>
-                    <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license"
-                                                                                   href="http://creativecommons.org/licenses/by-nc/4.0/"
-                                                                                   title="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)">Attribution-NonCommercial
-                            4.0</a></p>
-                    <p><span>转载请保留以上信息。</span></p>
-                </div>
-            
-            
-                <div class="post-tags">
-                    
-                        <a href="/tags/C-11/"> #C++11 </a>
-                    
-                        <a href="/tags/C/"> #C++ </a>
-                    
-                </div>
-            
-        </div>
-    </article>
 
-            <div id="disqus_thread"></div>
-            <script>
-                var disqus_config = function () {
-                    this.page.url = 'http://yoursite.com/2016/06/20/C++11/';
-                    this.page.identifier = '2016/06/20/C++11/';
-                };
-                (function () {
-                    var d = document, s = d.createElement('script');
-                    s.src = '//only0god.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            </script>
-        </div>
+      
     </div>
 
+    <div>
+      
+        
+
+      
     </div>
-    <footer>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2 col-md-2 footer-widget">
-                    <h3>Statistics</h3>
 
-                    <span>nothing</span>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-11/" rel="tag">#C++11</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+        </div>
+      
 
-                    <div class="stats">
-                        <div class="line">
-                            <span class="counter">9</span>
-                            <span class="caption">Articles</span>
-                        </div>
-                        <div class="line">
-                            <span class="counter">2</span>
-                            <span class="caption">Categories</span>
-                        </div>
-                        <div class="line">
-                            <span class="counter">11</span>
-                            <span class="caption">Tags</span>
-                        </div>
-                    </div>
-                </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/12/stl_alloc/" rel="next" title="STL空间配置器">
+                <i class="fa fa-chevron-left"></i> STL空间配置器
+              </a>
+            
+          </div>
 
-                <div class="col-sm-4 col-md-4 footer-widget">
-                    <h3>Recent posts</h3>
-                    <div class="post-recent-widget">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_list_2/">STL list ——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/stl_list_1/">STL list ——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/14/stl_vector/">STL vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/stl_traits/">STL  traits</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/06/stdarg/">可变参函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/lcs/">最长公共子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/C++11/">C++11</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/stl_alloc/">STL空间配置器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/heap_sort/">海量数据中求最大的K个数</a></li></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/23/lcs/" rel="prev" title="最长公共子序列">
+                最长公共子序列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-                <div class="col-sm-6 col-md-6 footer-widget clearfix">
-                    <h3>Tags</h3>
-                    <ul class="tags">
-                        
-                            <li><a href="/tags/C-11/">C++11</a></li>
-                        
-                            <li><a href="/tags/C/">C++</a></li>
-                        
-                            <li><a href="/tags/LongestCommonSubsequence/">LongestCommonSubsequence</a></li>
-                        
-                            <li><a href="/tags/Dynamic-Programming/">Dynamic_Programming</a></li>
-                        
-                            <li><a href="/tags/C/">C</a></li>
-                        
-                            <li><a href="/tags/stdargs/">stdargs</a></li>
-                        
-                            <li><a href="/tags/STL/">STL</a></li>
-                        
-                            <li><a href="/tags/alloc/">alloc</a></li>
-                        
-                            <li><a href="/tags/list/">list</a></li>
-                        
-                            <li><a href="/tags/traits/">traits</a></li>
-                        
-                            <li><a href="/tags/vector/">vector</a></li>
-                        
-                    </ul>
-                </div>
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/20/C++11/"
+           data-title="C++11" data-url="http://yoursite.com/2016/06/20/C++11/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="wanyaoqi" />
+          <p class="site-author-name" itemprop="name">wanyaoqi</p>
+          <p class="site-description motion-element" itemprop="description">面对疾风吧！！！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
             </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
         </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#auto"><span class="nav-number">1.</span> <span class="nav-text">auto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda表达式"><span class="nav-number">2.</span> <span class="nav-text">lambda表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decltype"><span class="nav-number">3.</span> <span class="nav-text">decltype</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右值引用"><span class="nav-number">4.</span> <span class="nav-text">右值引用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
     </div>
-    <div class="copyright">
-        <div class="container">
-            <p class="pull-left"> Powered by <a
-                        href="https://hexo.io">Hexo.</a></p>           
-        </div>
-    </div>
-</footer>
+  </aside>
 
 
-<div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Search Anything You Want" />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wanyaoqi</span>
 </div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: 'Untitled',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script type="text/javascript" src="/dist/js/jquery.min.js"></script>
-<script type="text/javascript" src="/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/dist/js/wow.min.js"></script>
-<script type="text/javascript" src="/dist/js/custom.js"></script>
-<script src="/dist/js/insight.js"></script>
-<script id="dsq-count-scr" src="//only0god.disqus.com/count.js" async></script>
-<script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-51515330-1', 'auto');
-    ga('send', 'pageview');
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-</div>
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wyq2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

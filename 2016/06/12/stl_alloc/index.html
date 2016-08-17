@@ -1,106 +1,310 @@
 <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-<meta name="description" content="Long way to go">
-<meta name="author" content="Xuanwo">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/dist/css/animate.min.css">
-<link rel="stylesheet" href="/dist/css/style.css">
-<link rel="stylesheet" href="/dist/css/font-awesome.min.css">
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-    <title> STL空间配置器 | Yaoqi's Blog </title>
-</head>
-<body id="home">
-<div id="menu" class="menu-right">
-    <ul>
-        <li>
-            <form class="menu-search">
-                <div class="form-group header">
-                    <span>
-                    <i class="fa fa-search searchico"></i>
-                    <input type="text" class="search-form-input ins-search-input" placeholder="Search" />
-                    <a href="#" class="close-menu"><i class="fa fa-close"></i></a>
-                        </span>
-                </div>
-            </form>
-        </li>
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-        <li><a href="/about"><i class="fa fa-user"></i>About</a></li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-book"></i>Categories<b class="caret"></b></a>
-            <ul class="submenu-list">
-                
-                    <li><a href="/categories/Summary/">Summary <span
-                                    class="badge">7</span></a></li>
-                
-                    <li><a href="/categories/Algorithm/">Algorithm <span
-                                    class="badge">2</span></a></li>
-                
-            </ul>
-        </li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-calendar"></i>Archives <b class="caret"></b></a>
-            <ul class="submenu-list"><li class="submenu-list-item"><a class="submenu-list-link" href="/archives/2016/">2016</a></li></ul>
-        </li>
-    </ul>
-</div>
 
-<div id="wrap">
-    <div id="main-nav" class="">
-    <div class="container">
-        <div class="nav-header">
-            <a class="nav-brand" href="/">Yqi's Blog</a>
-            <a class="menu-link nav-icon" href="#"><i class="fa fa-navicon"></i></a>
-        </div>
-    </div>
-</div>
-    <section id="hero" class="light-typo">
-    <div id="cover-image" class="image-bg animated fadeIn"></div>
-    <div class="container welcome-content">
-        <div class="middle-text">
-            <h1>Coding your future</h1>
-            <a class="btn smooth-scroll" href="#start">Get Stated</a>
-        </div>
-    </div>
-</section>
-    <div id="start" class="container content">
-        
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            
-    <article class="clearfix">
-        <div class="post-date">
-            发表于
-            <time datetime="2016-06-12T01:26:33+08:00"
-                  content="2016-06-12">
-                2016-06-12
-            </time>
-            &nbsp;|&nbsp;分类于
-            
-                
-                    <a href="/categories/Summary/" rel="index">
-                        Summary
-                        
-                        
-                    </a>
-                
-            
-            <span>
-            <a href="/2016/06/12/stl_alloc/#disqus_thread" data-disqus-identifier="2016/06/12/stl_alloc/">
-              <span class="disqus-comment-count" data-disqus-identifier="2016/06/12/stl_alloc/"></span>
-            </a>
-          </span>
+
   
-        </div>
-        <h2><a href="/2016/06/12/stl_alloc/">STL空间配置器</a></h2>
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++,STL,alloc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="一级空间配置器当所申请的空间大于128bytes时，stl直接使用一级空间配置器一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)12345678910111213141516171819202">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL空间配置器">
+<meta property="og:url" content="http://yoursite.com/2016/06/12/stl_alloc/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="一级空间配置器当所申请的空间大于128bytes时，stl直接使用一级空间配置器一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)12345678910111213141516171819202">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/stl_alloc.png">
+<meta property="og:updated_time" content="2016-08-12T07:38:31.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL空间配置器">
+<meta name="twitter:description" content="一级空间配置器当所申请的空间大于128bytes时，stl直接使用一级空间配置器一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)12345678910111213141516171819202">
+<meta name="twitter:image" content="http://yoursite.com/imgs/Summary/stl_alloc.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/12/stl_alloc/"/>
+
+  <title> STL空间配置器 | Yaoqi's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yaoqi's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">coding</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
         
-            <h1 id="一级空间配置器"><a href="#一级空间配置器" class="headerlink" title="一级空间配置器"></a>一级空间配置器</h1><p>当所申请的空间大于128bytes时，stl直接使用一级空间配置器<br>一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况<br>当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">template&lt;int inst&gt;</span><br><span class="line">class __malloc_alloc_template</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">	static void *oom_malloc(size_t n)//</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)//不断的去尝试</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();//调用malloc_handler</span><br><span class="line">			&#125;</span><br><span class="line">			result = malloc(n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void *oom_realloc(void *p,size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();</span><br><span class="line">			&#125;</span><br><span class="line">			result = realloc(p,n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void (*__malloc_alloc_oom_handler)();</span><br><span class="line">public:</span><br><span class="line">	static void * allocate(size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void * result = malloc(n);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_malloc(n);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	static void deallocate(void *p,size_t/*n*/)</span><br><span class="line">	&#123;</span><br><span class="line">		free(p);</span><br><span class="line">	&#125;</span><br><span class="line">	static void *reallocate(void *p,size_t /*old_sz*/,size_t new_sz)</span><br><span class="line">	&#123;</span><br><span class="line">		void result = realloc(p,new_sz);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_realloc(p,new_sz);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	// set_new_handler ;</span><br><span class="line">	static void(*set_malloc_handler(void (*f)()))() //参数和返回值全是函数指针</span><br><span class="line">	&#123;</span><br><span class="line">		void (*old)() = __malloc_alloc_oom_handler;</span><br><span class="line">		__malloc_alloc_oom_handler = f;</span><br><span class="line">		return old;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;int inst&gt;</span><br><span class="line">void (*__malloc_alloc_template&lt;inst&gt;::__malloc_alloc_oom_handler)()= NULL;</span><br><span class="line"></span><br><span class="line">typedef __malloc_alloc_template&lt;0&gt; malloc_alloc;</span><br></pre></td></tr></table></figure></p>
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                STL空间配置器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-12T01:26:33+08:00" content="2016-06-12">
+              2016-06-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Summary/" itemprop="url" rel="index">
+                    <span itemprop="name">Summary</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/12/stl_alloc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/12/stl_alloc/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一级空间配置器"><a href="#一级空间配置器" class="headerlink" title="一级空间配置器"></a>一级空间配置器</h1><p>当所申请的空间大于128bytes时，stl直接使用一级空间配置器<br>一级空间配置器其实是对malloc的封装，以及添加了类似new_handler处理内存分配不足的情况<br>当内存不足时调用oom_malloc尝试回收一些已分配的内存，调用的是__malloc_alloc_oom_handler方法(如果有的话，没有就抛出异常)<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">template&lt;int inst&gt;</span><br><span class="line">class __malloc_alloc_template</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">	static void *oom_malloc(size_t n)//</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)//不断的去尝试</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();//调用malloc_handler</span><br><span class="line">			&#125;</span><br><span class="line">			result = malloc(n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void *oom_realloc(void *p,size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void (*my_malloc_handler) () = NULL;</span><br><span class="line">		void *result = NULL;</span><br><span class="line">		for(;;)</span><br><span class="line">		&#123;</span><br><span class="line">			my_malloc_handler = __malloc_alloc_oom_handler;</span><br><span class="line">			if(NULL == my_malloc_handler)</span><br><span class="line">			&#123;</span><br><span class="line">				__THROW_BAD_ALLOC;</span><br><span class="line">			&#125;else</span><br><span class="line">			&#123;</span><br><span class="line">				(*my_malloc_handler)();</span><br><span class="line">			&#125;</span><br><span class="line">			result = realloc(p,n);</span><br><span class="line">			if(NULL != result)</span><br><span class="line">			&#123;</span><br><span class="line">				return result;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	static void (*__malloc_alloc_oom_handler)();</span><br><span class="line">public:</span><br><span class="line">	static void * allocate(size_t n)</span><br><span class="line">	&#123;</span><br><span class="line">		void * result = malloc(n);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_malloc(n);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	static void deallocate(void *p,size_t/*n*/)</span><br><span class="line">	&#123;</span><br><span class="line">		free(p);</span><br><span class="line">	&#125;</span><br><span class="line">	static void *reallocate(void *p,size_t /*old_sz*/,size_t new_sz)</span><br><span class="line">	&#123;</span><br><span class="line">		void result = realloc(p,new_sz);</span><br><span class="line">		if(NULL == result)</span><br><span class="line">		&#123;</span><br><span class="line">			result = oom_realloc(p,new_sz);</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">	// set_new_handler ;</span><br><span class="line">	static void(*set_malloc_handler(void (*f)()))() //参数和返回值全是函数指针</span><br><span class="line">	&#123;</span><br><span class="line">		void (*old)() = __malloc_alloc_oom_handler;</span><br><span class="line">		__malloc_alloc_oom_handler = f;</span><br><span class="line">		return old;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;int inst&gt;</span><br><span class="line">void (*__malloc_alloc_template&lt;inst&gt;::__malloc_alloc_oom_handler)()= NULL;</span><br><span class="line"></span><br><span class="line">typedef __malloc_alloc_template&lt;0&gt; malloc_alloc;</span><br></pre></td></tr></table></figure></p>
 <h1 id="二级空间配置器"><a href="#二级空间配置器" class="headerlink" title="二级空间配置器"></a>二级空间配置器</h1><p>二级空间配置器其实是一个内存池，他维持这一个空闲链表数组，所需字节数全上调成8的倍数，然后在空闲链表里面找。<br>当空闲链表内存块不足时，优先从已申请好的空闲堆内存中填充空闲链表<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span>&#123;__ALIGN = <span class="number">8</span> &#125;;</span><br><span class="line"><span class="keyword">enum</span>&#123;__MAX_BYTES = <span class="number">128</span>&#125;;</span><br><span class="line"><span class="keyword">enum</span>&#123;__NFREELIST = __MAX_BYTES/__ALIGN&#125;;</span><br><span class="line"><span class="keyword">union</span> obj                                    <span class="comment">//链表的结构，空间的有效利用</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">union</span> obj *free_list_link;</span><br><span class="line">	<span class="keyword">char</span> client_data[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">static</span> obj * <span class="keyword">volatile</span> free_list[__NFREELIST];<span class="comment">//空闲链表数组</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> size_t <span class="title">FREELIST_INDEX</span><span class="params">(<span class="keyword">size_t</span> bytes)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes + __ALIGN <span class="number">-1</span>) / __ALIGN <span class="number">-1</span>;<span class="comment">//寻找在数组中的下标位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> size_t <span class="title">ROUND_UP</span><span class="params">(<span class="keyword">size_t</span> bytes)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (bytes + __ALIGN <span class="number">-1</span>) &amp; ~(__ALIGN<span class="number">-1</span>);<span class="comment">//上调成8的倍数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * start_free; <span class="comment">//空闲内存起始地址</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * end_free;   <span class="comment">//空闲内存结束地址</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">size_t</span> heap_size;  <span class="comment">//空闲堆内存大小</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="allocate"><a href="#allocate" class="headerlink" title="allocate"></a>allocate</h2><p>如果找到了则把那块空间从free_list中非配给用户，没找到则调用refill()填充free_list<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> n)</span><span class="comment">// 15</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *result = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> malloc_alloc::allocate(n);</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	result = *my_free_list;</span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">NULL</span> == result)       <span class="comment">//如果free_list为空则调用refill填充或直接分配</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">void</span> *r = refill(ROUND_UP(n));</span><br><span class="line">		<span class="keyword">return</span> r;</span><br><span class="line">	&#125;</span><br><span class="line">	*my_free_list = result-&gt;free_list_link;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="refill"><a href="#refill" class="headerlink" title="refill"></a>refill</h2><p>STL规定refill为内存不足的那块填充20块相应大小的内存块，但是可能出现内存不足的情况所有申请到的不一定是20个内存快(可能只有1个)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">refill</span><span class="params">(<span class="keyword">size_t</span> n)</span> <span class="comment">//</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nobjs = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">char</span> *chunk = chunk_alloc(n,nobjs);<span class="comment">// 申请内存块</span></span><br><span class="line">	obj *<span class="keyword">volatile</span>* my_free_list;</span><br><span class="line">	obj *result;</span><br><span class="line">	obj *current_obj, *next_obj;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">1</span>==nobjs) <span class="keyword">return</span> chunk;</span><br><span class="line">	my_free_list=free_list + FREELIST_INDEX(n);</span><br><span class="line">	result=(obj *)chunk;</span><br><span class="line">	*my_free_list=next_obj=(obj *)(chunk+n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;;i++)                    <span class="comment">//将剩余的块连接到空闲链表</span></span><br><span class="line">	&#123;</span><br><span class="line">		current_obj = next_obj;</span><br><span class="line">		next_obj=(obj *)((<span class="keyword">char</span> *)next_obj + n);</span><br><span class="line">		<span class="keyword">if</span>(nobjs <span class="number">-1</span>==i)</span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=next_obj;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;                <span class="comment">//将第一个内存块返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -108,184 +312,318 @@
 <h2 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(<span class="keyword">void</span> *p,<span class="keyword">size_t</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *q = (obj*)p;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		malloc_alloc::deallocate(p,n);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	q-&gt;free_list_link = *my_free_list;</span><br><span class="line">	*my_free_list = q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h1><p>如图：<br><img src="/imgs/Summary/stl_alloc.png" alt="二级空间配置器内存结构"><br>参考资料——STL源码剖析</p>
 
+      
+    </div>
+
+    <div>
+      
         
-        <div class="post-footer">
-            
-                <div id="eof" class="print-invisible">
-                    <hr class="eof">
-                </div>
-                
-                <div class="copyright" style="clear:both;">
-                    <p><span>本文标题:</span><a href="/2016/06/12/stl_alloc/">STL空间配置器</a></p>
-                    <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
-                    <p><span>发布时间:</span>2016年6月12日 - 01时06分</p>
-                    <p><span>最后更新:</span>2016年8月12日 - 15时08分</p>
-                    <p><span>原始链接:</span><a href="/2016/06/12/stl_alloc/"
-                                            title="STL空间配置器">http://yoursite.com/2016/06/12/stl_alloc/</a></p>
-                    <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license"
-                                                                                   href="http://creativecommons.org/licenses/by-nc/4.0/"
-                                                                                   title="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)">Attribution-NonCommercial
-                            4.0</a></p>
-                    <p><span>转载请保留以上信息。</span></p>
-                </div>
-            
-            
-                <div class="post-tags">
-                    
-                        <a href="/tags/C/"> #C++ </a>
-                    
-                        <a href="/tags/STL/"> #STL </a>
-                    
-                        <a href="/tags/alloc/"> #alloc </a>
-                    
-                </div>
-            
-        </div>
-    </article>
 
-            <div id="disqus_thread"></div>
-            <script>
-                var disqus_config = function () {
-                    this.page.url = 'http://yoursite.com/2016/06/12/stl_alloc/';
-                    this.page.identifier = '2016/06/12/stl_alloc/';
-                };
-                (function () {
-                    var d = document, s = d.createElement('script');
-                    s.src = '//only0god.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            </script>
-        </div>
+      
     </div>
 
+    <div>
+      
+        
+
+      
     </div>
-    <footer>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2 col-md-2 footer-widget">
-                    <h3>Statistics</h3>
 
-                    <span>nothing</span>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/STL/" rel="tag">#STL</a>
+          
+            <a href="/tags/alloc/" rel="tag">#alloc</a>
+          
+        </div>
+      
 
-                    <div class="stats">
-                        <div class="line">
-                            <span class="counter">9</span>
-                            <span class="caption">Articles</span>
-                        </div>
-                        <div class="line">
-                            <span class="counter">2</span>
-                            <span class="caption">Categories</span>
-                        </div>
-                        <div class="line">
-                            <span class="counter">11</span>
-                            <span class="caption">Tags</span>
-                        </div>
-                    </div>
-                </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/06/heap_sort/" rel="next" title="海量数据中求最大的K个数">
+                <i class="fa fa-chevron-left"></i> 海量数据中求最大的K个数
+              </a>
+            
+          </div>
 
-                <div class="col-sm-4 col-md-4 footer-widget">
-                    <h3>Recent posts</h3>
-                    <div class="post-recent-widget">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_list_2/">STL list ——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/stl_list_1/">STL list ——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/14/stl_vector/">STL vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/stl_traits/">STL  traits</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/06/stdarg/">可变参函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/lcs/">最长公共子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/C++11/">C++11</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/stl_alloc/">STL空间配置器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/heap_sort/">海量数据中求最大的K个数</a></li></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/20/C++11/" rel="prev" title="C++11">
+                C++11 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-                <div class="col-sm-6 col-md-6 footer-widget clearfix">
-                    <h3>Tags</h3>
-                    <ul class="tags">
-                        
-                            <li><a href="/tags/C-11/">C++11</a></li>
-                        
-                            <li><a href="/tags/C/">C++</a></li>
-                        
-                            <li><a href="/tags/LongestCommonSubsequence/">LongestCommonSubsequence</a></li>
-                        
-                            <li><a href="/tags/Dynamic-Programming/">Dynamic_Programming</a></li>
-                        
-                            <li><a href="/tags/C/">C</a></li>
-                        
-                            <li><a href="/tags/stdargs/">stdargs</a></li>
-                        
-                            <li><a href="/tags/STL/">STL</a></li>
-                        
-                            <li><a href="/tags/alloc/">alloc</a></li>
-                        
-                            <li><a href="/tags/list/">list</a></li>
-                        
-                            <li><a href="/tags/traits/">traits</a></li>
-                        
-                            <li><a href="/tags/vector/">vector</a></li>
-                        
-                    </ul>
-                </div>
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/12/stl_alloc/"
+           data-title="STL空间配置器" data-url="http://yoursite.com/2016/06/12/stl_alloc/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="wanyaoqi" />
+          <p class="site-author-name" itemprop="name">wanyaoqi</p>
+          <p class="site-description motion-element" itemprop="description">面对疾风吧！！！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
             </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
         </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一级空间配置器"><span class="nav-number">1.</span> <span class="nav-text">一级空间配置器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二级空间配置器"><span class="nav-number">2.</span> <span class="nav-text">二级空间配置器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#allocate"><span class="nav-number">2.1.</span> <span class="nav-text">allocate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#refill"><span class="nav-number">2.2.</span> <span class="nav-text">refill</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chunk-alloc"><span class="nav-number">2.3.</span> <span class="nav-text">chunk_alloc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#释放内存"><span class="nav-number">2.4.</span> <span class="nav-text">释放内存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构图"><span class="nav-number">3.</span> <span class="nav-text">结构图</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
     </div>
-    <div class="copyright">
-        <div class="container">
-            <p class="pull-left"> Powered by <a
-                        href="https://hexo.io">Hexo.</a></p>           
-        </div>
-    </div>
-</footer>
+  </aside>
 
 
-<div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Search Anything You Want" />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wanyaoqi</span>
 </div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: 'Untitled',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script type="text/javascript" src="/dist/js/jquery.min.js"></script>
-<script type="text/javascript" src="/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/dist/js/wow.min.js"></script>
-<script type="text/javascript" src="/dist/js/custom.js"></script>
-<script src="/dist/js/insight.js"></script>
-<script id="dsq-count-scr" src="//only0god.disqus.com/count.js" async></script>
-<script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-51515330-1', 'auto');
-    ga('send', 'pageview');
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-</div>
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wyq2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
