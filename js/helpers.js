@@ -28,6 +28,6 @@ function displaySidebar () {
   }, 800);
 }
 
-function isMala () {
-  return CONFIG.scheme === 'Mala';
+function isMist () {
+  return CONFIG.scheme === 'Mist';
 }
