@@ -1,371 +1,106 @@
-
 <!doctype html>
-<html class="theme-next use-motion theme-next-mala">
+<html>
 <head>
-  
-
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="面对疾风吧！！！" />
-
-
-
-  <meta name="keywords" content="LongestCommonSubsequence,Dynamic_Programming," />
-
-
-
-
-
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
-
-
-<meta name="description" content="最长公共子序列（LongestCommonSubsequence）一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。最长公共子序列问题可以由动态规划求解
-动态规划动态规划（英语：Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求">
-<meta property="og:type" content="article">
-<meta property="og:title" content="最长公共子序列">
-<meta property="og:url" content="http://yoursite.com/2016/06/23/lcs/index.html">
-<meta property="og:site_name" content="Yaoqi's Blog">
-<meta property="og:description" content="最长公共子序列（LongestCommonSubsequence）一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。最长公共子序列问题可以由动态规划求解
-动态规划动态规划（英语：Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求">
-<meta property="og:updated_time" content="2016-08-05T04:17:49.409Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="最长公共子序列">
-<meta name="twitter:description" content="最长公共子序列（LongestCommonSubsequence）一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。最长公共子序列问题可以由动态规划求解
-动态规划动态规划（英语：Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求">
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mala',
-    sidebar: 'post'
-  };
-</script>
-
-  <title> 最长公共子序列 | Yaoqi's Blog </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
+    <meta charset="utf-8">
+<meta name="description" content="Long way to go">
+<meta name="author" content="Xuanwo">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/css/animate.min.css">
+<link rel="stylesheet" href="/dist/css/style.css">
+<link rel="stylesheet" href="/dist/css/font-awesome.min.css">
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-  
 
-
-
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
-      <span class="site-title">coding</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu ">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
-            首页
-          </a>
+    <title> 最长公共子序列 | Yaoqi's Blog </title>
+</head>
+<body id="home">
+<div id="menu" class="menu-right">
+    <ul>
+        <li>
+            <form class="menu-search">
+                <div class="form-group header">
+                    <span>
+                    <i class="fa fa-search searchico"></i>
+                    <input type="text" class="search-form-input ins-search-input" placeholder="Search" />
+                    <a href="#" class="close-menu"><i class="fa fa-close"></i></a>
+                        </span>
+                </div>
+            </form>
         </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            <i class="menu-item-icon icon-next-categories"></i> <br />
-            分类
-          </a>
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/about"><i class="fa fa-user"></i>About</a></li>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-book"></i>Categories<b class="caret"></b></a>
+            <ul class="submenu-list">
+                
+                    <li><a href="/categories/Summary/">Summary <span
+                                    class="badge">7</span></a></li>
+                
+                    <li><a href="/categories/Algorithm/">Algorithm <span
+                                    class="badge">2</span></a></li>
+                
+            </ul>
         </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
-            归档
-          </a>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-calendar"></i>Archives <b class="caret"></b></a>
+            <ul class="submenu-list"><li class="submenu-list-item"><a class="submenu-list-link" href="/archives/2016/">2016</a></li></ul>
         </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            关于
-          </a>
-        </li>
-      
-
-      
-      
     </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    
-      
-
-      
-        <style type="text/css">
-
-    .circle {
-        width: 40px;
-        height: 40px;
-        background: #555 no-repeat;
-        cursor: move;
-    }
-
-    .assist-btn {
-        position: fixed;
-        top: 50％;
-        left: 10px;
-        -moz-border-radius: 50px;
-        -webkit-border-radius: 50px;
-        border-radius: 50px;
-        outline: none;
-        border: none;
-        color: #87daff;
-    }
-
-</style>
-
-<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-<script type="text/javascript">
-    // 浮动圆点展开与收缩
-    /*
-    $(function () {
-        var assist_box = $('.assist-box');
-        $('#assist_btn').hover(function () {
-            assist_box.stop().show(300);
-        }, function () {
-            assist_box.stop().hide(150);
-        })
-    });
-    */  
-    //浮动圆点拖动
-    $(function () {
-        var box = document.getElementById('assist_btn');
-        box.onmousedown = function (event) {
-            var e = event || window.event,
-                t = e.target || e.srcElement,
-                // 鼠标按下时的坐标x1,y1
-                x1 = e.clientX,
-                y1 = e.clientY,
-                //鼠标按下时的左右偏移量
-                dragLeft = this.offsetLeft,
-                dragTop = this.offsetTop;
-
-            document.onmousemove = function (event) {
-                var e = event || window.event,
-                    t = e.target || e.srcElement,
-                    // 鼠标移动时的动态坐标
-                    x2 = e.clientX,
-                    y2 = e.clientY,
-                    // 鼠标移动时的坐标的变化量
-                    x = x2 - x1,
-                    y = y2 - y1;
-                box.style.left = (dragLeft + x) + 'px';
-                box.style.top = (dragTop + y) + 'px';
-            }
-
-            document.onmouseup = function () {
-                this.onmousemove = null;
-            }
-        }
-    });
-
-/*
-    $whitesmoke   = #f5f5f5
-    $gainsboro    = #eee
-    $gray-lighter = #ddd
-    $grey-light   = #ccc
-    $grey         = #bbb
-    $grey-dark    = #999
-    $grey-dim     = #666
-    $black-light  = #555
-    $black-deep   = #222
-    $red          = #ff2a2a
-    $blue-bright  = #87daff
-    $blue         = #0684bd
-    $blue-deep    = #262a30
-*/
-    // white theme
-    var body = {color: "#555", background: "white"};
-    var a_tag = {color: "#222"};
-    var header = { background: "#f5f5f5"};
-    var logo_line_i = {background: "#222"};
-    // var post_code = {background: "#eee", color: "#222"};
-
-    function switch_theme() {
-        $("body").css(body);
-        $("a:not('.links-of-author-item a, .site-state-item a, .site-state-posts a, .feed-link a, .motion-element a, .post-tags a, .show-commit-cls a, #donate_board a')").css(a_tag);
-        $(".header, .footer").css(header);
-        $(".logo-line-before i, .logo-line-after i").css(logo_line_i);
-        //$(".post code").css(post_code);
-        $("#idhyt-surprise-ball #idhyt-surprise-ball-animation .drag").css(a_tag);
-        $(".post-title-link, .posts-expand .post-meta, .post-comments-count, .disqus-comment-count, .post-category a, .post-nav-next a, .post-nav-item a").css(a_tag);
-        
-        // $("code").css({color: '#c5c8c6', background: '#1d1f21'});
-        $("#assist_btn").hide(1500);
-    }
-
-    $(function () {
-        $("#assist_btn").dblclick(function() {
-            switch_theme();
-        });
-    });
-
-</script>
-
-<div>
-
-    <button class="assist-btn circle" id="assist_btn" title="双击切换">
-        亮
-    </button>
-
 </div>
 
-
-
-
-
-
-
-
-
-      
-
-    
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content"> 
-
-  <div id="posts" class="posts-expand">
-    
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              最长公共子序列
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2016-06-23T12:18:38+08:00" content="2016-06-23">
-            2016-06-23
-          </time>
-        </span>
-
+<div id="wrap">
+    <div id="main-nav" class="">
+    <div class="container">
+        <div class="nav-header">
+            <a class="nav-brand" href="/">Yqi's Blog</a>
+            <a class="menu-link nav-icon" href="#"><i class="fa fa-navicon"></i></a>
+        </div>
+    </div>
+</div>
+    <section id="hero" class="light-typo">
+    <div id="cover-image" class="image-bg animated fadeIn"></div>
+    <div class="container welcome-content">
+        <div class="middle-text">
+            <h1>Coding your future</h1>
+            <a class="btn smooth-scroll" href="#start">Get Stated</a>
+        </div>
+    </div>
+</section>
+    <div id="start" class="container content">
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                  <span itemprop="name">Algorithm</span>
-                </a>
-              </span>
-
-              
-              
-
+    <article class="clearfix">
+        <div class="post-date">
+            发表于
+            <time datetime="2016-06-23T12:18:38+08:00"
+                  content="2016-06-23">
+                2016-06-23
+            </time>
+            &nbsp;|&nbsp;分类于
             
+                
+                    <a href="/categories/Algorithm/" rel="index">
+                        Algorithm
+                        
+                        
+                    </a>
+                
+            
+            <span>
+            <a href="/2016/06/23/lcs/#disqus_thread" data-disqus-identifier="2016/06/23/lcs/">
+              <span class="disqus-comment-count" data-disqus-identifier="2016/06/23/lcs/"></span>
+            </a>
           </span>
+  
+        </div>
+        <h2><a href="/2016/06/23/lcs/">最长公共子序列</a></h2>
         
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <!--
-              <a href="/2016/06/23/lcs/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/23/lcs/" itemprop="commentsCount"></span>
-              </a>
-              -->
-              <a href="/2016/06/23/lcs/#comments" itemprop="discussionUrl">
-                <span>评论</span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        <span itemprop="articleBody"><h1 id="最长公共子序列（LongestCommonSubsequence）"><a href="#最长公共子序列（LongestCommonSubsequence）" class="headerlink" title="最长公共子序列（LongestCommonSubsequence）"></a>最长公共子序列（LongestCommonSubsequence）</h1><p>一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。<br>最长公共子序列问题可以由动态规划求解</p>
+            <h1 id="最长公共子序列（LongestCommonSubsequence）"><a href="#最长公共子序列（LongestCommonSubsequence）" class="headerlink" title="最长公共子序列（LongestCommonSubsequence）"></a>最长公共子序列（LongestCommonSubsequence）</h1><p>一个数列S，如果分别是两个或多个已知数列的子序列，且是所有符合此条件序列中最长的，则S称为已知序列的最长公共子序列。<br>最长公共子序列问题可以由动态规划求解</p>
 <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>动态规划（英语：Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。<br>动态规划常常适用于有重叠子问题和最优子结构性质的问题，动态规划方法所耗时间往往远少于朴素解法。<br>动态规划背后的基本思想非常简单。大致上，若要解一个给定问题，我们需要解其不同部分（即子问题），再合并子问题的解以得出原问题的解。<br>通常许多子问题非常相似，为此动态规划法试图仅仅解决每个子问题一次，从而减少计算量：一旦某个给定子问题的解已经算出，则将其记忆化（en:memoization）存储，以便下次需要同一个子问题解之时直接查表。这种做法在重复子问题的数目关于输入的规模呈指数增长时特别有用。————<a href="https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92" target="_blank" rel="external">维基百科</a></p>
 <h1 id="动态规划求解LCS"><a href="#动态规划求解LCS" class="headerlink" title="动态规划求解LCS"></a>动态规划求解LCS</h1><h3 id="1-最优子结构性质"><a href="#1-最优子结构性质" class="headerlink" title="1.最优子结构性质"></a>1.最优子结构性质</h3><p>设输入序列是X [0 .. m-1] 和 Y [0 .. n-1]，长度分别为 m 和 n。和设序列 L(X [0 .. m-1]，Y[0 .. n-1]) 是这两个序列的 LCS 的长度，以下为 L(X [0 .. M-1]，Y [0 .. N-1]) 的递归定义：</p>
 <pre><code>1）如果两个序列的最后一个元素匹配（即X [M-1] == Y [N-1]）
@@ -375,425 +110,183 @@
 <h3 id="2-重叠子问题"><a href="#2-重叠子问题" class="headerlink" title="2.重叠子问题"></a>2.重叠子问题</h3><pre><code>很明显，LCS 很多子问题也都共享子子问题，因此可以对其进行递归求解。具体的算法时间度为 O(m*n)，可以优化至 O(m+n)。
 </code></pre><h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><p>代码如下：</p>
 <h3 id="未优化"><a href="#未优化" class="headerlink" title="未优化"></a>未优化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int Longest_Common_Subsequence(char *sa, int n1, char *sb, int n2)</span><br><span class="line">&#123;</span><br><span class="line">	if (n1 &gt; 0 &amp;&amp; n2 &gt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		if (sa[n1 - 1] == sb[n2 - 1]) </span><br><span class="line">			return 1 + Longest_Common_Subsequence(sa, n1 - 1, sb, n2 - 1);</span><br><span class="line">		else </span><br><span class="line">			return max(Longest_Common_Subsequence(sa, n1 , sb, n2 - 1),</span><br><span class="line">			Longest_Common_Subsequence(sa, n1 - 1, sb, n2 ));</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="优化后"><a href="#优化后" class="headerlink" title="优化后"></a>优化后</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int lcs(char *sa, int n1, char *sb, int n2)</span><br><span class="line">&#123;</span><br><span class="line">	int **ls = new int*[n1];</span><br><span class="line">	for (int i = 0; i &lt; n1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		ls[i] = new int[n2];</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = 0; i &lt; n1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; n2; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			if (i == 0 || j == 0) ls[i][j] = 0;</span><br><span class="line">			else if (sa[i - 1] == sb[j - 1]) ls[i][j] = ls[i - 1][j - 1] + 1;</span><br><span class="line">			else ls[i][j] = max(ls[i - 1][j], ls[i][j - 1]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int tmp = ls[n1 - 1][n2 - 1];</span><br><span class="line">	for (int k = 0; k &lt; n1; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		delete []ls[k];</span><br><span class="line">	&#125;</span><br><span class="line">	delete []ls;</span><br><span class="line">	return tmp;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
-      
+<h3 id="优化后"><a href="#优化后" class="headerlink" title="优化后"></a>优化后</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int lcs(char *sa, int n1, char *sb, int n2)</span><br><span class="line">&#123;</span><br><span class="line">	int **ls = new int*[n1];</span><br><span class="line">	for (int i = 0; i &lt; n1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		ls[i] = new int[n2];</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = 0; i &lt; n1; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; n2; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			if (i == 0 || j == 0) ls[i][j] = 0;</span><br><span class="line">			else if (sa[i - 1] == sb[j - 1]) ls[i][j] = ls[i - 1][j - 1] + 1;</span><br><span class="line">			else ls[i][j] = max(ls[i - 1][j], ls[i][j - 1]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int tmp = ls[n1 - 1][n2 - 1];</span><br><span class="line">	for (int k = 0; k &lt; n1; ++k)</span><br><span class="line">	&#123;</span><br><span class="line">		delete []ls[k];</span><br><span class="line">	&#125;</span><br><span class="line">	delete []ls;</span><br><span class="line">	return tmp;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        <div class="post-footer">
+            
+                <div id="eof" class="print-invisible">
+                    <hr class="eof">
+                </div>
+                
+                <div class="copyright" style="clear:both;">
+                    <p><span>本文标题:</span><a href="/2016/06/23/lcs/">最长公共子序列</a></p>
+                    <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
+                    <p><span>发布时间:</span>2016年6月23日 - 12时06分</p>
+                    <p><span>最后更新:</span>2016年8月5日 - 12时08分</p>
+                    <p><span>原始链接:</span><a href="/2016/06/23/lcs/"
+                                            title="最长公共子序列">http://yoursite.com/2016/06/23/lcs/</a></p>
+                    <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license"
+                                                                                   href="http://creativecommons.org/licenses/by-nc/4.0/"
+                                                                                   title="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)">Attribution-NonCommercial
+                            4.0</a></p>
+                    <p><span>转载请保留以上信息。</span></p>
+                </div>
+            
+            
+                <div class="post-tags">
+                    
+                        <a href="/tags/LongestCommonSubsequence/"> #LongestCommonSubsequence </a>
+                    
+                        <a href="/tags/Dynamic-Programming/"> #Dynamic_Programming </a>
+                    
+                </div>
+            
+        </div>
+    </article>
+
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = 'http://yoursite.com/2016/06/23/lcs/';
+                    this.page.identifier = '2016/06/23/lcs/';
+                };
+                (function () {
+                    var d = document, s = d.createElement('script');
+                    s.src = '//only0god.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+        </div>
     </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/LongestCommonSubsequence/" rel="tag">#LongestCommonSubsequence</a>
-          
-            <a href="/tags/Dynamic-Programming/" rel="tag">#Dynamic_Programming</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/06/stdarg/" rel="prev">可变参函数</a>
-            
-          </div>
-
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/06/20/C++11/" rel="next">C++11</a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div>
-      
     </div>
+    <footer>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2 col-md-2 footer-widget">
+                    <h3>Statistics</h3>
 
-    <div class="post-spread">
-      
-        <div class="bdsharebuttonbox">
-	<a href="#" class="bds_more" data-cmd="more"></a>
-	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
-	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+                    <span>nothing</span>
+
+                    <div class="stats">
+                        <div class="line">
+                            <span class="counter">9</span>
+                            <span class="caption">Articles</span>
+                        </div>
+                        <div class="line">
+                            <span class="counter">2</span>
+                            <span class="caption">Categories</span>
+                        </div>
+                        <div class="line">
+                            <span class="counter">11</span>
+                            <span class="caption">Tags</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 footer-widget">
+                    <h3>Recent posts</h3>
+                    <div class="post-recent-widget">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_list_2/">STL list ——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/stl_list_1/">STL list ——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/14/stl_vector/">STL vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/stl_traits/">STL  traits</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/06/stdarg/">可变参函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/lcs/">最长公共子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/C++11/">C++11</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/stl_alloc/">STL空间配置器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/heap_sort/">海量数据中求最大的K个数</a></li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 footer-widget clearfix">
+                    <h3>Tags</h3>
+                    <ul class="tags">
+                        
+                            <li><a href="/tags/C-11/">C++11</a></li>
+                        
+                            <li><a href="/tags/C/">C++</a></li>
+                        
+                            <li><a href="/tags/LongestCommonSubsequence/">LongestCommonSubsequence</a></li>
+                        
+                            <li><a href="/tags/Dynamic-Programming/">Dynamic_Programming</a></li>
+                        
+                            <li><a href="/tags/C/">C</a></li>
+                        
+                            <li><a href="/tags/stdargs/">stdargs</a></li>
+                        
+                            <li><a href="/tags/STL/">STL</a></li>
+                        
+                            <li><a href="/tags/alloc/">alloc</a></li>
+                        
+                            <li><a href="/tags/list/">list</a></li>
+                        
+                            <li><a href="/tags/traits/">traits</a></li>
+                        
+                            <li><a href="/tags/vector/">vector</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <p class="pull-left"> Powered by <a
+                        href="https://hexo.io">Hexo.</a></p>           
+        </div>
+    </div>
+</footer>
+
+
+<div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Search Anything You Want" />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
 </div>
 <script>
-    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: 'Untitled',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script type="text/javascript" src="/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/dist/js/wow.min.js"></script>
+<script type="text/javascript" src="/dist/js/custom.js"></script>
+<script src="/dist/js/insight.js"></script>
+<script id="dsq-count-scr" src="//only0god.disqus.com/count.js" async></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-51515330-1', 'auto');
+    ga('send', 'pageview');
 </script>
 
-      
-    </div>
-  </div>
-
- </div>
-
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div class="ds-thread" data-thread-key="2016/06/23/lcs/"
-                   data-title="最长公共子序列" data-url="http://yoursite.com/2016/06/23/lcs/">
-              </div>
-            
-          </div>
-        
-      </div>
-
-      
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="wanyaoqi" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">wanyaoqi</p>
-        </div>
-        <p class="site-description motion-element" itemprop="description">面对疾风吧！！！</p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">9</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">分类</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        <div class="links-of-friendly motion-element">
-          
-        </div>
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
-          <div class="post-toc">
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最长公共子序列（LongestCommonSubsequence）"><span class="nav-number">1.</span> <span class="nav-text">最长公共子序列（LongestCommonSubsequence）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划求解LCS"><span class="nav-number">3.</span> <span class="nav-text">动态规划求解LCS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-最优子结构性质"><span class="nav-number">3.0.1.</span> <span class="nav-text">1.最优子结构性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-重叠子问题"><span class="nav-number">3.0.2.</span> <span class="nav-text">2.重叠子问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">4.</span> <span class="nav-text">code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未优化"><span class="nav-number">4.0.1.</span> <span class="nav-text">未优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化后"><span class="nav-number">4.0.2.</span> <span class="nav-text">优化后</span></a></li></ol></li></ol></li></ol></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
-  
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2016
-  </span>
-  <span class="with-love">
-    <i class="icon-next-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">wanyaoqi
-  </span>
 </div>
-
-
-<!-- busuanzi -->
-
-
-
- </div>
-    </footer>
-
-    <div class="back-to-top"></div>
-  </div>
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"wyq2016"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-
-    
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
-      }
-    }
-  });
-</script>
-
-
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
 </body>
 </html>
