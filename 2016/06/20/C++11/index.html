@@ -1,0 +1,352 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>C++11 | Yaoqi&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="wanyaoqi">
+    
+    <meta name="description" content="autoauto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科auto实际上实在">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Yaoqi&#39;s Blog" title="Yaoqi&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Yaoqi&#39;s Blog">Yaoqi&#39;s Blog</a></h1>
+				<h2 class="blog-motto">coding</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">home</a></li>
+					
+						<li><a href="/archives">archives</a></li>
+					
+						<li><a href="/categories">categories</a></li>
+					
+						<li><a href="/tags">tags</a></li>
+					
+						<li><a href="/about">about</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/20/C++11/" title="C++11" itemprop="url">C++11</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="wanyaoqi">wanyaoqi</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-06-19T17:14:38.000Z" itemprop="datePublished">2016-06-20</time>
+    Updated:<time datetime="2016-07-23T17:29:03.186Z" itemprop="dateModified">2016-07-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#auto"><span class="toc-number">1.</span> <span class="toc-text">auto</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lambda表达式"><span class="toc-number">2.</span> <span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#decltype"><span class="toc-number">3.</span> <span class="toc-text">decltype</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#右值引用"><span class="toc-number">4.</span> <span class="toc-text">右值引用</span></a></li></ol>
+		</div>
+		
+		<h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><p>auto是C++程序设计语言的关键字。自C++11以来，auto关键字用于两种情况：声明变量时根据初始化表达式自动推断该变量的类型、声明函数时函数返回值的占位符。C++98标准中auto关键字用于自动变量的声明，但由于使用极少且多余，在C++11中已删除这一用法。–维基百科<br>auto实际上实在编译时对变量进行了类型推导，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。<br>从汇编看也是如此：<br><img src="/imgs/Summary/int.png" alt="int"><br><img src="/imgs/Summary/auto_int.png" alt="auto_int"><br>自定义类型<br><img src="/imgs/Summary/A.png" alt="A"><br><img src="/imgs/Summary/auto_A.png" alt="auto_A"><br>auto用于模板简化了模板的操作<br><img src="/imgs/Summary/auto_template.png" alt="auto_template"></p>
+<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>它可以用于创建并定义匿名的函数对象形式如下：<br>[函数对象参数]（操作符重载函数参数） -&gt;返回值类型{函数体}(具体参数)<br><img src="/imgs/Summary/lambda.png" alt="lambda"></p>
+<h1 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h1><p>decltype的功能与auto相反，从变量得到类型<br><img src="/imgs/Summary/decltype.png" alt="decltype"></p>
+<h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><p>右值引用（rvalue reference），是C++程序设计语言自C++11标准提出的一类数据类型。用于实现移动语义（move semantic）与完美转发（perfect forwarding）。–维基百科<br>在资源转移不是调用拷贝等操作而是实现了资源的转移<br><a href="https://www.zhihu.com/question/22111546" target="_blank" rel="external">参考</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/C-11/">C++11</a><a href="/tags/C/">C++</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Summary/">Summary</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/06/20/C++11/" data-title="C++11 | Yaoqi&#39;s Blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/06/23/lcs/" title="最长公共子序列">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  最长公共子序列</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/06/12/stl_alloc/"  title="STL空间配置器">
+ <strong>NEXT:</strong><br/> 
+ <span>STL空间配置器
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#auto"><span class="toc-number">1.</span> <span class="toc-text">auto</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lambda表达式"><span class="toc-number">2.</span> <span class="toc-text">lambda表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#decltype"><span class="toc-number">3.</span> <span class="toc-text">decltype</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#右值引用"><span class="toc-number">4.</span> <span class="toc-text">右值引用</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/Algorithm/" title="Algorithm">Algorithm<sup>2</sup></a></li>
+		
+			<li><a href="/categories/Summary/" title="Summary">Summary<sup>9</sup></a></li>
+		
+			<li><a href="/categories/python/" title="python">python<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>9</sup></a></li>
+		
+			<li><a href="/tags/C-11/" title="C++11">C++11<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Dynamic-Programming/" title="Dynamic_Programming">Dynamic_Programming<sup>1</sup></a></li>
+		
+			<li><a href="/tags/LongestCommonSubsequence/" title="LongestCommonSubsequence">LongestCommonSubsequence<sup>1</sup></a></li>
+		
+			<li><a href="/tags/STL/" title="STL">STL<sup>7</sup></a></li>
+		
+			<li><a href="/tags/alloc/" title="alloc">alloc<sup>1</sup></a></li>
+		
+			<li><a href="/tags/list/" title="list">list<sup>4</sup></a></li>
+		
+			<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+		
+			<li><a href="/tags/stdargs/" title="stdargs">stdargs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/traits/" title="traits">traits<sup>1</sup></a></li>
+		
+			<li><a href="/tags/vector/" title="vector">vector<sup>1</sup></a></li>
+		
+			<li><a href="/tags/装饰器/" title="装饰器">装饰器<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="wanyaoqi">wanyaoqi</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
