@@ -40,7 +40,7 @@ va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地�
 				<h1 class="site-name"><a href="/" title="Yaoqi&#39;s Blog">Yaoqi&#39;s Blog</a></h1>
 				<h2 class="blog-motto">coding</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -59,7 +59,7 @@ va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地�
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -83,7 +83,7 @@ va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地�
     </p>
   <p class="article-time">
     <time datetime="2016-08-06T06:33:58.000Z" itemprop="datePublished">2016-08-06</time>
-    Updated:<time datetime="2016-08-07T12:25:20.757Z" itemprop="dateModified">2016-08-07</time>
+    更新日期:<time datetime="2016-08-07T12:25:22.000Z" itemprop="dateModified">2016-08-07</time>
     
   </p>
 </header>
@@ -91,7 +91,7 @@ va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地�
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目录</strong>
 		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用示例"><span class="toc-number">1.</span> <span class="toc-text">使用示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现原理"><span class="toc-number">2.</span> <span class="toc-text">实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#va-list"><span class="toc-number">2.1.</span> <span class="toc-text">va_list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#va-start"><span class="toc-number">2.2.</span> <span class="toc-text">va_start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#va-rounded-size"><span class="toc-number">2.2.1.</span> <span class="toc-text">__va_rounded_size</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#va-arg"><span class="toc-number">2.3.</span> <span class="toc-text">va_arg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#va-end"><span class="toc-number">2.4.</span> <span class="toc-text">va_end</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux内核代码Acenv-h中也定义了一组宏"><span class="toc-number">3.</span> <span class="toc-text">Linux内核代码Acenv.h中也定义了一组宏</span></a></li></ol>
 		</div>
 		
@@ -171,20 +171,20 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
 	
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目录</strong>
   <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用示例"><span class="toc-number">1.</span> <span class="toc-text">使用示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现原理"><span class="toc-number">2.</span> <span class="toc-text">实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#va-list"><span class="toc-number">2.1.</span> <span class="toc-text">va_list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#va-start"><span class="toc-number">2.2.</span> <span class="toc-text">va_start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#va-rounded-size"><span class="toc-number">2.2.1.</span> <span class="toc-text">__va_rounded_size</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#va-arg"><span class="toc-number">2.3.</span> <span class="toc-text">va_arg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#va-end"><span class="toc-number">2.4.</span> <span class="toc-text">va_end</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux内核代码Acenv-h中也定义了一组宏"><span class="toc-number">3.</span> <span class="toc-text">Linux内核代码Acenv.h中也定义了一组宏</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">Categories</p>
+	<p class="asidetitle">分类</p>
 		<ul>
 		
 			<li><a href="/categories/Algorithm/" title="Algorithm">Algorithm<sup>2</sup></a></li>
@@ -199,7 +199,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
@@ -233,7 +233,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
@@ -254,7 +254,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
 		
 		
 	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
 		
 		<a href="http://yoursite.com" target="_blank" title="wanyaoqi">wanyaoqi</a>
 		
