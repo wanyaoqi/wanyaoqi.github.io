@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>分类: python | Yaoqi&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wanyaoqi">
+  
+  
+  <meta name="description" content="面对疾风吧！！！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yaoqi's Blog">
+<meta property="og:url" content="http://yoursite.com/categories/python/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="面对疾风吧！！！">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yaoqi's Blog">
+<meta name="twitter:description" content="面对疾风吧！！！">
+  
+    <link rel="alternate" href="/atom.xml" title="Yaoqi&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Yaoqi&#39;s Blog</a></h1>
+    <p><a href="/">coding</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+<h2 class="archives-title category"><span>python</span></h2>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2017/11/19/python装饰器/">
+  <time datetime="2017-11-19T14:46:38.000Z">
+    2017-11-19
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2017/11/19/python装饰器/">python</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def test(func):</span><br><span class="line">	def wrapper():</span><br><span class="line">	    func()</span><br><span class="line">        print func.__name__, "test wrapper"</span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line">@test</span><br><span class="line">def main()</span><br><span class="line">    print "start main"</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line">print main.__name__</span><br></pre></td></tr></table></figure>
+<p>得到的结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start main</span><br><span class="line">main test wrapper</span><br><span class="line">wrapper</span><br></pre></td></tr></table></figure></p>
+<p>可以看到装饰器会改变函数的属性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> main</span><br><span class="line">&lt;function wrapper at <span class="number">0x7f79c2437938</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>此时执行main函数已经被装饰器test返回的wrapper函数给替代了<br>即 main() == test()()<br>再看<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(test_arg)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> test_arg</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(func)</span>:</span></span><br><span class="line">	    <span class="keyword">print</span> <span class="string">"inner_wrapper"</span></span><br><span class="line">	    <span class="function"><span class="keyword">def</span> <span class="title">inner_wrapper</span><span class="params">()</span>:</span></span><br><span class="line">	        func()</span><br><span class="line">            <span class="keyword">print</span> func.__name__, <span class="string">"test wrapper"</span></span><br><span class="line">        <span class="keyword">return</span> inner_wrapper</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure></p>
+<p>这时使用装饰器test必须给参数, 如果不给的话test_arg相当与main函数的地址,<br>此时调用wrapper会报错(原因是参数不够)。<br>如果去了wrapper函数的参数则inner_wrapper不会被调用<br>可以看出带参数的装饰器其实包装了一层外壳，先执行最外层test函数的内容，<br>然后将调用的函数的地址传入里层的装饰器</p>
+<p>还有一个问题就是之前代码中的func.<strong>name</strong>和main.<strong>name</strong>的问题，<br>不难看出其实main函数的地址就是wrapper的地址，所以main.<strong>name</strong>打印的是wrapper函数的名字，<br>那么如何获得main函数真正的属性呢？</p>
+<h2 id="functools-wraps"><a href="#functools-wraps" class="headerlink" title="functools.wraps"></a>functools.wraps</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">	    func()</span><br><span class="line">        <span class="keyword">print</span> func.__name__, <span class="string">"test wrapper"</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<p>加上functools.wraps装饰器后的打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start main</span><br><span class="line">main test wrapper</span><br><span class="line">main</span><br></pre></td></tr></table></figure></p>
+<p>进入functools中看warps函数的实现其实可以看到<br>functools.wraps函数将wrapper函数的属性使用setattr设置为传入的func即main函数的属性</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">wanyaoqi</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

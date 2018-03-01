@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>STL list ——part 2 | Yaoqi&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wanyaoqi">
+  
+  
+    <meta name="description" content="transfer、splice1234567891011121314//将first到last內的所有元素搬移到position 前，不包括last元素。  void transfer(iterator position, iterator first, iterator last) &amp;#123;    if (position != last) &amp;#123;      (*(link_type(">
+  
+  <meta name="description" content="transfer、splice1234567891011121314//将first到last內的所有元素搬移到position 前，不包括last元素。  void transfer(iterator position, iterator first, iterator last) &amp;#123;    if (position != last) &amp;#123;      (*(link_type(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL list ——part 2">
+<meta property="og:url" content="http://yoursite.com/2016/08/18/stl_list_2/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="transfer、splice1234567891011121314//将first到last內的所有元素搬移到position 前，不包括last元素。  void transfer(iterator position, iterator first, iterator last) &amp;#123;    if (position != last) &amp;#123;      (*(link_type(">
+<meta property="og:image" content="http://yoursite.com/imgs/stl_list/transfer.png">
+<meta property="og:updated_time" content="2016-08-17T17:16:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL list ——part 2">
+<meta name="twitter:description" content="transfer、splice1234567891011121314//将first到last內的所有元素搬移到position 前，不包括last元素。  void transfer(iterator position, iterator first, iterator last) &amp;#123;    if (position != last) &amp;#123;      (*(link_type(">
+<meta name="twitter:image" content="http://yoursite.com/imgs/stl_list/transfer.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Yaoqi&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Yaoqi&#39;s Blog</a></h1>
+    <p><a href="/">coding</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/08/18/stl_list_2/">
+  <time datetime="2016-08-17T16:31:32.000Z">
+    2016-08-18
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">STL list ——part 2</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="transfer、splice"><a href="#transfer、splice" class="headerlink" title="transfer、splice"></a>transfer、splice</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将first到last內的所有元素搬移到position 前，不包括last元素。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transfer</span><span class="params">(iterator position, iterator first, iterator last)</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (position != last) &#123;  </span><br><span class="line"></span><br><span class="line">    (*(link_type((*last.node).prev))).next = position.node;          </span><br><span class="line">    (*(link_type((*first.node).prev))).next = last.node;       </span><br><span class="line">    (*(link_type((*position.node).prev))).next = first.node; </span><br><span class="line">        </span><br><span class="line">    link_type tmp = link_type((*position.node).prev);        </span><br><span class="line">    (*position.node).prev = (*last.node).prev;                </span><br><span class="line">    (*last.node).prev = (*first.node).prev;                  </span><br><span class="line">    (*first.node).prev = tmp;                            </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>迁移过程如图：<br><img src="/imgs/stl_list/transfer.png" alt="transfer"><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 將 x 链表插入到 position 所指位置之前。x 必须不能是 *this。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splice</span><span class="params">(iterator position, <span class="built_in">list</span>&amp; x)</span></span><br><span class="line"></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (!x.empty())   </span><br><span class="line">    transfer(position, x.begin(), x.end());  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 將i所指元素插入到 position 所指位置之前。position 和i 可在同一个list。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splice</span><span class="params">(iterator position, <span class="built_in">list</span>&amp;, iterator i)</span></span><br><span class="line"></span>&#123;  </span><br><span class="line">  iterator j = i;  </span><br><span class="line">  ++j;  </span><br><span class="line">  <span class="keyword">if</span> (position == i || position == j) <span class="keyword">return</span>;  </span><br><span class="line">  transfer(position, i, j);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 將 [first,last) 內的所有元素插入到 position 所指位置之前。  </span></span><br><span class="line"><span class="comment">// position 和[first,last)可指在同一个list，  </span></span><br><span class="line"><span class="comment">// 但position不能位于[first,last)之內。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">splice</span><span class="params">(iterator position, <span class="built_in">list</span>&amp;, iterator first, iterator last)</span></span><br><span class="line"></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (first != last)   </span><br><span class="line">    transfer(position, first, last);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将x合并到*this上面。两个链表都要先经过递增排序。相当于合并排序的最后一步  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc&gt;  </span><br><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::merge(<span class="built_in">list</span>&lt;T, Alloc&gt;&amp; x)</span><br><span class="line">&#123;  </span><br><span class="line">  iterator first1 = begin();  </span><br><span class="line">  iterator last1 = end();  </span><br><span class="line">  iterator first2 = x.begin();  </span><br><span class="line">  iterator last2 = x.end();  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//前提是两个链表都已经递增排序好了  </span></span><br><span class="line">  <span class="keyword">while</span> (first1 != last1 &amp;&amp; first2 != last2)  </span><br><span class="line">    <span class="keyword">if</span> (*first2 &lt; *first1) &#123;  </span><br><span class="line">      iterator next = first2;  </span><br><span class="line">      transfer(first1, first2, ++next);  </span><br><span class="line">      first2 = next;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      ++first1;  </span><br><span class="line">  <span class="keyword">if</span> (first2 != last2) transfer(last1, first2, last2);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 将 list逆置  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc&gt;  </span><br><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::reverse() </span><br><span class="line">&#123;    </span><br><span class="line">    <span class="comment">//如果链表是空，或者只有一个元素，就不做任何处理  </span></span><br><span class="line">    <span class="comment">//不是用size()==0或size()==1来判断，因为这样比较慢  </span></span><br><span class="line">  <span class="keyword">if</span> (node-&gt;next == node || link_type(node-&gt;next)-&gt;next == node) <span class="keyword">return</span>;  </span><br><span class="line">  iterator first = begin();  </span><br><span class="line">  ++first;  </span><br><span class="line">  <span class="keyword">while</span> (first != end()) &#123;  </span><br><span class="line">    iterator old = first;  </span><br><span class="line">    ++first;  </span><br><span class="line">    transfer(begin(), old, first);  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="list-sort"><a href="#list-sort" class="headerlink" title="list sort"></a>list sort</h1><p>list不能采用STL sort()算法，必须使用自己的sort；因为STL sort只能接收随机流迭代器<br>SGI实现版：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc&gt;  </span><br><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::sort() &#123;  </span><br><span class="line">    </span><br><span class="line">  <span class="keyword">if</span> (node-&gt;next == node || link_type(node-&gt;next)-&gt;next == node) <span class="keyword">return</span>;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="built_in">list</span>&lt;T, Alloc&gt; carry;  </span><br><span class="line">  <span class="built_in">list</span>&lt;T, Alloc&gt; counter[<span class="number">64</span>];  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> fill = <span class="number">0</span>;  </span><br><span class="line">  <span class="keyword">while</span> (!empty()) </span><br><span class="line">  &#123;  </span><br><span class="line">    carry.splice(carry.begin(), *<span class="keyword">this</span>, begin());  <span class="comment">//取第一个放入carry中</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span>(i &lt; fill &amp;&amp; !counter[i].empty())	     <span class="comment">//counter[i]为空则跳过</span></span><br><span class="line">    &#123;      </span><br><span class="line">      counter[i].merge(carry);                   <span class="comment">//有序的合并到counter</span></span><br><span class="line">      carry.swap(counter[i++]);  </span><br><span class="line">    &#125;  </span><br><span class="line">    carry.swap(counter[i]);           <span class="comment">//将carry中的数据交换到counter[i]中</span></span><br><span class="line">    <span class="keyword">if</span> (i == fill) ++fill;  </span><br><span class="line">  &#125;   </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; fill; ++i)       <span class="comment">//将数组中所有的数据合并到最后一个桶中</span></span><br><span class="line">     counter[i].merge(counter[i<span class="number">-1</span>]);  </span><br><span class="line">  swap(counter[fill<span class="number">-1</span>]);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//两个链表交换，就是他们的node头结点交换 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">list</span>&lt;T, Alloc&gt;&amp; x)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	__STD::swap(node, x.node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>sort的过程是一个循环归并的过程，定义一个tmp和一个list数组</p>
+<pre><code>假设有这样以组数: 3 5 1 2 7 6 9    
+1.取 3 放入carry中，此时不满足循环条件i==fill，将carry中数据换入counter[0]中，carry为空，counter[0]为{3};
+2.取 5 放入carry中，carry与counter[0] merge并交换，得到counter为空，counter[1]为{3，5};
+3.取 1 放如carry中,此时counter[0]为空，不进入while循环，将 1 放入 counter[0]中，counter[0]为{1};
+4.去 2 放入carry中，和counter[0] merge 后又与counter[1] merge放入counter[2]中，counter[2]为{1，2，3，5}
+counter[0]和counter[1]为空；
+</code></pre><p>一直循环下去。。直到list为空。<br>然后最后面for循环将counter中的合并到最后一个中，在换给list，即完成了排序；</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Summary/">Summary</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/C/">C++</a>, <a class="tags-link" href="/tags/STL/">STL</a>, <a class="tags-link" href="/tags/list/">list</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">wanyaoqi</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>可变参函数 | Yaoqi&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wanyaoqi">
+  
+  
+    <meta name="description" content="使用示例
+实现原理va_listva_list 是一个字符指针类型。
+typedef char *va_list; 
+va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)
+#ifndef __sparc__
+#define va_start(AP, LASTARG) \
+(AP = ((ch">
+  
+  <meta name="description" content="使用示例
+实现原理va_listva_list 是一个字符指针类型。
+typedef char *va_list; 
+va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)
+#ifndef __sparc__
+#define va_start(AP, LASTARG) \
+(AP = ((ch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可变参函数">
+<meta property="og:url" content="http://yoursite.com/2016/08/06/stdarg/index.html">
+<meta property="og:site_name" content="Yaoqi's Blog">
+<meta property="og:description" content="使用示例
+实现原理va_listva_list 是一个字符指针类型。
+typedef char *va_list; 
+va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)
+#ifndef __sparc__
+#define va_start(AP, LASTARG) \
+(AP = ((ch">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/stdargs.png">
+<meta property="og:image" content="http://yoursite.com/imgs/Summary/linux_args.png">
+<meta property="og:updated_time" content="2016-08-07T12:25:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="可变参函数">
+<meta name="twitter:description" content="使用示例
+实现原理va_listva_list 是一个字符指针类型。
+typedef char *va_list; 
+va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)
+#ifndef __sparc__
+#define va_start(AP, LASTARG) \
+(AP = ((ch">
+<meta name="twitter:image" content="http://yoursite.com/imgs/Summary/stdargs.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Yaoqi&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Yaoqi&#39;s Blog</a></h1>
+    <p><a href="/">coding</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/08/06/stdarg/">
+  <time datetime="2016-08-06T06:33:58.000Z">
+    2016-08-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">可变参函数</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p><img src="/imgs/Summary/stdargs.png" alt="stdargs"></p>
+<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><h2 id="va-list"><a href="#va-list" class="headerlink" title="va_list"></a>va_list</h2><pre><code>va_list 是一个字符指针类型。
+typedef char *va_list; 
+</code></pre><h2 id="va-start"><a href="#va-start" class="headerlink" title="va_start"></a>va_start</h2><p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
+<pre><code>#ifndef __sparc__
+#define va_start(AP, LASTARG) \
+(AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG))) //AP即va_list
+
+#else
+#define va_start(AP, LASTARG) \
+(__builtin_saveregs (), \
+AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG)))
+#endif
+
+__builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存寄存器。
+它的说明可参见gcc 手册章节“Target Description Macros”中的
+“Implementing the Varargs Macros”小节。
+</code></pre><h3 id="va-rounded-size"><a href="#va-rounded-size" class="headerlink" title="__va_rounded_size"></a>__va_rounded_size</h3><p>__va_rounded_size定义了取整后的TYPE 类型的字节长度值。是int 长度(4)的倍数。</p>
+<pre><code>#define __va_rounded_size(TYPE) \
+(((sizeof (TYPE) + sizeof (int) - 1) / sizeof (int)) * sizeof (int))
+</code></pre><h2 id="va-arg"><a href="#va-arg" class="headerlink" title="va_arg"></a>va_arg</h2><p>va_arg先让AP偏移到指向下一个参数的位置，再返回要取的参数</p>
+<pre><code>#define va_arg(AP, TYPE) \
+(AP += __va_rounded_size (TYPE), \
+*((TYPE *) (AP - __va_rounded_size (TYPE))))
+</code></pre><h2 id="va-end"><a href="#va-end" class="headerlink" title="va_end"></a>va_end</h2><p>va_end 必须在va_arg 读完所有的参数后再被调用。<br>va_end 可以修改AP 使其在重新调用va_start 之前不能被使用(把va_list指向NULL)。<br>    void va_end (va_list);    // 在gnulib 中定义</p>
+<pre><code>#define va_end(AP)
+</code></pre><h1 id="Linux内核代码Acenv-h中也定义了一组宏"><a href="#Linux内核代码Acenv-h中也定义了一组宏" class="headerlink" title="Linux内核代码Acenv.h中也定义了一组宏"></a>Linux内核代码Acenv.h中也定义了一组宏</h1><p><img src="/imgs/Summary/linux_args.png" alt="linuxstdargs"></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Summary/">Summary</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/C/">C</a>, <a class="tags-link" href="/tags/stdargs/">stdargs</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">wanyaoqi</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
