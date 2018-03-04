@@ -1,136 +1,559 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
-  <title>STL vector | Yaoqi&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
-    <meta name="author" content="wanyaoqi">
-  
-  
-    <meta name="description" content="vector概述   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素
-vector 定义123456789101112131415161718192021template&amp;lt;class _Ty, class _A = allocator&amp;lt;_Ty&amp;gt; &amp;gt;class vector &amp;#123;public:	typ">
-  
-  <meta name="description" content="vector概述   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素
-vector 定义123456789101112131415161718192021template&amp;lt;class _Ty, class _A = allocator&amp;lt;_Ty&amp;gt; &amp;gt;class vector &amp;#123;public:	typ">
-<meta property="og:type" content="article">
-<meta property="og:title" content="STL vector">
-<meta property="og:url" content="http://yoursite.com/2016/08/14/stl_vector/index.html">
-<meta property="og:site_name" content="Yaoqi's Blog">
-<meta property="og:description" content="vector概述   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素
-vector 定义123456789101112131415161718192021template&amp;lt;class _Ty, class _A = allocator&amp;lt;_Ty&amp;gt; &amp;gt;class vector &amp;#123;public:	typ">
-<meta property="og:updated_time" content="2016-08-13T18:55:40.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STL vector">
-<meta name="twitter:description" content="vector概述   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素
-vector 定义123456789101112131415161718192021template&amp;lt;class _Ty, class _A = allocator&amp;lt;_Ty&amp;gt; &amp;gt;class vector &amp;#123;public:	typ">
-  
-  
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<link rel="canonical" href=" { { site.url } }{ { page.url } }" />
+
+
+
+
+
+
+
+  <meta name="keywords" content="C++,STL,vector," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: 'UA-51515330-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+<meta name="google-site-verification" content="YAHxtBFjjhWkrycLOhOBuMHETNYVTtS3h4cPY4Wgo2A" />
+  <title> STL vector // Yaoqi's Blog </title>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header id="header">
-  <div class="title">
-    <h1><a href="/">Yaoqi&#39;s Blog</a></h1>
-    <p><a href="/">coding</a></p>
-  </div>
-  <nav class="nav">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/categories">Categories</a></li>
-      
-        <li><a href="/tags">Tags</a></li>
-      
-        <li><a href="/about">About</a></li>
-      
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</header>
-    <div class="content"><article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/08/14/stl_vector/">
-  <time datetime="2016-08-13T17:53:03.000Z">
-    2016-08-14
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title">STL vector</h1>
-  
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
 
-  </header>
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title" style="opacity: 1; top: 0px;box-shadow: 5px 1px 10px #888;" >Yaoqi's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
   
-  <div class="entry">
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
     
-      <h1 id="vector概述"><a href="#vector概述" class="headerlink" title="vector概述"></a>vector概述</h1><p>   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素</p>
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              STL vector
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-08-14
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/Summary/">Summary</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/08/14/stl_vector/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/14/stl_vector/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h1 id="vector概述"><a href="#vector概述" class="headerlink" title="vector概述"></a>vector概述</h1><p>   vector 数据安排上和数组非常相似，差别在于数组大小定义后不能在改变而vector内部会自行扩充空间容纳新元素</p>
 <h1 id="vector-定义"><a href="#vector-定义" class="headerlink" title="vector 定义"></a>vector 定义</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> _Ty, <span class="keyword">class</span> _A = allocator&lt;_Ty&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> <span class="built_in">vector</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;_Ty, _A&gt;     _Myt;</span><br><span class="line">	<span class="keyword">typedef</span> _A                  allocator_type;</span><br><span class="line">	<span class="keyword">typedef</span> _A::size_type       size_type;</span><br><span class="line">	<span class="keyword">typedef</span> _A::difference_type difference_type;</span><br><span class="line">	<span class="keyword">typedef</span> _A::pointer         _Tptr;</span><br><span class="line">	<span class="keyword">typedef</span> _A::const_pointer   _Ctptr;</span><br><span class="line">	<span class="keyword">typedef</span> _A::reference       reference;</span><br><span class="line">	<span class="keyword">typedef</span> _A::const_reference const_reference;</span><br><span class="line">	<span class="keyword">typedef</span> _A::value_type      value_type;</span><br><span class="line">	<span class="keyword">typedef</span> _Tptr               iterator;                <span class="comment">//vector迭代器就是本身的指针</span></span><br><span class="line">	<span class="keyword">typedef</span> _Ctptr              const_iterator;</span><br><span class="line">	</span><br><span class="line">protect:	</span><br><span class="line">	_A allocator;                <span class="comment">//空间配置器</span></span><br><span class="line">	iterator _First, _Last, _End;<span class="comment">//正在使用的头，正在使用的尾，空间的尾</span></span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">explicit vector(const _A&amp; _Al = _A())                 //简单的初始化成员变量</span><br><span class="line">	: allocator(_Al), _First(0), _Last(0), _End(0) &#123;&#125;</span><br><span class="line">	</span><br><span class="line">explicit vector(size_type _N, const _Ty&amp; _V = _Ty(),  //初始化_N个_TY变量</span><br><span class="line">	const _A&amp; _Al = _A())</span><br><span class="line">	: allocator(_Al)</span><br><span class="line">	&#123;_First = allocator.allocate(_N, (void *)0);</span><br><span class="line">	_Ufill(_First, _N, _V);                       //这个函数后面会有，就是从_F开始构造_N个_V                   </span><br><span class="line">	_Last = _First + _N;</span><br><span class="line">	_End = _Last; &#125;</span><br><span class="line">	</span><br><span class="line">vector(const _Myt&amp; _X)                           //拷贝构造函数</span><br><span class="line">	: allocator(_X.allocator)</span><br><span class="line">	&#123;_First = allocator.allocate(_X.size(), (void *)0);</span><br><span class="line">	_Last = _Ucopy(_X.begin(), _X.end(), _First);</span><br><span class="line">	_End = _Last; &#125;</span><br><span class="line">	</span><br><span class="line">typedef const_iterator _It;</span><br><span class="line">vector(_It _F, _It _L, const _A&amp; _Al = _A())     //构造vector并在开始位置插入_F到_L间的数据</span><br><span class="line">	: allocator(_Al), _First(0), _Last(0), _End(0)</span><br><span class="line">	&#123;insert(begin(), _F, _L); &#125;</span><br></pre></td></tr></table></figure>
 <h1 id="vector-元素操作"><a href="#vector-元素操作" class="headerlink" title="vector 元素操作"></a>vector 元素操作</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">void resize(size_type _N, const _Ty&amp; _X = _Ty())  //resize手动改变vector容量</span><br><span class="line">	&#123;if (size() &lt; _N)</span><br><span class="line">		insert(end(), _N - size(), _X);</span><br><span class="line">	else if (_N &lt; size())</span><br><span class="line">		erase(begin() + _N, end()); &#125;</span><br><span class="line">size_type size() const //已用大小</span><br><span class="line">	&#123;return (_First == 0 ? 0 : _Last - _First); &#125;</span><br><span class="line"></span><br><span class="line">bool empty() const</span><br><span class="line">	&#123;return (size() == 0); &#125;</span><br><span class="line"></span><br><span class="line">reference operator[](size_type _P)</span><br><span class="line">	&#123;return (*(begin() + _P)); &#125;</span><br><span class="line"></span><br><span class="line">void push_back(const _Ty&amp; _X)     //在容器的最后插入一个元素</span><br><span class="line">	&#123;insert(end(), _X); &#125;</span><br><span class="line">void pop_back()                   //删除最后一个元素</span><br><span class="line">	&#123;erase(end() - 1); &#125;</span><br><span class="line"></span><br><span class="line">iterator insert(iterator _P, const _Ty&amp; _X = _Ty()) //插入一个,返回的迭代器指向的是</span><br><span class="line">	&#123;size_type _O = _P - begin();</span><br><span class="line">	insert(_P, 1, _X);</span><br><span class="line">	return (begin() + _O); &#125;</span><br><span class="line">	</span><br><span class="line">void insert(iterator _P, size_type _M, const _Ty&amp; _X) //从_P开始插入_M个_X元素</span><br><span class="line">	&#123;if (_End - _Last &lt; _M)</span><br><span class="line">		&#123;size_type _N = size() + (_M &lt; size() ? size() : _M);</span><br><span class="line">		iterator _S = allocator.allocate(_N, (void *)0);</span><br><span class="line">		iterator _Q = _Ucopy(_First, _P, _S);</span><br><span class="line">		_Ufill(_Q, _M, _X);</span><br><span class="line">		_Ucopy(_P, _Last, _Q + _M);</span><br><span class="line">		_Destroy(_First, _Last);</span><br><span class="line">		allocator.deallocate(_First, _End - _First);</span><br><span class="line">		_End = _S + _N;</span><br><span class="line">		_Last = _S + size() + _M;</span><br><span class="line">		_First = _S; &#125;</span><br><span class="line">	else if (_Last - _P &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_P, _Last, _P + _M);</span><br><span class="line">		_Ufill(_Last, _M - (_Last - _P), _X);</span><br><span class="line">		fill(_P, _Last, _X);</span><br><span class="line">		_Last += _M; &#125;</span><br><span class="line">	else if (0 &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_Last - _M, _Last, _Last);</span><br><span class="line">		copy_backward(_P, _Last - _M, _Last);</span><br><span class="line">		fill(_P, _P + _M, _X);</span><br><span class="line">		_Last += _M; &#125;&#125;</span><br><span class="line">		</span><br><span class="line">void insert(iterator _P, _It _F, _It _L)</span><br><span class="line">	&#123;size_type _M = 0;</span><br><span class="line">	_Distance(_F, _L, _M);</span><br><span class="line">	if (_End - _Last &lt; _M)</span><br><span class="line">		&#123;size_type _N = size() + (_M &lt; size() ? size() : _M);</span><br><span class="line">		iterator _S = allocator.allocate(_N, (void *)0);</span><br><span class="line">		iterator _Q = _Ucopy(_First, _P, _S);</span><br><span class="line">		_Q = _Ucopy(_F, _L, _Q);</span><br><span class="line">		_Ucopy(_P, _Last, _Q);</span><br><span class="line">		_Destroy(_First, _Last);</span><br><span class="line">		allocator.deallocate(_First, _End - _First);</span><br><span class="line">		_End = _S + _N;</span><br><span class="line">		_Last = _S + size() + _M;</span><br><span class="line">		_First = _S; &#125;</span><br><span class="line">	else if (_Last - _P &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_P, _Last, _P + _M);</span><br><span class="line">		_Ucopy(_F + (_Last - _P), _L, _Last);</span><br><span class="line">		copy(_F, _F + (_Last - _P), _P);</span><br><span class="line">		_Last += _M; &#125;</span><br><span class="line">	else if (0 &lt; _M)</span><br><span class="line">		&#123;_Ucopy(_Last - _M, _Last, _Last);</span><br><span class="line">		copy_backward(_P, _Last - _M, _Last);</span><br><span class="line">		copy(_F, _L, _P);</span><br><span class="line">		_Last += _M; &#125;&#125;</span><br><span class="line">iterator erase(iterator _P)</span><br><span class="line">	&#123;copy(_P + 1, end(), _P);    // 从—_p+1开始往前挪</span><br><span class="line">	_Destroy(_Last - 1, _Last);</span><br><span class="line">	--_Last;</span><br><span class="line">	return (_P); &#125;</span><br><span class="line">iterator erase(iterator _F, iterator _L)</span><br><span class="line">	&#123;iterator _S = copy(_L, end(), _F);</span><br><span class="line">	_Destroy(_S, end());</span><br><span class="line">	_Last = _S;</span><br><span class="line">	return (_F); &#125;</span><br><span class="line">void clear()</span><br><span class="line">	&#123;erase(begin(), end()); &#125;</span><br><span class="line"></span><br><span class="line">protected:</span><br><span class="line">void _Destroy(iterator _F, iterator _L)</span><br><span class="line">	&#123;for (; _F != _L; ++_F)</span><br><span class="line">		allocator.destroy(_F); &#125;</span><br><span class="line">iterator _Ucopy(const_iterator _F, const_iterator _L,</span><br><span class="line">	iterator _P)</span><br><span class="line">	&#123;for (; _F != _L; ++_P, ++_F)</span><br><span class="line">		allocator.construct(_P, *_F);</span><br><span class="line">	return (_P); &#125;</span><br><span class="line">void _Ufill(iterator _F, size_type _N, const _Ty &amp;_X)</span><br><span class="line">	&#123;for (; 0 &lt; _N; --_N, ++_F)</span><br><span class="line">		allocator.construct(_F, _X); &#125;</span><br><span class="line">void _Xran() const</span><br><span class="line">	&#123;_THROW(out_of_range, "invalid vector&lt;T&gt; subscript"); &#125;</span><br><span class="line"></span><br><span class="line">size_type capacity() const //容量</span><br><span class="line">&#123;return (_First == 0 ? 0 : _End - _First); &#125;</span><br></pre></td></tr></table></figure>
-    
-  </div>
-  <footer>
-    
       
-  <div class="categories">
-    <a class="categories-link" href="/categories/Summary/">Summary</a>
-  </div>
+    </div>
+
+    <div class="post-footer">
+      
+        <div id="eof" class="print-invisible">
+          <hr class="eof">
+        </div>
+        <div class="copyright" style="clear:both;">
+           <p><span>本文标题:</span><a href="/2016/08/14/stl_vector/">STL vector</a></p>
+           <p><span>文章作者:</span><a href="/" title="访问 wanyaoqi 的个人博客">wanyaoqi</a></p>
+           <p><span>发布时间:</span>2016年8月14日 - 01时08分</p>
+           <p><span>最后更新:</span>2016年8月14日 - 02时08分</p>
+           <p><span>原始链接:</span><a href="/2016/08/14/stl_vector/" title="STL vector">http://yoursite.com/2016/08/14/stl_vector/</a></p>
+           <p><span>转载请保留以上信息。</span></p>
+        </div>
+      
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/"> #C++ </a>
+          
+            <a href="/tags/STL/"> #STL </a>
+          
+            <a href="/tags/vector/"> #vector </a>
+          
+        </div>
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/15/stl_list_1/">STL list ——part 1</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/10/stl_traits/">STL  traits</a>
+            
+          </div>
+        </div>
+      
 
       
-  <div class="tags">
-    <a class="tags-link" href="/tags/C/">C++</a>, <a class="tags-link" href="/tags/STL/">STL</a>, <a class="tags-link" href="/tags/vector/">vector</a>
+      
+    </div>
   </div>
+
+
 
     
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-</div>
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/08/14/stl_vector/"
+               data-title="STL vector" data-url="http://yoursite.com/2016/08/14/stl_vector/">
+          </div>
+        
+      </div>
+    
   </div>
-  <footer id="footer"><div class="copyright">
+<div id="disqus_thread"></div>
+
+        </div>
+      </div>
+
+
+      
   
-  &copy; 2018 <a href="/">wanyaoqi</a>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/avatar.jpg" alt="wanyaoqi" />
+          <p class="site-author-name">wanyaoqi</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element">
+            <a  class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vector概述"><span class="nav-number">1.</span> <span class="nav-text">vector概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-定义"><span class="nav-number">2.</span> <span class="nav-text">vector 定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-元素操作"><span class="nav-number">4.</span> <span class="nav-text">vector 元素操作</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright-page">
   
+  &copy; &nbsp;  2016 - 
+  2018
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">wanyaoqi</span>
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        </br>访问量<span id="busuanzi_value_site_pv"></span>，访客数<span id="busuanzi_value_site_uv"></span>人，阅读量<span id="busuanzi_value_page_pv"></span>次
+
 </div>
-<div class="theme-copyright">
-  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
-   | 
-  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-<script src="/js/scale.fix.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
 
 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-  (function($){
-    $('.fancybox').fancybox();
-  })(jQuery);
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js" id="motion.global"></script>
+
+
+
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
 </script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wyq2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+
+
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js"></script>
+
 
 </body>
 </html>
