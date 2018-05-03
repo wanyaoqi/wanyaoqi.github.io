@@ -1,4 +1,185 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>python装饰器 | Yaoqi's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">python装饰器</h1><a id="logo" href="/.">Yaoqi's Blog</a><p class="description">coding</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 主页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">python装饰器</h1><div class="post-meta">Nov 19, 2017<span> | </span><span class="category"><a href="/categories/python/">python</a></span></div><a class="disqus-comment-count" data-disqus-identifier="2017/11/19/python装饰器/" href="/2017/11/19/python装饰器/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器原理"><span class="toc-number">1.</span> <span class="toc-text">装饰器原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#functools-wraps"><span class="toc-number">2.</span> <span class="toc-text">functools.wraps</span></a></li></ol></div></div><div class="post-content"><blockquote>
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>python装饰器 | Yaoqi&#39;s Blog | coding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,装饰器">
+    <meta name="description" content="Python includes a more natural way of decorating a function by using an annotation on the function that is decorated.https://en.wikipedia.org/wiki/Decorator_pattern译：Python提供了一种更为自然的方式来装饰一个函数，这种方法通过在">
+<meta name="keywords" content="python,装饰器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python装饰器">
+<meta property="og:url" content="http://wanyaoqi.top/2017/11/19/python装饰器/index.html">
+<meta property="og:site_name" content="Yaoqi&#39;s Blog">
+<meta property="og:description" content="Python includes a more natural way of decorating a function by using an annotation on the function that is decorated.https://en.wikipedia.org/wiki/Decorator_pattern译：Python提供了一种更为自然的方式来装饰一个函数，这种方法通过在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-06T07:21:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python装饰器">
+<meta name="twitter:description" content="Python includes a more natural way of decorating a function by using an annotation on the function that is decorated.https://en.wikipedia.org/wiki/Decorator_pattern译：Python提供了一种更为自然的方式来装饰一个函数，这种方法通过在">
+    
+        <link rel="alternate" type="application/atom+xml" title="Yaoqi&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wanyaoqi</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python装饰器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python装饰器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-19T14:46:38.000Z" itemprop="datePublished" class="page-time">
+  2017-11-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#装饰器原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">装饰器原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#functools-wraps"><span class="post-toc-number">2.</span> <span class="post-toc-text">functools.wraps</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-python装饰器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python装饰器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-19 22:46:38" datetime="2017-11-19T14:46:38.000Z"  itemprop="datePublished">2017-11-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
 <p>Python includes a more natural way of decorating a function by using an annotation on the function that is decorated.<br><a href="https://en.wikipedia.org/wiki/Decorator_pattern" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Decorator_pattern</a><br>译：Python提供了一种更为自然的方式来装饰一个函数，这种方法通过在被装饰的函数前加一个注释来时实现。</p>
 </blockquote>
 <h2 id="装饰器原理"><a href="#装饰器原理" class="headerlink" title="装饰器原理"></a>装饰器原理</h2><p>看一个简单的例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(func)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">	    func()</span><br><span class="line">        <span class="keyword">print</span> func.__name__, <span class="string">"test wrapper"</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@test</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"start main"</span></span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line"><span class="keyword">print</span> main.__name__</span><br></pre></td></tr></table></figure></p>
@@ -16,29 +197,304 @@
 <h2 id="functools-wraps"><a href="#functools-wraps" class="headerlink" title="functools.wraps"></a>functools.wraps</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">	    func()</span><br><span class="line">        <span class="keyword">print</span> func.__name__, <span class="string">"test wrapper"</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
 <p>加上functools.wraps装饰器后的打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start main</span><br><span class="line">main test wrapper</span><br><span class="line">main</span><br></pre></td></tr></table></figure></p>
 <p>进入functools中看warps函数的实现其实可以看到<br>functools.wraps函数将wrapper函数的属性使用setattr设置为传入的func即main函数的属性</p>
-</div><div class="tags"><a href="/tags/python/">python</a><a href="/tags/装饰器/">装饰器</a></div><div class="post-nav"><a class="pre" href="/2018/03/18/rpm_spec/">RPM 使用与 SPEC 文件</a><a class="next" href="/2016/08/20/stl_deque_2/">STL deque——part 2</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'superqi';
-var disqus_identifier = '2017/11/19/python装饰器/';
-var disqus_title = 'python装饰器';
-var disqus_url = 'http://wanyaoqi.top/2017/11/19/python装饰器/';
-$('.btn_click_load').click(function() {
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-  $('.btn_click_load').css('display','none');
-});
-$.ajax({
-  url: 'https://disqus.com/next/config.json',
-  timeout: 3000,
-  type: 'GET',
-  success: (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    $('.btn_click_load').css('display','none');
-  })(),
-  error: function() {
-    $('.btn_click_load').css('display','block');
-  }
-});</script><script id="dsq-count-scr" src="//superqi.disqus.com/count.js" async></script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://wanyaoqi.top"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Summary/">Summary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/rpm/" style="font-size: 15px;">rpm</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/LongestCommonSubsequence/" style="font-size: 15px;">LongestCommonSubsequence</a> <a href="/tags/Dynamic-Programming/" style="font-size: 15px;">Dynamic_Programming</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/装饰器/" style="font-size: 15px;">装饰器</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/C-11/" style="font-size: 15px;">C++11</a> <a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/stdargs/" style="font-size: 15px;">stdargs</a> <a href="/tags/STL/" style="font-size: 15px;">STL</a> <a href="/tags/alloc/" style="font-size: 15px;">alloc</a> <a href="/tags/list/" style="font-size: 15px;">list</a> <a href="/tags/traits/" style="font-size: 15px;">traits</a> <a href="/tags/vector/" style="font-size: 15px;">vector</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/rpm_spec/">RPM 使用与 SPEC 文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/19/python装饰器/">python装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/stl_deque_2/">STL deque——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_deque_1/">STL deque——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_list_2/">STL list ——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/stl_list_1/">STL list ——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/14/stl_vector/">STL vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/stl_traits/">STL  traits</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/06/stdarg/">可变参函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/lcs/">最长公共子序列</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div><script type="text/javascript" src="//superqi.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Yaoqi's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2018-04-06T07:21:01.000Z" itemprop="dateUpdated">2018-04-06 15:21:01</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/11/19/python装饰器/" target="_blank" rel="external">http://wanyaoqi.top/2017/11/19/python装饰器/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://wanyaoqi.top">
+            <img src="/img/avatar.jpg" alt="wanyaoqi">
+            wanyaoqi
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/装饰器/">装饰器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2017/11/19/python装饰器/&title=《python装饰器》 — Yaoqi's Blog&pic=http://wanyaoqi.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wanyaoqi.top/2017/11/19/python装饰器/&title=《python装饰器》 — Yaoqi's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wanyaoqi.top/2017/11/19/python装饰器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python装饰器》 — Yaoqi's Blog&url=http://wanyaoqi.top/2017/11/19/python装饰器/&via=http://wanyaoqi.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wanyaoqi.top/2017/11/19/python装饰器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/18/rpm_spec/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">RPM 使用与 SPEC 文件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/20/stl_deque_2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">STL deque——part 2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wanyaoqi &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2017/11/19/python装饰器/&title=《python装饰器》 — Yaoqi's Blog&pic=http://wanyaoqi.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wanyaoqi.top/2017/11/19/python装饰器/&title=《python装饰器》 — Yaoqi's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wanyaoqi.top/2017/11/19/python装饰器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python装饰器》 — Yaoqi's Blog&url=http://wanyaoqi.top/2017/11/19/python装饰器/&via=http://wanyaoqi.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wanyaoqi.top/2017/11/19/python装饰器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://wanyaoqi.top/2017/11/19/python装饰器/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

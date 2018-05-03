@@ -1,4 +1,185 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>RPM 使用与 SPEC 文件 | Yaoqi's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">RPM 使用与 SPEC 文件</h1><a id="logo" href="/.">Yaoqi's Blog</a><p class="description">coding</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 主页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">RPM 使用与 SPEC 文件</h1><div class="post-meta">Mar 18, 2018<span> | </span><span class="category"><a href="/categories/linux/">linux</a></span></div><a class="disqus-comment-count" data-disqus-identifier="2018/03/18/rpm_spec/" href="/2018/03/18/rpm_spec/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-RPM-使用"><span class="toc-number">2.</span> <span class="toc-text">2. RPM 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1）安装"><span class="toc-number">2.1.</span> <span class="toc-text">1）安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2）卸载"><span class="toc-number">2.2.</span> <span class="toc-text">2）卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3）升级"><span class="toc-number">2.3.</span> <span class="toc-text">3）升级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4）查询"><span class="toc-number">2.4.</span> <span class="toc-text">4）查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5）校验"><span class="toc-number">2.5.</span> <span class="toc-text">5）校验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6）解压"><span class="toc-number">2.6.</span> <span class="toc-text">6）解压</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-spec文件"><span class="toc-number">3.</span> <span class="toc-text">3. spec文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）Preamle"><span class="toc-number">3.0.1.</span> <span class="toc-text">1）Preamle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）Prep"><span class="toc-number">3.0.2.</span> <span class="toc-text">2）Prep</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3）Build"><span class="toc-number">3.0.3.</span> <span class="toc-text">3）Build</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4）install"><span class="toc-number">3.0.4.</span> <span class="toc-text">4）install</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5）clean"><span class="toc-number">3.0.5.</span> <span class="toc-text">5）clean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6）files"><span class="toc-number">3.0.6.</span> <span class="toc-text">6）files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7）changlog"><span class="toc-number">3.0.7.</span> <span class="toc-text">7）changlog</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8）example-amp-summer"><span class="toc-number">3.0.8.</span> <span class="toc-text">8）example &amp; summer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-打包"><span class="toc-number">4.</span> <span class="toc-text">4. 打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#end"><span class="toc-number">5.</span> <span class="toc-text">end</span></a></li></ol></div></div><div class="post-content"><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>RPM全称是 Red Hat Package Manager（Red Hat包管理器）。</p>
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>RPM 使用与 SPEC 文件 | Yaoqi&#39;s Blog | coding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="linux,rpm">
+    <meta name="description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
+<meta name="keywords" content="linux,rpm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPM 使用与 SPEC 文件">
+<meta property="og:url" content="http://wanyaoqi.top/2018/03/18/rpm_spec/index.html">
+<meta property="og:site_name" content="Yaoqi&#39;s Blog">
+<meta property="og:description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-06T07:20:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RPM 使用与 SPEC 文件">
+<meta name="twitter:description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
+    
+        <link rel="alternate" type="application/atom+xml" title="Yaoqi&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">wanyaoqi</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RPM 使用与 SPEC 文件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">RPM 使用与 SPEC 文件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-18T08:22:20.000Z" itemprop="datePublished" class="page-time">
+  2018-03-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-RPM-使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. RPM 使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1）安装"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1）安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2）卸载"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2）卸载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3）升级"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3）升级</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4）查询"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4）查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5）校验"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">5）校验</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6）解压"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">6）解压</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-spec文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. spec文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1）Preamle"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">1）Preamle</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2）Prep"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">2）Prep</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3）Build"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">3）Build</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4）install"><span class="post-toc-number">3.0.4.</span> <span class="post-toc-text">4）install</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5）clean"><span class="post-toc-number">3.0.5.</span> <span class="post-toc-text">5）clean</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6）files"><span class="post-toc-number">3.0.6.</span> <span class="post-toc-text">6）files</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7）changlog"><span class="post-toc-number">3.0.7.</span> <span class="post-toc-text">7）changlog</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8）example-amp-summer"><span class="post-toc-number">3.0.8.</span> <span class="post-toc-text">8）example &amp; summer</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-打包"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 打包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#end"><span class="post-toc-number">5.</span> <span class="post-toc-text">end</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-rpm_spec"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RPM 使用与 SPEC 文件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-18 16:22:20" datetime="2018-03-18T08:22:20.000Z"  itemprop="datePublished">2018-03-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>RPM全称是 Red Hat Package Manager（Red Hat包管理器）。</p>
 <p>RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU <em>GPL</em>、<em>GPL</em>）。</p>
 <p>RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@serverwyq wyq]# rpm --help</span><br></pre></td></tr></table></figure>
@@ -82,29 +263,297 @@
 <p><a href="https://www.zhukun.net/archives/7263" target="_blank" rel="noopener">https://www.zhukun.net/archives/7263</a></p>
 <hr>
 <p>昔我往矣，杨柳依依；今我来思，雨雪霏霏</p>
-</div><div class="tags"><a href="/tags/linux/">linux</a><a href="/tags/rpm/">rpm</a></div><div class="post-nav"><a class="next" href="/2017/11/19/python装饰器/">python装饰器</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'superqi';
-var disqus_identifier = '2018/03/18/rpm_spec/';
-var disqus_title = 'RPM 使用与 SPEC 文件';
-var disqus_url = 'http://wanyaoqi.top/2018/03/18/rpm_spec/';
-$('.btn_click_load').click(function() {
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-  $('.btn_click_load').css('display','none');
-});
-$.ajax({
-  url: 'https://disqus.com/next/config.json',
-  timeout: 3000,
-  type: 'GET',
-  success: (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    $('.btn_click_load').css('display','none');
-  })(),
-  error: function() {
-    $('.btn_click_load').css('display','block');
-  }
-});</script><script id="dsq-count-scr" src="//superqi.disqus.com/count.js" async></script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://wanyaoqi.top"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Summary/">Summary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/rpm/" style="font-size: 15px;">rpm</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/LongestCommonSubsequence/" style="font-size: 15px;">LongestCommonSubsequence</a> <a href="/tags/Dynamic-Programming/" style="font-size: 15px;">Dynamic_Programming</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/装饰器/" style="font-size: 15px;">装饰器</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/C-11/" style="font-size: 15px;">C++11</a> <a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/stdargs/" style="font-size: 15px;">stdargs</a> <a href="/tags/STL/" style="font-size: 15px;">STL</a> <a href="/tags/alloc/" style="font-size: 15px;">alloc</a> <a href="/tags/list/" style="font-size: 15px;">list</a> <a href="/tags/traits/" style="font-size: 15px;">traits</a> <a href="/tags/vector/" style="font-size: 15px;">vector</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/rpm_spec/">RPM 使用与 SPEC 文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/19/python装饰器/">python装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/stl_deque_2/">STL deque——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_deque_1/">STL deque——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_list_2/">STL list ——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/stl_list_1/">STL list ——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/14/stl_vector/">STL vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/stl_traits/">STL  traits</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/06/stdarg/">可变参函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/lcs/">最长公共子序列</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div><script type="text/javascript" src="//superqi.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Yaoqi's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2018-04-06T07:20:03.000Z" itemprop="dateUpdated">2018-04-06 15:20:03</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/03/18/rpm_spec/" target="_blank" rel="external">http://wanyaoqi.top/2018/03/18/rpm_spec/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://wanyaoqi.top">
+            <img src="/img/avatar.jpg" alt="wanyaoqi">
+            wanyaoqi
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rpm/">rpm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2018/03/18/rpm_spec/&title=《RPM 使用与 SPEC 文件》 — Yaoqi's Blog&pic=http://wanyaoqi.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wanyaoqi.top/2018/03/18/rpm_spec/&title=《RPM 使用与 SPEC 文件》 — Yaoqi's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wanyaoqi.top/2018/03/18/rpm_spec/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RPM 使用与 SPEC 文件》 — Yaoqi's Blog&url=http://wanyaoqi.top/2018/03/18/rpm_spec/&via=http://wanyaoqi.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wanyaoqi.top/2018/03/18/rpm_spec/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/19/python装饰器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python装饰器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>wanyaoqi &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2018/03/18/rpm_spec/&title=《RPM 使用与 SPEC 文件》 — Yaoqi's Blog&pic=http://wanyaoqi.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wanyaoqi.top/2018/03/18/rpm_spec/&title=《RPM 使用与 SPEC 文件》 — Yaoqi's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wanyaoqi.top/2018/03/18/rpm_spec/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RPM 使用与 SPEC 文件》 — Yaoqi's Blog&url=http://wanyaoqi.top/2018/03/18/rpm_spec/&via=http://wanyaoqi.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wanyaoqi.top/2018/03/18/rpm_spec/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://wanyaoqi.top/2018/03/18/rpm_spec/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
