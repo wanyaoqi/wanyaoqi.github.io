@@ -55,10 +55,10 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+    <div class="brand-wrap" style="background-image:url(/)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
+          <img src="/">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">wanyaoqi</h5>
@@ -187,13 +187,7 @@
 <h2 id="refill"><a href="#refill" class="headerlink" title="refill"></a>refill</h2><p>STL规定refill为内存不足的那块填充20块相应大小的内存块，但是可能出现内存不足的情况所有申请到的不一定是20个内存快(可能只有1个)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">refill</span><span class="params">(<span class="keyword">size_t</span> n)</span> <span class="comment">//</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> nobjs = <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">char</span> *chunk = chunk_alloc(n,nobjs);<span class="comment">// 申请内存块</span></span><br><span class="line">	obj *<span class="keyword">volatile</span>* my_free_list;</span><br><span class="line">	obj *result;</span><br><span class="line">	obj *current_obj, *next_obj;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">1</span>==nobjs) <span class="keyword">return</span> chunk;</span><br><span class="line">	my_free_list=free_list + FREELIST_INDEX(n);</span><br><span class="line">	result=(obj *)chunk;</span><br><span class="line">	*my_free_list=next_obj=(obj *)(chunk+n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;;i++)                    <span class="comment">//将剩余的块连接到空闲链表</span></span><br><span class="line">	&#123;</span><br><span class="line">		current_obj = next_obj;</span><br><span class="line">		next_obj=(obj *)((<span class="keyword">char</span> *)next_obj + n);</span><br><span class="line">		<span class="keyword">if</span>(nobjs <span class="number">-1</span>==i)</span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			current_obj-&gt;free_list_link=next_obj;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;                <span class="comment">//将第一个内存块返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="chunk-alloc"><a href="#chunk-alloc" class="headerlink" title="chunk_alloc"></a>chunk_alloc</h2><p>chunk_alloc函数分配内存块给free_list,他和refill是维持这个结构的核心。处理了多种内存不足的情况<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">char</span> * <span class="title">chunk_alloc</span><span class="params">(<span class="keyword">size_t</span> size,<span class="keyword">int</span> &amp;nobjs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *result = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">size_t</span> total_bytes = size*nobjs;</span><br><span class="line">	<span class="keyword">size_t</span> bytes_left = end_free - start_free;</span><br><span class="line">	<span class="keyword">if</span>(bytes_left &gt;= total_bytes)<span class="comment">//当剩余内存完全足够</span></span><br><span class="line">	&#123;</span><br><span class="line">		result = start_free;</span><br><span class="line">		start_free += total_bytes;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(bytes_left &gt;= size)<span class="comment">//内存不够分配20块但能分配一块或一块以上</span></span><br><span class="line">	&#123;</span><br><span class="line">		nobjs = bytes_left/size;</span><br><span class="line">		total_bytes = size*nobjs;</span><br><span class="line">		result = start_free;</span><br><span class="line">		start_free += total_bytes;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="comment">//剩余内存一块都不能分配</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">size_t</span> bytes_to_get=<span class="number">2</span> *total_bytes+ROUND_UP(heap_size&gt;&gt;<span class="number">4</span>);</span><br><span class="line">		<span class="comment">//先给剩余的内存找到合适的free list(先处理start_free——end_free的那段内存)</span></span><br><span class="line">		<span class="keyword">if</span>(bytes_left&gt;<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			obj * <span class="keyword">volatile</span> *my_free_list=free_list +FREELIST_INDEX(bytes_left);</span><br><span class="line">			((obj *)start_free)-&gt;free_list_link= *my_free_list;</span><br><span class="line">			*my_free_list=(obj *)start_free;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//向堆空间申请内存</span></span><br><span class="line">		start_free=(<span class="keyword">char</span> *)<span class="built_in">malloc</span>(bytes_to_get);</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">0</span>==start_free)<span class="comment">//堆空间不足时</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			obj *<span class="keyword">volatile</span>* my_free_list,*p;</span><br><span class="line">			<span class="comment">//遍历比他大的free list查看是否还剩有未使用内存</span></span><br><span class="line">			<span class="keyword">for</span>(i=size;i&lt;__MAX_BYTES;i+=__ALIGN)</span><br><span class="line">			&#123;</span><br><span class="line">				my_free_list = free_list +FREELIST_INDEX(i);</span><br><span class="line">				p = *my_free_list;</span><br><span class="line">				<span class="keyword">if</span>(<span class="number">0</span>!=p)<span class="comment">//</span></span><br><span class="line">				&#123;</span><br><span class="line">					*my_free_list = p -&gt;free_list_link;</span><br><span class="line">					start _free = (<span class="keyword">char</span> *)p;</span><br><span class="line">					end_free = (<span class="keyword">char</span> *)p;</span><br><span class="line">					<span class="comment">//由于nobjs 传的是引用所以递归调用修正nobjs</span></span><br><span class="line">					<span class="keyword">return</span> (chunk_alloc(size,nobjs));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			end_free=<span class="number">0</span>;</span><br><span class="line">			<span class="comment">//调用一级空间配置器,看看malloc_handler能否挤出内存...</span></span><br><span class="line">			start_free =(<span class="keyword">char</span> *)malloc_alloc::allocate(bytes_to_get);</span><br><span class="line">		&#125;</span><br><span class="line">		heap_size +=bytes_to_get;</span><br><span class="line">		end_free =start_free +bytes_to_get;			</span><br><span class="line">		<span class="keyword">return</span> (chunk_alloc(size,nobjs));<span class="comment">//同上</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(<span class="keyword">void</span> *p,<span class="keyword">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	obj * <span class="keyword">volatile</span> * my_free_list = <span class="literal">NULL</span>;</span><br><span class="line">	obj *q = (obj*)p;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; (<span class="keyword">size_t</span>) __MAX_BYTES)</span><br><span class="line">	&#123;</span><br><span class="line">		malloc_alloc::deallocate(p,n);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	my_free_list = free_list + FREELIST_INDEX(n);</span><br><span class="line">	q-&gt;free_list_link = *my_free_list;</span><br><span class="line">	*my_free_list = q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h1><p>如图：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/imgs/Summary/stl_alloc.png" alt="二级空间配置器内存结构" title="">
-                </div>
-                <div class="image-caption">二级空间配置器内存结构</div>
-            </figure><br>参考资料——STL源码剖析</p>
+<h1 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h1><p>如图：<br><img src="/imgs/Summary/stl_alloc.png" alt="二级空间配置器内存结构"><br>参考资料——STL源码剖析</p>
 
         </div>
 
@@ -213,17 +207,13 @@
     
     <footer>
         <a href="http://wanyaoqi.top">
-            <img src="/img/avatar.jpg" alt="wanyaoqi">
+            <img src="/" alt="wanyaoqi">
             wanyaoqi
         </a>
     </footer>
 </blockquote>
 
         
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
 
 
         <div class="post-footer">
@@ -238,7 +228,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2016/06/12/stl_alloc/&title=《STL空间配置器》 — Yaoqi's Blog&pic=http://wanyaoqi.top/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2016/06/12/stl_alloc/&title=《STL空间配置器》 — Yaoqi's Blog&pic=http://wanyaoqi.topundefined" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -308,6 +298,15 @@
     
 
 
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
 
 
 
@@ -324,32 +323,6 @@
 
 
 </article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
-                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
 
 
 
@@ -394,7 +367,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2016/06/12/stl_alloc/&title=《STL空间配置器》 — Yaoqi's Blog&pic=http://wanyaoqi.top/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wanyaoqi.top/2016/06/12/stl_alloc/&title=《STL空间配置器》 — Yaoqi's Blog&pic=http://wanyaoqi.topundefined" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -438,7 +411,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
