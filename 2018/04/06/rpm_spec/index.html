@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <title>RPM 使用与 SPEC 文件 | ^_^</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
+<meta name="keywords" content="linux,rpm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPM 使用与 SPEC 文件">
+<meta property="og:url" content="http://wanyaoqi.top/2018/04/06/rpm_spec/index.html">
+<meta property="og:site_name" content="^_^">
+<meta property="og:description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-06T07:20:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RPM 使用与 SPEC 文件">
+<meta name="twitter:description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
+  
+    <link rel="alternate" href="/atom.xml" title="^_^" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">^_^</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">在你的立足之地深挖下去，就会有泉水涌出！别管蒙昧者们叫嚷：“下面是地狱”</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wanyaoqi.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-rpm_spec" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/06/rpm_spec/" class="article-date">
+  <time datetime="2018-04-06T07:20:03.000Z" itemprop="datePublished">2018-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RPM 使用与 SPEC 文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>RPM全称是 Red Hat Package Manager（Red Hat包管理器）。</p>
+<p>RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU <em>GPL</em>、<em>GPL</em>）。</p>
+<p>RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@serverwyq wyq]# rpm --help</span><br></pre></td></tr></table></figure>
+<p>​   通常，供Linux使用的源代码包还提供一个名为 <strong>{ 软件名称 }.spec</strong> 的文件，即spec文件。如果提供spec文件，则该源代码还可以直接编译成RPM包。 </p>
+<h2 id="2-RPM-使用"><a href="#2-RPM-使用" class="headerlink" title="2. RPM 使用"></a>2. RPM 使用</h2><h3 id="1）安装"><a href="#1）安装" class="headerlink" title="1）安装"></a>1）安装</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-i|--install&#125; [install-options] PACKAGE_FILE ...</span><br></pre></td></tr></table></figure>
+<p>​   通过rpm -ivh可以把rpm软件包安装到系统中，使用的较多的是-ivh参数 ，使用该选项可以解决大部分rpm软件包的安装，至于详细的参数说明可用查看rpm的man 文档。</p>
+<h3 id="2）卸载"><a href="#2）卸载" class="headerlink" title="2）卸载"></a>2）卸载</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-e|--erase&#125; [--allmatches] [--nodeps] [--noscripts]</span><br><span class="line">           [--notriggers] [--test] PACKAGE_NAME ...</span><br><span class="line">           </span><br><span class="line">注：</span><br><span class="line">--nodeps  Don’t do a dependency check before installing or upgrading a package.(不检查依赖)</span><br><span class="line">--force   Same as using --replacepkgs, --replacefiles, and --oldpackage.(相当于同时使用了这三个参数)</span><br><span class="line"></span><br><span class="line">--replacepkgs</span><br><span class="line">      Install the packages even if some of them are already installed on this system.</span><br><span class="line">--replacefiles</span><br><span class="line">      Install the packages even if they replace files from other, already installed, packages.</span><br></pre></td></tr></table></figure>
+<p>​   如果某个软件包你再也不想使用了，那就用以上这个命令彻底的把你指定的rpm软件包清除掉把。</p>
+<h3 id="3）升级"><a href="#3）升级" class="headerlink" title="3）升级"></a>3）升级</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-U|--upgrade&#125; [install-options] PACKAGE_FILE ...</span><br></pre></td></tr></table></figure>
+<p>​   由于开源软件更新速度快，用户当然要使用最新版本的软件包，此时最合适的就是rpm升级功能，当然最理想的参数选项就是-Uvh。</p>
+<h3 id="4）查询"><a href="#4）查询" class="headerlink" title="4）查询"></a>4）查询</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-q|--query&#125; [select-options] [query-options]</span><br></pre></td></tr></table></figure>
+<p>​   查看软件包的版本、依赖关系等软件包的详细说明都要用到这个选项，常用的有：</p>
+<p> <strong>rpm -qa</strong> 是查询机器上所有已经安装的包，加上grep可以得到你想要的包名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@serverwyq wyq]# rpm -qa | grep kernel</span><br><span class="line">kernel-...</span><br><span class="line">kernel-devel-...</span><br><span class="line">kernel-headers-...</span><br></pre></td></tr></table></figure>
+<p><strong>rpm -qi</strong>   + 包名  == 查看包的详细信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@serverwyq wyq]# rpm -qi kernel-3.10.0-123.el7.x86_64                                                                                                                                </span><br><span class="line">Name        : kernel</span><br><span class="line">Install Date: 2014年07月09日 星期三 13时57分38秒</span><br><span class="line">......</span><br><span class="line">URL         : http://www.kernel.org/</span><br><span class="line">Summary     : The Linux kernel</span><br></pre></td></tr></table></figure>
+<p><strong>rpm -ql</strong> + 包名 == 查看包内文件的安装路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@serverwyq wyq]# rpm -ql kernel-3.10.0-123.el7.x86_64 |more                                                                                                                            </span><br><span class="line">/boot/.vmlinuz-3.10.0-123.el7.x86_64.hmac</span><br><span class="line">/boot/System.map-3.10.0-123.el7.x86_64</span><br><span class="line">/boot/config-3.10.0-123.el7.x86_64</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<h3 id="5）校验"><a href="#5）校验" class="headerlink" title="5）校验"></a>5）校验</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-V|--verify&#125; [select-options] [verify-options]</span><br></pre></td></tr></table></figure>
+<p>​   一般我们可用通过该命令来验证已安装软件包</p>
+<h3 id="6）解压"><a href="#6）解压" class="headerlink" title="6）解压"></a>6）解压</h3><p>​   RPM包是使用cpio格式打包的，因此需要先转成cpio然后解压。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio some.rpm | cpio -div</span><br></pre></td></tr></table></figure>
+<h2 id="3-spec文件"><a href="#3-spec文件" class="headerlink" title="3. spec文件"></a>3. spec文件</h2><p>​   其实，制作RPM软件包并不是一件复杂的工作，其中的关键在于编写SPEC软件包描述文件。</p>
+<p>​   这个文件中包含了软件包的诸多信息，如软件包的名字、版本、类别、说明摘要、创建时要执行什么指令、安装时要执行什么操作、以及软件包所要包含的文件列表等等。</p>
+<p>​   像前面rmp -qi所看的信息都是制作rpm包时在spec文件中指定的。</p>
+<h4 id="1）Preamle"><a href="#1）Preamle" class="headerlink" title="1）Preamle"></a>1）Preamle</h4><p>​   序言包含用户请求包的信息时所显示的内容。它可以包含包的功能描述、包的软件版本、版权信息和所属的包组等。Summary 是一行关于该软件包的描述，Name 是该软件包的基名，Version 是该软件的版本号，                                 Release 是 RPM 本身的版本号，如果修复了 spec 文件中的一个错误并发布了该软件同一版本的新 RPM，就应该增加发行版号。License 应该给出一些许可说明，Group 标识软件类型。那些试图帮助人们管理 RPM 的程序通常按照组列出 RPM。您可以在/usr/share/doc/rpm-x.x.x/GROUPS 文件看到一个 Red Hat 使用的组列表。但是您还可以使用那些组名以外的名称。Source0、Source1等等给这些源文件命名（通常为 tar.gz 文件）。%{name} 和 %{version} 是 RPM 宏，它们扩展成为头中定义的 rpm 名称和版本。</p>
+<p>​   要注意的是，<strong>不要在 Source 语句中包含任何路径</strong>。缺省情况下，RPM 会在 /usr/src/redhat/SOURCES 中（对于Redhat6 系统，则是在 /root/rpmbuild/SOURCES 目录中）寻找文件，请将您的源文件复制或链接到那里。（要使 spec 文件尽量可移植的话，应当尽量避免嵌入自己开发机器上的假想路径。其他开发人员就可以指示 RPM 在别的目录下查找源文件，而不用修改您的 spec 文件。）</p>
+<p>​   接下来的部分从 %description 行开始。您应该在这里提供该软件更多的描述，这样任何人使用 rpm -qi 查询您的软件包时都可以看到它。您可以解释这个软件包做什么，描述任何警告或附加的配置指令，等等。</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Summary: Utilities for managing accounts and shadow password files.</span><br><span class="line">Name: shadow-utils</span><br><span class="line">Version: 4.0.17</span><br><span class="line">Release: 14<span class="comment">%&#123;?dist&#125;</span></span><br><span class="line"> </span><br><span class="line">Source0: <span class="comment">%&#123;name&#125;-%&#123;version&#125;.tar.bz2</span></span><br><span class="line">Source1: shadow-4.0.17-login.defs</span><br><span class="line">Source2: shadow-970616.useradd</span><br><span class="line"> </span><br><span class="line">Patch0: shadow-4.0.17-redhat.patch</span><br><span class="line">Patch1: shadow-4.0.3-noinst.patch</span><br><span class="line">Patch2: shadow-4.0.11.1-vipw.patch</span><br><span class="line"> </span><br><span class="line">Packager:amoblin  </span><br><span class="line">Group: Application  </span><br><span class="line">URL: http://www.ossxp.com </span><br><span class="line">License: GPL</span><br><span class="line">BuildRequires: autoconf, automake, libtool, gettext-devel</span><br><span class="line">BuildRequires: libselinux-devel &gt;= 1.25.2-1</span><br><span class="line">BuildRequires: audit-libs-devel &gt;= 1.0.10</span><br><span class="line">Requires: libselinux &gt;= 1.25.2-1</span><br><span class="line"> </span><br><span class="line"><span class="comment">%description</span></span><br><span class="line">This package includes the necessary programs for XXX.</span><br></pre></td></tr></table></figure>
+<h4 id="2）Prep"><a href="#2）Prep" class="headerlink" title="2）Prep"></a>2）Prep</h4><p>Prep 部分进行实际的打包准备工作，它是使用节前缀%prep表示的。主要功能有：<br>​   1. 将文件 (SOURCES/) 解压到构建目录 (BUILD/)<br>​   2. 应用Patch（打补丁） (SOURCES/ =&gt; BUILD/)<br>​   3. 描述 “rm -rf $RPM_BUILD_ROOT”<br>​   4. 描述或编辑本部分用到的命令到 PreReq:<br>​   5. 通过 “-b .XXX” 描述补丁备份</p>
+<p>%setup</p>
+<p>-n newdir #将压缩的软件源程序在newdir目录下解开。<br>-c #在解开源程序之前先创建目录。<br>-b num #在包含多个源程序时，将第num个源程序解压缩。<br>-T #不使用缺省的解压缩操作。</p>
+<p>通常patch补丁都会一起放到SOURCES目录下。一般参数为<br>%patchN -p1 #应用前面定义的第N个patch，-p1是忽略patch的第一层目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%setup -q   #最常用</span><br><span class="line">%setup -q -n newdir    #将source解压至newdir</span><br><span class="line">%setup -T -b 0    #解开第一个源程序文件</span><br><span class="line">%setup -c -n newdir    #创建目录newdir，并在此目录之下解开源程序</span><br><span class="line"> </span><br><span class="line">%patch1 -p1   #应用第1个补丁</span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%prep</span></span><br><span class="line"><span class="comment">%setup -q</span></span><br><span class="line"><span class="comment">%patch0 -p1</span></span><br><span class="line"><span class="comment">%patch1 -p1</span></span><br><span class="line"><span class="comment">%patch2 -p1</span></span><br><span class="line"><span class="comment">%patch3 -p1</span></span><br><span class="line"> </span><br><span class="line">cp <span class="comment">%&#123;SOURCE3&#125; lib/nscd.c</span></span><br><span class="line">rm po/*.gmo</span><br><span class="line">rm po/stamp-po</span><br></pre></td></tr></table></figure>
+<h4 id="3）Build"><a href="#3）Build" class="headerlink" title="3）Build"></a>3）Build</h4><p>主要用于编译源码，它是使用节前缀%build表示的。一般用于configure及make的过程。</p>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%build</span><br><span class="line">%configure --with-selinux  --without-libpam --disable-shared --with-libaudit</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h4 id="4）install"><a href="#4）install" class="headerlink" title="4）install"></a>4）install</h4><p>这一节主要用于完成实际安装软件必须执行的命令，它是使用节前缀%install表示的。这一节一般是由make install指令构成，但是有时也会包含cp、mv、install等指令。</p>
+<p>这一节还能指定在用户安装的系统上，包安装时运行的脚本。这样的脚本称为安装（卸载）脚本。它可以指定包安装前、包安装后、包除去前、包除去后的系统必须运行的外壳程序段。在用户安装的系统上，为了验证一个包是否已经成功安装的验证脚本也可由这一节指定。</p>
+<p>eg:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%install</span></span><br><span class="line">rm -rf <span class="formula">$RPM_BUILD_ROOT</span></span><br><span class="line"><span class="formula">make install DESTDIR=$</span>RPM_BUILD_ROOT gnulocaledir=<span class="formula">$RPM_BUILD_ROOT/%&#123;_datadir&#125;/locale MKINSTALLDIRS=`pwd`/mkinstalldirs</span></span><br><span class="line"><span class="formula">install -d -m 755 $</span>RPM_BUILD_ROOT/etc/default</span><br><span class="line">install -c -m 0644 <span class="comment">%&#123;SOURCE1&#125; $RPM_BUILD_ROOT/etc/login.defs</span></span><br><span class="line">install -c -m 0600 <span class="comment">%&#123;SOURCE2&#125; $RPM_BUILD_ROOT/etc/default/useradd</span></span><br><span class="line"> </span><br><span class="line">ln -s useradd <span class="formula">$RPM_BUILD_ROOT%&#123;_sbindir&#125;/adduser</span></span><br><span class="line"><span class="formula">ln -s %&#123;_mandir&#125;/man8/useradd.8 $</span>RPM_BUILD_ROOT/<span class="comment">%&#123;_mandir&#125;/man8/adduser.8</span></span><br><span class="line">for subdir in <span class="formula">$RPM_BUILD_ROOT/%&#123;_mandir&#125;/&#123;??,??_??,??_??.*&#125;/man* ; do</span></span><br><span class="line"><span class="formula">        test -d $</span>subdir &amp;&amp; test -e <span class="formula">$subdir/useradd.8 &amp;&amp; echo ".so man8/useradd.8" &gt; $</span>subdir/adduser.8</span><br><span class="line">done</span><br><span class="line"> </span><br><span class="line"># Remove binaries we don't use.</span><br><span class="line">rm <span class="formula">$RPM_BUILD_ROOT/%&#123;_bindir&#125;/chfn</span></span><br><span class="line"><span class="formula">rm $</span>RPM_BUILD_ROOT/<span class="comment">%&#123;_bindir&#125;/chsh</span></span><br></pre></td></tr></table></figure>
+<h4 id="5）clean"><a href="#5）clean" class="headerlink" title="5）clean"></a>5）clean</h4><p>这一节所描述的内容表示在完成包建立的工作之后，自动执行此节下的脚本进行附加的清除工作，它是使用节前缀%clean表示的。一般而言，这一节的内容是简单地使用rm -rf $RPM_BUILD_ROOT命令，不需要指定此节的其它内容。</p>
+<p>eg:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%clean</span></span><br><span class="line">rm -rf <span class="formula">$RPM_BUILD_ROOT</span></span><br></pre></td></tr></table></figure>
+<h4 id="6）files"><a href="#6）files" class="headerlink" title="6）files"></a>6）files</h4><p>这一节指定构成包的文件的列表，它是使用节前缀%files表示的。此外，它还包含一系列宏控制安装后的文件属性和配置信息。</p>
+<p>%files 列出应该捆绑到 RPM 中的文件，并能够可选地设置许可权和其它信息。在 %files 中，您可以使用 %defattr 来定义缺省的许可权、所有者和组；%defattr(-,root,root) 会安装 root 用户拥有的所有文件，使用当 RPM 从构建系统捆绑它们时它们所具有的任何许可权。</p>
+<p>可以用 %attr(permissions,user,group) 覆盖个别文件的所有者和许可权。可以在 %files 中用一行包括多个文件。可以通过在行中添加 %doc 或 %config 来标记文件。%doc 告诉 RPM 这是一个文档文件，因此如果用户安装软件包时使用 –excludedocs，将不安装该文件。您也可以在 %doc 下不带路径列出文件名，RPM 会在构建目录下查找这些文件并在 RPM 文件中包括它们，并把它们安装到 /usr/share/doc/%{name}-%{version}。以 %doc 的形式包括 README 和 ChangeLog 这样的文件是个好主意。</p>
+<p>%config 告诉 RPM 这是一个配置文件。在升级时，RPM 将会试图避免用 RPM 打包的缺省配置文件覆盖用户仔细修改过的配置。</p>
+<p>注意：如果在 %files 下列出一个目录名，RPM 会包括该目录下的所有文件。通常这不是您想要的，特别对于 /bin 这样的目录。</p>
+<p>eg:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%files</span></span><br><span class="line"><span class="comment">%defattr(-,root,root)      #指定默认权限</span></span><br><span class="line"><span class="comment">%doc NEWS doc/HOWTO README</span></span><br><span class="line"><span class="comment">%dir /etc/default</span></span><br><span class="line"><span class="comment">%attr(0644,root,root)   %config(noreplace) /etc/login.defs</span></span><br><span class="line"><span class="comment">%attr(0600,root,root)   %config /etc/default/useradd</span></span><br><span class="line"><span class="comment">%&#123;_bindir&#125;/sg</span></span><br><span class="line"><span class="comment">%&#123;_bindir&#125;/chage</span></span><br><span class="line"><span class="comment">%attr(0750,root,root)   %&#123;_sbindir&#125;/user*</span></span><br><span class="line"><span class="comment">%attr(0750,root,root)   %&#123;_sbindir&#125;/group*</span></span><br><span class="line"><span class="comment">%&#123;_sbindir&#125;/grpck</span></span><br><span class="line"><span class="comment">%&#123;_sbindir&#125;/pwck</span></span><br><span class="line"><span class="comment">%&#123;_sbindir&#125;/*conv</span></span><br></pre></td></tr></table></figure>
+<h4 id="7）changlog"><a href="#7）changlog" class="headerlink" title="7）changlog"></a>7）changlog</h4><p>主要描述软件的开发记录，它是使用节前缀%changlog表示的。对于包的维护极有好处</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%changlog</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="8）example-amp-summer"><a href="#8）example-amp-summer" class="headerlink" title="8）example &amp; summer"></a>8）example &amp; summer</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Summary:    hello world rpm package  </span><br><span class="line">Name:       hello  </span><br><span class="line">Version:    0.1  </span><br><span class="line">Release:    1  </span><br><span class="line"> </span><br><span class="line">License:    GPL</span><br><span class="line">Source:    <span class="comment">%&#123;name&#125;-%&#123;version&#125;.tar.gz</span></span><br><span class="line">Packager:   amoblin  </span><br><span class="line">Group:      Application  </span><br><span class="line">URL:        http://www.ossxp.com    </span><br><span class="line"> </span><br><span class="line"><span class="comment">%description</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%prep  </span></span><br><span class="line"><span class="comment">%setup -q    </span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%build  </span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%install</span></span><br><span class="line">mkdir -p <span class="formula">$RPM_BUILD_ROOT/%&#123;_bindir&#125;</span></span><br><span class="line"><span class="formula">gcc -o hello hello.c</span></span><br><span class="line"><span class="formula">install -c -m 755 hello $</span>RPM_BUILD_ROOT/<span class="comment">%&#123;_bindir&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%files  </span></span><br><span class="line"><span class="comment">%&#123;_bindir&#125;/hello</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%clean</span></span><br><span class="line">rm -rf <span class="formula">$RPM_BUILD_ROOT</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">（1）Preamle</span><br><span class="line">Summary：</span><br><span class="line">        用一句话概括该软件包尽量多的信息。</span><br><span class="line">Name：</span><br><span class="line">        软件包的名字，最终RPM软件包是用该名字与版本号，释出号及体系号来命名软件包的。</span><br><span class="line">Version：</span><br><span class="line">        软件版本号。仅当软件包比以前有较大改变时才增加版本号。</span><br><span class="line">Release：</span><br><span class="line">        软件包释出号。一般我们对该软件包做了一些小的补丁的时候就应该把释出号加1。</span><br><span class="line">Vendor：</span><br><span class="line">        软件开发者的名字。</span><br><span class="line">Copyright：</span><br><span class="line">        软件包所采用的版权规则。具体有：GPL（自由软件），BSD，MIT，Public Domain（公共域），               Distributable（贡献），commercial（商业），Share（共享）等，一般的开发都写GPL。</span><br><span class="line">Group： </span><br><span class="line">        软件包所属类别，具体类别在/usr/share/doc/rpm-x.x.x/GROUPS这里可以看到</span><br><span class="line">Source：</span><br><span class="line">        源程序软件包的名字。如 stardict-2.0.tar.gz。</span><br><span class="line"><span class="comment">%description：</span></span><br><span class="line">        软件包详细说明，可写在多个行上。</span><br><span class="line"></span><br><span class="line">（2）<span class="comment">%prep段</span></span><br><span class="line"></span><br><span class="line">这个段是预处理段，通常用来执行一些解开源程序包的命令，为下一步的编译安装作准备。<span class="comment">%prep和下面的%build，%install段一样，除了可以执行RPM所定义的宏命令（以%开头）以外，还可以执行SHELL命令，命令可以有很多行，如我们常写的tar解包命令。</span></span><br><span class="line"></span><br><span class="line">（3）build段</span><br><span class="line"></span><br><span class="line">本段是建立段，所要执行的命令为生成软件包服务，如make 命令。</span><br><span class="line"></span><br><span class="line">（4）<span class="comment">%install段</span></span><br><span class="line"></span><br><span class="line">本段是安装段，其中的命令在安装软件包时将执行，如make install命令。</span><br><span class="line"></span><br><span class="line">（5）<span class="comment">%files段</span></span><br><span class="line"></span><br><span class="line">本段是文件段，用于定义软件包所包含的文件，分为三类--说明文档（doc），配置文件（config）及执行程序，还可定义文件存取权限，拥有者及组别。</span><br><span class="line"></span><br><span class="line">（6）<span class="comment">%changelog段</span></span><br><span class="line"></span><br><span class="line">本段是修改日志段。你可以将软件的每次修改记录到这里，保存到发布的软件包中，以便查询之用。每一个修改日志都有这样一种格式：第一行是：* 星期 月 日 年 修改人 电子信箱。其中：星期、月份均用英文形式的前3个字母，用中文会报错。接下来的行写的是修改了什么地方，可写多行。一般以减号开始，便于后续的查阅。</span><br></pre></td></tr></table></figure>
+<h2 id="4-打包"><a href="#4-打包" class="headerlink" title="4. 打包"></a>4. 打包</h2><p>​   如果想发布rpm格式的源码包或者是二进制包，就要使用rpmbuild工具。</p>
+<p>​   如果我们已经根据本地源码包的成功编译安装而写了spec文件（该文件要以.spec结束），那我们就可以建立一个打包环境，也就是目录树的建立。</p>
+<p>​   一般是在目录下建立5个目录。它门分别是BUILD、SOURCE、SPEC、SRPM、RPM。</p>
+<p>​       - 其中BUILD目录用来存放打包过程中的源文件，</p>
+<p>​       - SOURCE用来存放打包是要用到的源文件和patch，</p>
+<p>​       - SPEC用来存放spec文件，</p>
+<p>​       - SRPM、RPM分别存放打包生成的rpm格式的源文件和二进制文件。</p>
+<p>我们可以根据需要来选用不同的参数打包文件：</p>
+<p>1） 只生成二进制格式的rpm包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpmbuild -bb xxx.spec</span><br></pre></td></tr></table></figure>
+<p>​   用此命令生成软件包，执行后屏幕将显示执行信息，生成的文件会在刚才建立的RPM目录下存在。</p>
+<p>2）只生成src格式的rpm包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpmbuild -bs xxx.spec</span><br></pre></td></tr></table></figure>
+<p>​   生成的文件会在刚才建立的SRPM目录下存在。</p>
+<p>3） 只需要生成完整的源文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpmbuild -bp xxx.spec</span><br></pre></td></tr></table></figure>
+<p>​   源文件存在目录BUILD下。读者朋友可能对这个命令不太明白，这个命令的作用就是把tar包解开然后把所有的补丁文件合并而生成一个完整的具最新功能的源文件。</p>
+<p>4） 完全打包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpmbuild -ba xxx.spec</span><br></pre></td></tr></table></figure>
+<p>​   产生以上3个过程分别生成的包。存放在相应的目录下。</p>
+<p>​   软件包制作完成后可用rpm命令查询，看看效果。如果不满意的话可以再次修改软件包描述文件，重新运行以上命令产生新的RPM软件包。</p>
+<h2 id="end"><a href="#end" class="headerlink" title="end"></a>end</h2><hr>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-rpm/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-rpm/</a></p>
+<p><a href="https://www.zhukun.net/archives/7263" target="_blank" rel="noopener">https://www.zhukun.net/archives/7263</a></p>
+<hr>
+<p>昔我往矣，杨柳依依；今我来思，雨雪霏霏</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wanyaoqi.top/2018/04/06/rpm_spec/" data-id="cjsajf7hk001sj51rdum98rf7" class="article-share-link">Share</a>
+      
+        <a href="http://wanyaoqi.top/2018/04/06/rpm_spec/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rpm/">rpm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/17/IO虚拟化--SR-IOV/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          I/O虚拟化 &amp;&amp; SR-IOV
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/19/python装饰器/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python装饰器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Summary/">Summary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/虚拟化/">虚拟化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-11/">C++11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic_Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I-O虚拟化/">I/O虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LongestCommonSubsequence/">LongestCommonSubsequence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SR-IOV/">SR-IOV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alloc/">alloc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list/">list</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stdargs/">stdargs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/traits/">traits</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装饰器/">装饰器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/C-11/" style="font-size: 10px;">C++11</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic_Programming</a> <a href="/tags/I-O虚拟化/" style="font-size: 10px;">I/O虚拟化</a> <a href="/tags/LongestCommonSubsequence/" style="font-size: 10px;">LongestCommonSubsequence</a> <a href="/tags/SR-IOV/" style="font-size: 10px;">SR-IOV</a> <a href="/tags/STL/" style="font-size: 16.67px;">STL</a> <a href="/tags/alloc/" style="font-size: 10px;">alloc</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/list/" style="font-size: 13.33px;">list</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/stdargs/" style="font-size: 10px;">stdargs</a> <a href="/tags/traits/" style="font-size: 10px;">traits</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/装饰器/" style="font-size: 10px;">装饰器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/17/IO虚拟化--SR-IOV/">I/O虚拟化 &amp;&amp; SR-IOV</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/06/rpm_spec/">RPM 使用与 SPEC 文件</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/19/python装饰器/">python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/20/stl_deque_2/">STL deque——part 2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/18/stl_deque_1/">STL deque——part 1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wanyaoqi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'superqi';
+  
+  var disqus_url = 'http://wanyaoqi.top/2018/04/06/rpm_spec/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,4 +1,102 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>STL deque——part 2 | Yaoqi's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">STL deque——part 2</h1><a id="logo" href="/.">Yaoqi's Blog</a><p class="description">coding</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Accueil</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> À propos</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">STL deque——part 2</h1><div class="post-meta">Aug 20, 2016<span> | </span><span class="category"><a href="/categories/Summary/">Summary</a></span></div><a class="disqus-comment-count" data-disqus-identifier="2016/08/20/stl_deque_2/" href="/2016/08/20/stl_deque_2/#disqus_thread"></a><div class="post-content"><blockquote>
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  <title>STL deque——part 2 | ^_^</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="接下来介绍一下deque的插入删除操作及其他操作(push, pop …)常见的有push_back, push_front, pop_back, pop_front, insert, erase, clear等包括了内存分配和释放等问题  push pop1234567891011121314151617181920212223242526272829303132333435363738394">
+<meta name="keywords" content="C++,STL,list">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL deque——part 2">
+<meta property="og:url" content="http://wanyaoqi.top/2016/08/20/stl_deque_2/index.html">
+<meta property="og:site_name" content="^_^">
+<meta property="og:description" content="接下来介绍一下deque的插入删除操作及其他操作(push, pop …)常见的有push_back, push_front, pop_back, pop_front, insert, erase, clear等包括了内存分配和释放等问题  push pop1234567891011121314151617181920212223242526272829303132333435363738394">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-06T07:09:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL deque——part 2">
+<meta name="twitter:description" content="接下来介绍一下deque的插入删除操作及其他操作(push, pop …)常见的有push_back, push_front, pop_back, pop_front, insert, erase, clear等包括了内存分配和释放等问题  push pop1234567891011121314151617181920212223242526272829303132333435363738394">
+  
+    <link rel="alternate" href="/atom.xml" title="^_^" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">^_^</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">在你的立足之地深挖下去，就会有泉水涌出！别管蒙昧者们叫嚷：“下面是地狱”</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wanyaoqi.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-stl_deque_2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/20/stl_deque_2/" class="article-date">
+  <time datetime="2016-08-20T02:52:35.000Z" itemprop="datePublished">2016-08-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Summary/">Summary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      STL deque——part 2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
 <p>接下来介绍一下deque的插入删除操作及其他操作(push, pop …)<br>常见的有push_back, push_front, pop_back, pop_front, insert, erase, clear等<br>包括了内存分配和释放等问题</p>
 </blockquote>
 <h2 id="push-pop"><a href="#push-pop" class="headerlink" title="push pop"></a>push pop</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//在deque末尾添加元素  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">const</span> value_type&amp; t)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (finish.cur != finish.last - <span class="number">1</span>) &#123;   </span><br><span class="line">      <span class="comment">// 当前缓冲区还有空间  </span></span><br><span class="line">      construct(finish.cur, t); <span class="comment">// 直接在可用空间构建  </span></span><br><span class="line">      ++finish.cur; <span class="comment">// 调整finish迭代器  </span></span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>  <span class="comment">// 当前缓冲区无可用空间（last不能存储元素用）  </span></span><br><span class="line">      push_back_aux(t);  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//在deque头添加元素  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">push_front</span><span class="params">(<span class="keyword">const</span> value_type&amp; t)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (start.cur != start.first) &#123;     <span class="comment">// 当前缓冲区还有空间  </span></span><br><span class="line">      construct(start.cur - <span class="number">1</span>, t);   </span><br><span class="line">      --start.cur;        </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span> <span class="comment">// 当前缓冲区无空间可用了  </span></span><br><span class="line">      push_front_aux(t);  </span><br><span class="line">  &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删掉末尾元素  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">pop_back</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (finish.cur != finish.first) &#123;<span class="comment">//最后一个缓冲区（finish指的缓冲区）有多于一个元素（含一个）  </span></span><br><span class="line">      --finish.cur;       </span><br><span class="line">      destroy(finish.cur);    </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      <span class="comment">// 最后一个缓冲区无元素  </span></span><br><span class="line">      pop_back_aux();       <span class="comment">// 这里会进行缓冲区的释放工作  </span></span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//在deque头删除元素  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">pop_front</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (start.cur != start.last - <span class="number">1</span>) &#123;  </span><br><span class="line">      <span class="comment">// start.node所指缓冲区有多余一个元素（不含一个）  </span></span><br><span class="line">      destroy(start.cur);     </span><br><span class="line">      ++start.cur;    </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span>   </span><br><span class="line">      <span class="comment">// start.node所指缓冲区只有一个元素  </span></span><br><span class="line">      pop_front_aux();      <span class="comment">// 这里会进行缓冲区释放工作  </span></span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:push_back_aux(<span class="keyword">const</span> value_type&amp; t) &#123;  </span><br><span class="line">  value_type t_copy = t;  </span><br><span class="line">  reserve_map_at_back();        <span class="comment">//  若符合某重条件则必须重换一个map  </span></span><br><span class="line">  *(finish.node + <span class="number">1</span>) = allocate_node(); <span class="comment">// 配置一个新结点（缓冲区）  </span></span><br><span class="line">  __STL_TRY &#123;  </span><br><span class="line">    construct(finish.cur, t_copy);      <span class="comment">// 设置值  </span></span><br><span class="line">    finish.set_node(finish.node + <span class="number">1</span>);   <span class="comment">// 改变finish，令其指向新结点  </span></span><br><span class="line">    finish.cur = finish.first;          <span class="comment">// 设置 finish 的状态  </span></span><br><span class="line">  &#125;  </span><br><span class="line">  __STL_UNWIND(deallocate_node(*(finish.node + <span class="number">1</span>)));  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 只有当start.cur == start.first才会调用。  </span></span><br><span class="line"><span class="comment">// 第一个缓冲区没有未用空间时才会调用。和上面实现类似  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:push_front_aux(<span class="keyword">const</span> value_type&amp; t) &#123;  </span><br><span class="line">  value_type t_copy = t;  </span><br><span class="line">  reserve_map_at_front();         </span><br><span class="line">  *(start.node - <span class="number">1</span>) = allocate_node();    </span><br><span class="line">  __STL_TRY &#123;  </span><br><span class="line">    start.set_node(start.node - <span class="number">1</span>);       </span><br><span class="line">    start.cur = start.last - <span class="number">1</span>;           </span><br><span class="line">    construct(start.cur, t_copy);         </span><br><span class="line">  &#125;</span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 只有当finish.cur == finish.first才会调用  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:pop_back_aux() &#123;  </span><br><span class="line">  deallocate_node(finish.first);      </span><br><span class="line">  finish.set_node(finish.node - <span class="number">1</span>);   </span><br><span class="line">  finish.cur = finish.last - <span class="number">1</span>;       </span><br><span class="line">  destroy(finish.cur);        </span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">// 只有当start.cur == start.last - 1时才会调用  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:pop_front_aux() &#123;  </span><br><span class="line">  destroy(start.cur);                 </span><br><span class="line">  deallocate_node(start.first);   </span><br><span class="line">  start.set_node(start.node + <span class="number">1</span>);  </span><br><span class="line">  start.cur = start.first;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//在map尾添加缓冲区  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">reserve_map_at_back</span> <span class="params">(size_type nodes_to_add = <span class="number">1</span>)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (nodes_to_add + <span class="number">1</span> &gt; map_size - (finish.node - <span class="built_in">map</span>))  </span><br><span class="line">    <span class="comment">//map空间不够用，则开辟新的map空间，把原来map内容拷贝过来。释放原来的  </span></span><br><span class="line">      reallocate_map(nodes_to_add, <span class="literal">false</span>);   </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//在map头添加缓冲区  </span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">reserve_map_at_front</span> <span class="params">(size_type nodes_to_add = <span class="number">1</span>)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (nodes_to_add &gt; start.node - <span class="built_in">map</span>)  </span><br><span class="line">      reallocate_map(nodes_to_add, <span class="literal">true</span>);     </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//添加map结点，指向新的缓冲区，add_at_front=true添加在map头，否则添加在尾  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:reallocate_map(size_type nodes_to_add,  </span><br><span class="line">                                              <span class="keyword">bool</span> add_at_front) &#123;  </span><br><span class="line">  size_type old_num_nodes = finish.node - start.node + <span class="number">1</span>;  </span><br><span class="line">  size_type new_num_nodes = old_num_nodes + nodes_to_add;  </span><br><span class="line">  </span><br><span class="line">  map_pointer new_nstart;  </span><br><span class="line">  <span class="keyword">if</span> (map_size &gt; <span class="number">2</span> * new_num_nodes) &#123;  </span><br><span class="line">    new_nstart = <span class="built_in">map</span> + (map_size - new_num_nodes) / <span class="number">2</span>   </span><br><span class="line">                     + (add_at_front ? nodes_to_add : <span class="number">0</span>);  </span><br><span class="line">    <span class="keyword">if</span> (new_nstart &lt; start.node)  </span><br><span class="line">      copy(start.node, finish.node + <span class="number">1</span>, new_nstart);  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      copy_backward(start.node, finish.node + <span class="number">1</span>, new_nstart + old_num_nodes);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">else</span> &#123;  </span><br><span class="line">    size_type new_map_size = map_size + max(map_size, nodes_to_add) + <span class="number">2</span>;  </span><br><span class="line">    <span class="comment">// 配置新的结点，准备给map使用  </span></span><br><span class="line">    map_pointer new_map = map_allocator::allocate(new_map_size);  </span><br><span class="line">    new_nstart = new_map + (new_map_size - new_num_nodes) / <span class="number">2</span>  </span><br><span class="line">                         + (add_at_front ? nodes_to_add : <span class="number">0</span>);  </span><br><span class="line">    <span class="comment">// 把原map 內容拷贝  </span></span><br><span class="line">    copy(start.node, finish.node + <span class="number">1</span>, new_nstart);  </span><br><span class="line">    <span class="comment">// 释放放原map  </span></span><br><span class="line">    map_allocator::deallocate(<span class="built_in">map</span>, map_size);  </span><br><span class="line">    <span class="comment">// 设置新map起始位置和大小  </span></span><br><span class="line">    <span class="built_in">map</span> = new_map;  </span><br><span class="line">    map_size = new_map_size;  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 重新设置迭代器 start 和 finish  </span></span><br><span class="line">  start.set_node(new_nstart);  </span><br><span class="line">  finish.set_node(new_nstart + old_num_nodes - <span class="number">1</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -6,29 +104,176 @@
 <h2 id="resize"><a href="#resize" class="headerlink" title="resize"></a>resize</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调整deque的大小。</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">(size_type new_size, <span class="keyword">const</span> value_type&amp; x)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">const</span> size_type len = size();  </span><br><span class="line">    <span class="keyword">if</span> (new_size &lt; len)   <span class="comment">//如果deque变小，直接擦除掉多余的元素</span></span><br><span class="line">      erase(start + new_size, finish);  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      insert(finish, new_size - len, x);  <span class="comment">//如果deque变大，则在deque后面插入元素补充</span></span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">(size_type new_size)</span> </span>&#123; resize(new_size, value_type()); &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="erase"><a href="#erase" class="headerlink" title="erase"></a>erase</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 清除 pos 所指的元素。  </span></span><br><span class="line">  <span class="comment">//判断pos距离头近还是距离尾近，距离那个位置近就移动那个位置的元素，保证移动元素个数最少  </span></span><br><span class="line">  <span class="function">iterator <span class="title">erase</span><span class="params">(iterator pos)</span> </span>&#123;  </span><br><span class="line">    iterator next = pos;  </span><br><span class="line">    ++next;  </span><br><span class="line">    difference_type index = pos - start;    <span class="comment">// pos和deque开头元素的个数  </span></span><br><span class="line">    <span class="keyword">if</span> (index &lt; (size() &gt;&gt; <span class="number">1</span>)) &#123;           <span class="comment">// size() &gt;&gt; 1为size()/2  </span></span><br><span class="line">    <span class="comment">//如果pos距离deque头比较近的话，deque的开头到pos元素向后移  </span></span><br><span class="line">      copy_backward(start, pos, next);    </span><br><span class="line">      pop_front();              <span class="comment">// 移动后，删除第一个元素  </span></span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span> &#123;                  <span class="comment">// 否则pos+1到结尾元素向前移，  </span></span><br><span class="line">      copy(next, finish, pos);    </span><br><span class="line">      pop_back();                 </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> start + index;  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//擦除两个迭代器之间的元素  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:iterator   </span><br><span class="line"><span class="built_in">deque</span>&lt;T, Alloc, BufSize&gt;::erase(iterator first, iterator last) &#123;  </span><br><span class="line">  <span class="keyword">if</span> (first == start &amp;&amp; last == finish) &#123; <span class="comment">// 如果是清除整个 deque  </span></span><br><span class="line">    clear();                            <span class="comment">// 直接调用 clear() 即可  </span></span><br><span class="line">    <span class="keyword">return</span> finish;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">else</span> &#123;  </span><br><span class="line">    difference_type n = last - first;           <span class="comment">// 擦除区间长度  </span></span><br><span class="line">    difference_type elems_before = first - start;   <span class="comment">// 擦除区间前方元素的个数  </span></span><br><span class="line">    <span class="keyword">if</span> (elems_before &lt; (size() - n) / <span class="number">2</span>) &#123;       <span class="comment">// 如果前方的元素少，  </span></span><br><span class="line">      copy_backward(start, first, last);        <span class="comment">// 前方元素向后移（覆盖擦除区间）  </span></span><br><span class="line">      iterator new_start = start + n;           <span class="comment">// deque 的新起点  </span></span><br><span class="line">      destroy(start, new_start);                <span class="comment">// 多于元素析构  </span></span><br><span class="line">      <span class="comment">// 释放多于元素所占内存  </span></span><br><span class="line">      <span class="keyword">for</span> (map_pointer cur = start.node; cur &lt; new_start.node; ++cur)  </span><br><span class="line">        data_allocator::deallocate(*cur, buffer_size());  </span><br><span class="line">      start = new_start;      </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">else</span> &#123;  <span class="comment">// 后方元素更少  </span></span><br><span class="line">      copy(last, finish, first);    <span class="comment">//后方元素向前移动（覆盖擦除区间）     </span></span><br><span class="line">      iterator new_finish = finish - n;   </span><br><span class="line">      destroy(new_finish, finish);        </span><br><span class="line">      <span class="comment">// 释放多于元素所占内存</span></span><br><span class="line">      <span class="keyword">for</span> (map_pointer cur = new_finish.node + <span class="number">1</span>; cur &lt;= finish.node; ++cur)  </span><br><span class="line">        data_allocator::deallocate(*cur, buffer_size());  </span><br><span class="line">      finish = new_finish;    </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> start + elems_before;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//清空deque。最后保留了一个缓冲区，这是deque的策略，也是其初始状态  </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>, <span class="title">size_t</span> <span class="title">BufSize</span>&gt;  </span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">deque</span>&lt;T, Alloc, BufSize&gt;:</span>:clear() &#123;  </span><br><span class="line">  <span class="comment">//头尾以外的缓冲区，它们肯定是满的。  </span></span><br><span class="line">  <span class="keyword">for</span> (map_pointer node = start.node + <span class="number">1</span>; node &lt; finish.node; ++node) &#123;  </span><br><span class="line"></span><br><span class="line">    destroy(*node, *node + buffer_size());  </span><br><span class="line">    data_allocator::deallocate(*node, buffer_size());  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (start.node != finish.node) &#123;  <span class="comment">// 至少有2个以上（含）缓冲区  </span></span><br><span class="line">    destroy(start.cur, start.last); <span class="comment">// 头缓冲区元素析构  </span></span><br><span class="line">    destroy(finish.first, finish.cur); <span class="comment">// 尾缓冲区元素析构  </span></span><br><span class="line">    <span class="comment">// 释放尾缓冲区，保留了头缓冲区  </span></span><br><span class="line">    data_allocator::deallocate(finish.first, buffer_size());  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">else</span>  <span class="comment">// 只有一个缓冲区  </span></span><br><span class="line">    destroy(start.cur, finish.cur); <span class="comment">// 析构，但是不释放  </span></span><br><span class="line">  </span><br><span class="line">  finish = start;   <span class="comment">// 调整迭代器，deque为空  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div><div class="tags"><a href="/tags/C/">C++</a><a href="/tags/STL/">STL</a><a href="/tags/list/">list</a></div><div class="post-nav"><a class="pre" href="/2017/11/19/python装饰器/">python装饰器</a><a class="next" href="/2016/08/18/stl_deque_1/">STL deque——part 1</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'superqi';
-var disqus_identifier = '2016/08/20/stl_deque_2/';
-var disqus_title = 'STL deque——part 2';
-var disqus_url = 'http://wanyaoqi.top/2016/08/20/stl_deque_2/';
-$('.btn_click_load').click(function() {
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wanyaoqi.top/2016/08/20/stl_deque_2/" data-id="cjsajf7hn001wj51rfm24ya3u" class="article-share-link">Share</a>
+      
+        <a href="http://wanyaoqi.top/2016/08/20/stl_deque_2/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/list/">list</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/19/python装饰器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python装饰器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/18/stl_deque_1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">STL deque——part 1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Summary/">Summary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/虚拟化/">虚拟化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-11/">C++11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/">Dynamic_Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I-O虚拟化/">I/O虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LongestCommonSubsequence/">LongestCommonSubsequence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SR-IOV/">SR-IOV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/alloc/">alloc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list/">list</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rpm/">rpm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stdargs/">stdargs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/traits/">traits</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vector/">vector</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/装饰器/">装饰器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/C-11/" style="font-size: 10px;">C++11</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic_Programming</a> <a href="/tags/I-O虚拟化/" style="font-size: 10px;">I/O虚拟化</a> <a href="/tags/LongestCommonSubsequence/" style="font-size: 10px;">LongestCommonSubsequence</a> <a href="/tags/SR-IOV/" style="font-size: 10px;">SR-IOV</a> <a href="/tags/STL/" style="font-size: 16.67px;">STL</a> <a href="/tags/alloc/" style="font-size: 10px;">alloc</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/list/" style="font-size: 13.33px;">list</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/rpm/" style="font-size: 10px;">rpm</a> <a href="/tags/stdargs/" style="font-size: 10px;">stdargs</a> <a href="/tags/traits/" style="font-size: 10px;">traits</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/装饰器/" style="font-size: 10px;">装饰器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/17/IO虚拟化--SR-IOV/">I/O虚拟化 &amp;&amp; SR-IOV</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/06/rpm_spec/">RPM 使用与 SPEC 文件</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/19/python装饰器/">python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/20/stl_deque_2/">STL deque——part 2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/18/stl_deque_1/">STL deque——part 1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wanyaoqi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'superqi';
+  
+  var disqus_url = 'http://wanyaoqi.top/2016/08/20/stl_deque_2/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
-  $('.btn_click_load').css('display','none');
-});
-$.ajax({
-  url: 'https://disqus.com/next/config.json',
-  timeout: 3000,
-  type: 'GET',
-  success: (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    $('.btn_click_load').css('display','none');
-  })(),
-  error: function() {
-    $('.btn_click_load').css('display','block');
-  }
-});</script><script id="dsq-count-scr" src="//superqi.disqus.com/count.js" async></script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://wanyaoqi.top"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Catégories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Summary/">Summary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/虚拟化/">虚拟化</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/SR-IOV/" style="font-size: 15px;">SR-IOV</a> <a href="/tags/C-11/" style="font-size: 15px;">C++11</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/装饰器/" style="font-size: 15px;">装饰器</a> <a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/stdargs/" style="font-size: 15px;">stdargs</a> <a href="/tags/I-O虚拟化/" style="font-size: 15px;">I/O虚拟化</a> <a href="/tags/rpm/" style="font-size: 15px;">rpm</a> <a href="/tags/LongestCommonSubsequence/" style="font-size: 15px;">LongestCommonSubsequence</a> <a href="/tags/Dynamic-Programming/" style="font-size: 15px;">Dynamic_Programming</a> <a href="/tags/STL/" style="font-size: 15px;">STL</a> <a href="/tags/alloc/" style="font-size: 15px;">alloc</a> <a href="/tags/list/" style="font-size: 15px;">list</a> <a href="/tags/traits/" style="font-size: 15px;">traits</a> <a href="/tags/vector/" style="font-size: 15px;">vector</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Récent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/IO虚拟化--SR-IOV/">I/O虚拟化 && SR-IOV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/rpm_spec/">RPM 使用与 SPEC 文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/19/python装饰器/">python装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/stl_deque_2/">STL deque——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_deque_1/">STL deque——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/18/stl_list_2/">STL list ——part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/stl_list_1/">STL list ——part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/14/stl_vector/">STL vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/10/stl_traits/">STL  traits</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/06/stdarg/">可变参函数</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> Commentaires récents</i></div><script type="text/javascript" src="//superqi.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> À suivre</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Yaoqi's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
