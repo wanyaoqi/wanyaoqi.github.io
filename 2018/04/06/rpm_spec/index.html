@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="^_^">
 <meta property="og:description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-06T07:20:03.000Z">
+<meta property="og:updated_time" content="2019-04-30T13:22:58.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPM 使用与 SPEC 文件">
 <meta name="twitter:description" content="1. 概述RPM全称是 Red Hat Package Manager（Red Hat包管理器）。 RPM的发布基于GPL协议（GNU通用公共授權條款GNU General Public License，简称GNU GPL、GPL）。 RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令： 1[root@serverwyq wyq]">
@@ -101,6 +101,7 @@
 <p>RPM有五种基本的操作功能(不包括创建软件包)：安装、卸载、升级、查询、和验证。关于rpm命令的使用我们可以用以下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@serverwyq wyq]# rpm --help</span><br></pre></td></tr></table></figure>
 <p>​   通常，供Linux使用的源代码包还提供一个名为 <strong>{ 软件名称 }.spec</strong> 的文件，即spec文件。如果提供spec文件，则该源代码还可以直接编译成RPM包。 </p>
+<a id="more"></a>
 <h2 id="2-RPM-使用"><a href="#2-RPM-使用" class="headerlink" title="2. RPM 使用"></a>2. RPM 使用</h2><h3 id="1）安装"><a href="#1）安装" class="headerlink" title="1）安装"></a>1）安装</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-i|--install&#125; [install-options] PACKAGE_FILE ...</span><br></pre></td></tr></table></figure>
 <p>​   通过rpm -ivh可以把rpm软件包安装到系统中，使用的较多的是-ivh参数 ，使用该选项可以解决大部分rpm软件包的安装，至于详细的参数说明可用查看rpm的man 文档。</p>
 <h3 id="2）卸载"><a href="#2）卸载" class="headerlink" title="2）卸载"></a>2）卸载</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rpm &#123;-e|--erase&#125; [--allmatches] [--nodeps] [--noscripts]</span><br><span class="line">           [--notriggers] [--test] PACKAGE_NAME ...</span><br><span class="line">           </span><br><span class="line">注：</span><br><span class="line">--nodeps  Don’t do a dependency check before installing or upgrading a package.(不检查依赖)</span><br><span class="line">--force   Same as using --replacepkgs, --replacefiles, and --oldpackage.(相当于同时使用了这三个参数)</span><br><span class="line"></span><br><span class="line">--replacepkgs</span><br><span class="line">      Install the packages even if some of them are already installed on this system.</span><br><span class="line">--replacefiles</span><br><span class="line">      Install the packages even if they replace files from other, already installed, packages.</span><br></pre></td></tr></table></figure>
@@ -184,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wanyaoqi.top/2018/04/06/rpm_spec/" data-id="cjsajf7hk001sj51rdum98rf7" class="article-share-link">Share</a>
+      <a data-url="http://wanyaoqi.top/2018/04/06/rpm_spec/" data-id="cjv3taw9k001vlevxgc862pmr" class="article-share-link">Share</a>
       
         <a href="http://wanyaoqi.top/2018/04/06/rpm_spec/#disqus_thread" class="article-comment-link">Comments</a>
       

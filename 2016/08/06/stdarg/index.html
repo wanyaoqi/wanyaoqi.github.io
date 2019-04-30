@@ -6,20 +6,20 @@
   
   <title>可变参函数 | ^_^</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="使用示例 实现原理va_listva_list 是一个字符指针类型。 typedef char *va_list;  va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右) #ifndef __sparc__ #define va_start(AP, LASTARG) \ (AP = ((ch">
+  <meta name="description" content="使用示例 实现原理va_listva_list 是一个字符指针类型。 typedef char *va_list;">
 <meta name="keywords" content="C,stdargs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="可变参函数">
 <meta property="og:url" content="http://wanyaoqi.top/2016/08/06/stdarg/index.html">
 <meta property="og:site_name" content="^_^">
-<meta property="og:description" content="使用示例 实现原理va_listva_list 是一个字符指针类型。 typedef char *va_list;  va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右) #ifndef __sparc__ #define va_start(AP, LASTARG) \ (AP = ((ch">
+<meta property="og:description" content="使用示例 实现原理va_listva_list 是一个字符指针类型。 typedef char *va_list;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wanyaoqi.top/imgs/Summary/stdargs.png">
 <meta property="og:image" content="http://wanyaoqi.top/imgs/Summary/linux_args.png">
-<meta property="og:updated_time" content="2016-08-07T12:25:22.000Z">
+<meta property="og:updated_time" content="2019-04-30T13:24:50.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可变参函数">
-<meta name="twitter:description" content="使用示例 实现原理va_listva_list 是一个字符指针类型。 typedef char *va_list;  va_startva_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右) #ifndef __sparc__ #define va_start(AP, LASTARG) \ (AP = ((ch">
+<meta name="twitter:description" content="使用示例 实现原理va_listva_list 是一个字符指针类型。 typedef char *va_list;">
 <meta name="twitter:image" content="http://wanyaoqi.top/imgs/Summary/stdargs.png">
   
     <link rel="alternate" href="/atom.xml" title="^_^" type="application/atom+xml">
@@ -102,7 +102,8 @@
         <h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p><img src="/imgs/Summary/stdargs.png" alt="stdargs"></p>
 <h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><h2 id="va-list"><a href="#va-list" class="headerlink" title="va_list"></a>va_list</h2><pre><code>va_list 是一个字符指针类型。
 typedef char *va_list; 
-</code></pre><h2 id="va-start"><a href="#va-start" class="headerlink" title="va_start"></a>va_start</h2><p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
+</code></pre><a id="more"></a>
+<h2 id="va-start"><a href="#va-start" class="headerlink" title="va_start"></a>va_start</h2><p>va_start用于初始化 va_list, 取第一个参数(从左向右)的地址再向高地址偏移LASTARG大小，实际上指向了第二个参数(从左向右)</p>
 <pre><code>#ifndef __sparc__
 #define va_start(AP, LASTARG) \
 (AP = ((char *) &amp;(LASTARG) + __va_rounded_size (LASTARG))) //AP即va_list
@@ -130,7 +131,7 @@ __builtin_saveregs()是在gcc 的库程序libgcc2.c 中定义的，用于保存�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wanyaoqi.top/2016/08/06/stdarg/" data-id="cjsajf7gb0009j51r7gzn2ueg" class="article-share-link">Share</a>
+      <a data-url="http://wanyaoqi.top/2016/08/06/stdarg/" data-id="cjv3taw8m0005levx0f5j398u" class="article-share-link">Share</a>
       
         <a href="http://wanyaoqi.top/2016/08/06/stdarg/#disqus_thread" class="article-comment-link">Comments</a>
       

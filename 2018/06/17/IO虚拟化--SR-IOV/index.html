@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://wanyaoqi.top/imgs/SR-IOV/image11.png">
 <meta property="og:image" content="http://wanyaoqi.top/imgs/SR-IOV/image12.png">
 <meta property="og:image" content="http://wanyaoqi.top/imgs/SR-IOV/image13.png">
-<meta property="og:updated_time" content="2018-06-17T07:22:07.000Z">
+<meta property="og:updated_time" content="2019-04-30T13:21:57.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="I&#x2F;O虚拟化 &amp;&amp; SR-IOV">
 <meta name="twitter:description" content="1.介绍​   在Guest和Host间添加虚拟化层会引入很大的开销；计算工业界中一直在努力来解决这种开销。​   为此，英特尔推出了一系列在英特尔虚拟化技术(intel@ VT )支持下的处理器、芯片组和以太网控制器增强功能。intel@ VT 系列技术可提高虚拟化平台的性能、效率和健壮性。​   在此之上 PCI-SIG 制定了一种单根I/O虚拟化规范(SR-IOV) ，SR-IOV 的做法是">
@@ -117,6 +117,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>​   在Guest和Host间添加虚拟化层会引入很大的开销；计算工业界中一直在努力来解决这种开销。<br>​   为此，英特尔推出了一系列在英特尔虚拟化技术(intel@ VT )支持下的处理器、芯片组和以太网控制器增强功能。intel@ VT 系列技术可提高虚拟化平台的性能、效率和健壮性。<br>​   在此之上 PCI-SIG 制定了一种单根I/O虚拟化规范(SR-IOV) ，SR-IOV 的做法是在 I/O 子系统中开发一种扩展机制，以解决 I/O 设备的共享问题。<br><img src="/imgs/SR-IOV/imagex.png" alt="figure1"></p>
+<a id="more"></a>
 <h2 id="2-背景"><a href="#2-背景" class="headerlink" title="2.背景"></a>2.背景</h2><h3 id="2-1-I-O-虚拟化的目标"><a href="#2-1-I-O-虚拟化的目标" class="headerlink" title="2.1 I/O 虚拟化的目标"></a>2.1 I/O 虚拟化的目标</h3><p>​   I/O 虚拟化方案需要为虚机提供与在单独的物理计算机上运行时相同的隔离环境。解决方案需要提供可扩展性，以支持利用空闲资源所需的虚拟机( VMs )数量。还应为 I/O 操作提供近乎宿主机的性能。隔离应提供存储空间的隔离， 还包括需要为 I/O 分流、中断分流，以及在共享设备的情况下隔离控制操作、I/O操作和异常处理的能力。</p>
 <h3 id="2-2-模拟-I-O"><a href="#2-2-模拟-I-O" class="headerlink" title="2.2 模拟 I/O"></a>2.2 模拟 I/O</h3><h4 id="全虚拟化："><a href="#全虚拟化：" class="headerlink" title="全虚拟化："></a>全虚拟化：</h4><p>​   虚拟机并不知道运行在虚拟化环境中，I/O操作由hypervisor捕获，然后模拟；hypervisor捕获vm的I/O操作，然后模拟I/O操作</p>
 <p><img src="/imgs/SR-IOV/image.png" alt="figure2"></p>
@@ -260,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wanyaoqi.top/2018/06/17/IO虚拟化--SR-IOV/" data-id="cjsajf7hf001rj51rsefm38ru" class="article-share-link">Share</a>
+      <a data-url="http://wanyaoqi.top/2018/06/17/IO虚拟化--SR-IOV/" data-id="cjv3taw9h001tlevxmw92oixf" class="article-share-link">Share</a>
       
         <a href="http://wanyaoqi.top/2018/06/17/IO虚拟化--SR-IOV/#disqus_thread" class="article-comment-link">Comments</a>
       
