@@ -5,9 +5,9 @@
   <subtitle>在你的立足之地深挖下去，就会有泉水涌出！别管蒙昧者们叫嚷：“下面是地狱”</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://wanyaoqi.top/"/>
+  <link href="http://yoursite.com/"/>
   <updated>2019-04-30T13:21:57.841Z</updated>
-  <id>http://wanyaoqi.top/</id>
+  <id>http://yoursite.com/</id>
   
   <author>
     <name>wanyaoqi</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>I/O虚拟化 &amp;&amp; SR-IOV</title>
-    <link href="http://wanyaoqi.top/2018/06/17/IO%E8%99%9A%E6%8B%9F%E5%8C%96--SR-IOV/"/>
-    <id>http://wanyaoqi.top/2018/06/17/IO虚拟化--SR-IOV/</id>
+    <link href="http://yoursite.com/2018/06/17/IO%E8%99%9A%E6%8B%9F%E5%8C%96--SR-IOV/"/>
+    <id>http://yoursite.com/2018/06/17/IO虚拟化--SR-IOV/</id>
     <published>2018-06-17T03:56:04.000Z</published>
     <updated>2019-04-30T13:21:57.841Z</updated>
     
@@ -31,19 +31,19 @@
     
     </summary>
     
-      <category term="虚拟化" scheme="http://wanyaoqi.top/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+      <category term="虚拟化" scheme="http://yoursite.com/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
     
-      <category term="I/O虚拟化" scheme="http://wanyaoqi.top/tags/I-O%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+      <category term="I/O虚拟化" scheme="http://yoursite.com/tags/I-O%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
-      <category term="SR-IOV" scheme="http://wanyaoqi.top/tags/SR-IOV/"/>
+      <category term="SR-IOV" scheme="http://yoursite.com/tags/SR-IOV/"/>
     
   </entry>
   
   <entry>
     <title>RPM 使用与 SPEC 文件</title>
-    <link href="http://wanyaoqi.top/2018/04/06/rpm_spec/"/>
-    <id>http://wanyaoqi.top/2018/04/06/rpm_spec/</id>
+    <link href="http://yoursite.com/2018/04/06/rpm_spec/"/>
+    <id>http://yoursite.com/2018/04/06/rpm_spec/</id>
     <published>2018-04-06T07:20:03.000Z</published>
     <updated>2019-04-30T13:22:58.900Z</updated>
     
@@ -59,19 +59,19 @@
     
     </summary>
     
-      <category term="linux" scheme="http://wanyaoqi.top/categories/linux/"/>
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
     
     
-      <category term="linux" scheme="http://wanyaoqi.top/tags/linux/"/>
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
     
-      <category term="rpm" scheme="http://wanyaoqi.top/tags/rpm/"/>
+      <category term="rpm" scheme="http://yoursite.com/tags/rpm/"/>
     
   </entry>
   
   <entry>
     <title>python装饰器</title>
-    <link href="http://wanyaoqi.top/2017/11/19/python%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
-    <id>http://wanyaoqi.top/2017/11/19/python装饰器/</id>
+    <link href="http://yoursite.com/2017/11/19/python%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    <id>http://yoursite.com/2017/11/19/python装饰器/</id>
     <published>2017-11-19T14:46:38.000Z</published>
     <updated>2019-04-30T13:22:41.483Z</updated>
     
@@ -85,19 +85,19 @@
     
     </summary>
     
-      <category term="python" scheme="http://wanyaoqi.top/categories/python/"/>
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
     
     
-      <category term="python" scheme="http://wanyaoqi.top/tags/python/"/>
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
-      <category term="装饰器" scheme="http://wanyaoqi.top/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+      <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>STL deque——part 2</title>
-    <link href="http://wanyaoqi.top/2016/08/20/stl_deque_2/"/>
-    <id>http://wanyaoqi.top/2016/08/20/stl_deque_2/</id>
+    <link href="http://yoursite.com/2016/08/20/stl_deque_2/"/>
+    <id>http://yoursite.com/2016/08/20/stl_deque_2/</id>
     <published>2016-08-20T02:52:35.000Z</published>
     <updated>2019-04-30T13:25:20.001Z</updated>
     
@@ -111,21 +111,21 @@
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="list" scheme="http://wanyaoqi.top/tags/list/"/>
+      <category term="list" scheme="http://yoursite.com/tags/list/"/>
     
   </entry>
   
   <entry>
     <title>STL deque——part 1</title>
-    <link href="http://wanyaoqi.top/2016/08/18/stl_deque_1/"/>
-    <id>http://wanyaoqi.top/2016/08/18/stl_deque_1/</id>
+    <link href="http://yoursite.com/2016/08/18/stl_deque_1/"/>
+    <id>http://yoursite.com/2016/08/18/stl_deque_1/</id>
     <published>2016-08-18T13:59:56.000Z</published>
     <updated>2019-04-30T13:25:11.134Z</updated>
     
@@ -137,21 +137,21 @@
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="list" scheme="http://wanyaoqi.top/tags/list/"/>
+      <category term="list" scheme="http://yoursite.com/tags/list/"/>
     
   </entry>
   
   <entry>
     <title>STL list ——part 2</title>
-    <link href="http://wanyaoqi.top/2016/08/18/stl_list_2/"/>
-    <id>http://wanyaoqi.top/2016/08/18/stl_list_2/</id>
+    <link href="http://yoursite.com/2016/08/18/stl_list_2/"/>
+    <id>http://yoursite.com/2016/08/18/stl_list_2/</id>
     <published>2016-08-17T16:31:32.000Z</published>
     <updated>2019-04-30T13:25:38.091Z</updated>
     
@@ -163,21 +163,21 @@
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="list" scheme="http://wanyaoqi.top/tags/list/"/>
+      <category term="list" scheme="http://yoursite.com/tags/list/"/>
     
   </entry>
   
   <entry>
     <title>STL list ——part 1</title>
-    <link href="http://wanyaoqi.top/2016/08/15/stl_list_1/"/>
-    <id>http://wanyaoqi.top/2016/08/15/stl_list_1/</id>
+    <link href="http://yoursite.com/2016/08/15/stl_list_1/"/>
+    <id>http://yoursite.com/2016/08/15/stl_list_1/</id>
     <published>2016-08-15T15:19:53.000Z</published>
     <updated>2019-04-30T13:25:27.727Z</updated>
     
@@ -189,21 +189,21 @@
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="list" scheme="http://wanyaoqi.top/tags/list/"/>
+      <category term="list" scheme="http://yoursite.com/tags/list/"/>
     
   </entry>
   
   <entry>
     <title>STL vector</title>
-    <link href="http://wanyaoqi.top/2016/08/14/stl_vector/"/>
-    <id>http://wanyaoqi.top/2016/08/14/stl_vector/</id>
+    <link href="http://yoursite.com/2016/08/14/stl_vector/"/>
+    <id>http://yoursite.com/2016/08/14/stl_vector/</id>
     <published>2016-08-13T17:53:03.000Z</published>
     <updated>2019-04-30T13:25:59.371Z</updated>
     
@@ -216,21 +216,21 @@
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="vector" scheme="http://wanyaoqi.top/tags/vector/"/>
+      <category term="vector" scheme="http://yoursite.com/tags/vector/"/>
     
   </entry>
   
   <entry>
     <title>STL  traits</title>
-    <link href="http://wanyaoqi.top/2016/08/10/stl_traits/"/>
-    <id>http://wanyaoqi.top/2016/08/10/stl_traits/</id>
+    <link href="http://yoursite.com/2016/08/10/stl_traits/"/>
+    <id>http://yoursite.com/2016/08/10/stl_traits/</id>
     <published>2016-08-10T04:56:46.000Z</published>
     <updated>2019-04-30T13:25:48.639Z</updated>
     
@@ -243,21 +243,21 @@
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="traits" scheme="http://wanyaoqi.top/tags/traits/"/>
+      <category term="traits" scheme="http://yoursite.com/tags/traits/"/>
     
   </entry>
   
   <entry>
     <title>可变参函数</title>
-    <link href="http://wanyaoqi.top/2016/08/06/stdarg/"/>
-    <id>http://wanyaoqi.top/2016/08/06/stdarg/</id>
+    <link href="http://yoursite.com/2016/08/06/stdarg/"/>
+    <id>http://yoursite.com/2016/08/06/stdarg/</id>
     <published>2016-08-06T06:33:58.000Z</published>
     <updated>2019-04-30T13:24:50.005Z</updated>
     
@@ -272,19 +272,19 @@ typedef char *va_list;
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="stdargs" scheme="http://wanyaoqi.top/tags/stdargs/"/>
+      <category term="stdargs" scheme="http://yoursite.com/tags/stdargs/"/>
     
   </entry>
   
   <entry>
     <title>最长公共子序列</title>
-    <link href="http://wanyaoqi.top/2016/06/23/lcs/"/>
-    <id>http://wanyaoqi.top/2016/06/23/lcs/</id>
+    <link href="http://yoursite.com/2016/06/23/lcs/"/>
+    <id>http://yoursite.com/2016/06/23/lcs/</id>
     <published>2016-06-23T04:18:38.000Z</published>
     <updated>2019-04-30T13:24:36.789Z</updated>
     
@@ -298,19 +298,19 @@ typedef char *va_list;
     
     </summary>
     
-      <category term="Algorithm" scheme="http://wanyaoqi.top/categories/Algorithm/"/>
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
     
-      <category term="LongestCommonSubsequence" scheme="http://wanyaoqi.top/tags/LongestCommonSubsequence/"/>
+      <category term="LongestCommonSubsequence" scheme="http://yoursite.com/tags/LongestCommonSubsequence/"/>
     
-      <category term="Dynamic_Programming" scheme="http://wanyaoqi.top/tags/Dynamic-Programming/"/>
+      <category term="Dynamic_Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
   <entry>
     <title>C++11</title>
-    <link href="http://wanyaoqi.top/2016/06/20/C++11/"/>
-    <id>http://wanyaoqi.top/2016/06/20/C++11/</id>
+    <link href="http://yoursite.com/2016/06/20/C++11/"/>
+    <id>http://yoursite.com/2016/06/20/C++11/</id>
     <published>2016-06-19T17:14:38.000Z</published>
     <updated>2016-07-23T17:29:04.000Z</updated>
     
@@ -325,19 +325,19 @@ typedef char *va_list;
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++11" scheme="http://wanyaoqi.top/tags/C-11/"/>
+      <category term="C++11" scheme="http://yoursite.com/tags/C-11/"/>
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>STL空间配置器</title>
-    <link href="http://wanyaoqi.top/2016/06/12/stl_alloc/"/>
-    <id>http://wanyaoqi.top/2016/06/12/stl_alloc/</id>
+    <link href="http://yoursite.com/2016/06/12/stl_alloc/"/>
+    <id>http://yoursite.com/2016/06/12/stl_alloc/</id>
     <published>2016-06-11T17:26:33.000Z</published>
     <updated>2019-04-30T13:24:55.895Z</updated>
     
@@ -349,21 +349,21 @@ typedef char *va_list;
     
     </summary>
     
-      <category term="Summary" scheme="http://wanyaoqi.top/categories/Summary/"/>
+      <category term="Summary" scheme="http://yoursite.com/categories/Summary/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
-      <category term="STL" scheme="http://wanyaoqi.top/tags/STL/"/>
+      <category term="STL" scheme="http://yoursite.com/tags/STL/"/>
     
-      <category term="alloc" scheme="http://wanyaoqi.top/tags/alloc/"/>
+      <category term="alloc" scheme="http://yoursite.com/tags/alloc/"/>
     
   </entry>
   
   <entry>
     <title>海量数据中求最大的K个数</title>
-    <link href="http://wanyaoqi.top/2016/06/06/heap_sort/"/>
-    <id>http://wanyaoqi.top/2016/06/06/heap_sort/</id>
+    <link href="http://yoursite.com/2016/06/06/heap_sort/"/>
+    <id>http://yoursite.com/2016/06/06/heap_sort/</id>
     <published>2016-06-06T04:18:38.000Z</published>
     <updated>2019-04-30T13:24:27.157Z</updated>
     
@@ -377,10 +377,10 @@ typedef char *va_list;
     
     </summary>
     
-      <category term="Algorithm" scheme="http://wanyaoqi.top/categories/Algorithm/"/>
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
     
-      <category term="C++" scheme="http://wanyaoqi.top/tags/C/"/>
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
   </entry>
   
